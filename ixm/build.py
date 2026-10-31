@@ -37,7 +37,7 @@ def aai_tables(monthly: dict[str, dict]) -> tuple[list[dict], list[dict]]:
         prev = monthly.get(f"{int(m[:4]) - 1}-{m[5:]}", {})
         cur, old = _f(r.get("pax_total")), _f(prev.get("pax_total"))
         rows.append({
-            "month": m, **{k: _f(r.get(k)) for k in aai.MONTHLY_FIELDS if k not in ("month", "source")},
+            "month": m, **{k: _f(r.get(k)) for k in aai.MONTHLY_FIELDS if k not in ("month", "source", "parser_v")},
             "pax_yoy_pct": round(100 * (cur - old) / old, 1) if cur and old else None,
             "pax_per_day": round(cur / an.month_bounds(int(m[:4]), int(m[5:]))[1].day) if cur else None,
             "source": r.get("source", ""),

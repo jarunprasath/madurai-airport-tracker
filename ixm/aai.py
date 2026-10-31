@@ -40,7 +40,8 @@ METRIC_ANNEX = {v: k for k, v in ANNEX_METRIC.items()}
 AIRPORT_TOKEN = "MADURAI"
 
 MONTHLY_FIELDS = ["month", "pax_dom", "pax_intl", "pax_total", "mov_dom", "mov_intl", "mov_total",
-                  "frt_dom", "frt_intl", "frt_total", "source"]
+                  "frt_dom", "frt_intl", "frt_total", "source", "parser_v"]
+PARSER_VERSION = 2   # bump when parsing changes so already-collected months are read again once
 
 _NUM = re.compile(r"(?<![\w.])-?\d[\d,]*(?:\.\d+)?(?![\w])")
 _FNAME = re.compile(r"([A-Za-z]{3})[A-Za-z]*\s*2\s*[kK]\s*(\d{1,2})\s*[_\-\s]*annex(?:ure)?[_\-\s]*(\d)",
@@ -371,6 +372,7 @@ def apply_annex(table: dict[str, dict], year: int, month: int, annex: int, res: 
             prev[f"{metric}_{tag[sec]}"] = _fmt(f.month_prev_year)
             prev.setdefault("source", "AAI Traffic News (prev-year column)")
     row["source"] = "AAI Traffic News"
+    row["parser_v"] = PARSER_VERSION
     if not prev.get("source"):
         prev["source"] = "AAI Traffic News (prev-year column)"
 
@@ -420,8 +422,8 @@ def collect(start: date, end: date, refetch: bool = False, fetcher: Fetcher | No
     for y, m in months:
         key = f"{y}-{m:02d}"
         existing = table.get(key, {})
-        complete = all(existing.get(k) for k in ("pax_total", "mov_total", "frt_total"))
-        if not refetch and existing.get("source") == "AAI Traffic News" and complete:
+        current = str(existing.get("parser_v", "")) == str(PARSER_VERSION)
+        if not refetch and existing.get("source") == "AAI Traffic News" and existing.get("pax_total") and current:
             summary["months_skipped"] += 1
             continue
         if max_months is not None and done >= max_months:
