@@ -1,0 +1,37 @@
+month,annex,url,status
+2026-10,3,,not found
+2026-10,2,,not found
+2026-10,4,,not found
+2026-09,3,https://www.aai.aero/sites/default/files/traffic-news/Sep2k26Annex_3.pdf,ok
+2026-09,2,https://www.aai.aero/sites/default/files/traffic-news/Sep2k26Annex_2.pdf,ok
+2026-09,4,https://www.aai.aero/sites/default/files/traffic-news/Sep2k26Annex_4.pdf,ok
+2026-08,3,https://www.aai.aero/sites/default/files/traffic-news/Aug2k26Annex3.pdf,ok
+2026-08,2,https://www.aai.aero/sites/default/files/traffic-news/Aug2k26Annex2.pdf,ok
+2026-08,4,https://www.aai.aero/sites/default/files/traffic-news/Aug2k26Annex_4.pdf,ok
+2026-07,3,https://www.aai.aero/sites/default/files/traffic-news/Jul2k26Annex3.pdf,ok
+2026-07,2,https://www.aai.aero/sites/default/files/traffic-news/Jul2k26Annex2.pdf,ok
+2026-07,4,https://www.aai.aero/sites/default/files/traffic-news/Jul2k26Annex4.pdf,ok
+2026-06,3,https://www.aai.aero/sites/default/files/traffic-news/Jun2k26Annex3.pdf,ok
+2026-06,2,https://www.aai.aero/sites/default/files/traffic-news/Jun2k26Annex2.pdf,ok
+2026-06,4,https://www.aai.aero/sites/default/files/traffic-news/Jun2k26Annex4.pdf,check: international 42.3 + domestic 11.0 != total 372.0
+2026-05,3,https://www.aai.aero/sites/default/files/traffic-news/May2K26Annex3.pdf,ok
+2026-05,2,https://www.aai.aero/sites/default/files/traffic-news/May2k26Annex2.pdf,ok
+2026-05,4,https://www.aai.aero/sites/default/files/traffic-news/May2k26Annex4.pdf,check: international 54.0 + domestic 11.0 != total 385.7
+2026-04,3,https://www.aai.aero/sites/default/files/traffic-news/April2k26Annex3.pdf,ok
+2026-04,2,https://www.aai.aero/sites/default/files/traffic-news/April2k26Annex2.pdf,ok
+2026-04,4,https://www.aai.aero/sites/default/files/traffic-news/April2k26Annex4.pdf,ok
+2026-03,3,https://www.aai.aero/sites/default/files/traffic-news/Mar2k26Annex3_0.pdf,ok
+2026-03,2,https://www.aai.aero/sites/default/files/traffic-news/Mar2k26Annex2_0.pdf,ok
+2026-03,4,https://www.aai.aero/sites/default/files/traffic-news/Mar2k26Annex4.pdf,ok
+2026-02,3,https://www.aai.aero/sites/default/files/traffic-news/Feb2k26Annex3.pdf,ok
+2026-02,2,https://www.aai.aero/sites/default/files/traffic-news/Feb2k26Annex2.pdf,ok
+2026-02,4,https://www.aai.aero/sites/default/files/traffic-news/Feb2k26Annex4.pdf,check: international 98.6 + domestic 8.0 != total 409.6
+2026-01,3,https://www.aai.aero/sites/default/files/traffic-news/Jan2k26Annex3_0.pdf,ok
+2026-01,2,https://www.aai.aero/sites/default/files/traffic-news/Jan2k26Annex2_0.pdf,ok
+2026-01,4,https://www.aai.aero/sites/default/files/traffic-news/Jan2k26Annex4_0.pdf,ok
+2025-12,3,https://www.aai.aero/sites/default/files/traffic-news/Dec2k25Annex3.pdf,ok
+2025-12,2,https://www.aai.aero/sites/default/files/traffic-news/Dec2k25Annex2.pdf,ok
+2025-12,4,https://www.aai.aero/sites/default/files/traffic-news/Dec2k25Annex4.pdf,check: international 8.0 + domestic 232.4 != total 8.0
+2025-11,3,,not found
+2025-11,2,,not found
+2025-11,4,,not found
