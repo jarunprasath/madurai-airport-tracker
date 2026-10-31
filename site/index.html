@@ -44,7 +44,13 @@
       <span class="pill" id="live-status">–</span>
     </div>
     <div id="map" role="img" aria-label="Map of aircraft near Madurai airport"></div>
+    <ul class="legend">
+      <li><span class="lg-plane">✈</span> Live aircraft with call sign – tap for airline, altitude and speed</li>
+      <li><span class="lg-dot"></span> Madurai Airport</li>
+      <li><span class="lg-osm">✈</span> Small purple plane = the map's own airport symbol, not a live flight</li>
+    </ul>
     <p class="note">ADS-B positions from the OpenSky Network, refreshed every minute while this page is open.
+      Parked aircraft usually have transponders off, so they are rarely shown.
       Coverage near Madurai depends on volunteer receivers, so some aircraft may not appear.</p>
     <div class="table-wrap"><table id="live-table"></table></div>
   </section>

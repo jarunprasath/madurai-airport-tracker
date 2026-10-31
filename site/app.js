@@ -99,9 +99,10 @@
     $("live-status").textContent = `${aircraft.length} aircraft · ${label}`;
     layer.clearLayers();
     aircraft.forEach((a) => {
-      const icon = L.divIcon({ className: "", html: `<div class="plane-icon" style="transform:rotate(${(a.track || 0) - 45}deg)">✈</div>`,
-        iconSize: [20, 20], iconAnchor: [10, 10] });
+      const icon = L.divIcon({ className: "", html: `<div class="plane-icon" style="font-size:24px;transform:rotate(${(a.track || 0) - 45}deg)">✈</div>`,
+        iconSize: [26, 26], iconAnchor: [13, 13] });
       L.marker([a.lat, a.lon], { icon }).addTo(layer)
+        .bindTooltip(esc(a.callsign || a.airline || "aircraft"), { permanent: true, direction: "right", offset: [10, 0], className: "plane-label" })
         .bindPopup(`<b>${esc(a.callsign || "unknown")}</b><br>${esc(a.airline)}<br>${a.alt_m ?? "–"} m · ${a.speed_kmh ?? "–"} km/h<br>${esc(a.phase)} · ${a.distance_km} km`);
     });
     table($("live-table"), [
