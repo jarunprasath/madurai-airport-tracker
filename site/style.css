@@ -13,8 +13,14 @@
 body { margin: 0; background: var(--bg); color: var(--ink);
   font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
 a { color: var(--maroon); }
-.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
-  padding: 16px; background: #7a1e2c; color: #fff; }
+.top { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap;
+  min-height: 200px; padding: 16px; color: #fff; background-color: #7a1e2c;
+  background-image: linear-gradient(180deg, rgba(40,8,16,.15) 0%, rgba(40,8,16,.75) 100%),
+    linear-gradient(90deg, rgba(60,12,24,.55) 0%, rgba(60,12,24,0) 70%), url("banner-sm.jpg");
+  background-size: cover; background-position: 30% center; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+@media (min-width: 760px) { .top { min-height: clamp(260px, 33.3vw, 480px); padding: 24px 32px;
+  background-image: linear-gradient(180deg, rgba(40,8,16,.05) 0%, rgba(40,8,16,.7) 100%),
+    linear-gradient(90deg, rgba(60,12,24,.5) 0%, rgba(60,12,24,0) 60%), url("banner.jpg"); } }
 .brand { display: flex; align-items: center; gap: 12px; }
 .mark { width: 48px; height: 48px; flex: 0 0 48px; border-radius: 50%; box-shadow: 0 0 0 2px rgba(255,255,255,.25); }
 .top h1 { margin: 0; font: 700 22px/1.1 Georgia, Cambria, serif; letter-spacing: .3px; }
@@ -28,8 +34,8 @@ a { color: var(--maroon); }
 .author { display: flex; gap: 14px; align-items: flex-start; background: var(--card); border: 1px solid var(--line);
   border-radius: 14px; padding: 14px; margin-bottom: 12px; }
 .author p { margin: 0 0 6px; }
-.avatar { flex: 0 0 48px; height: 48px; border-radius: 50%; background: var(--maroon); color: #fff; display: grid;
-  place-items: center; font-weight: 700; }
+.avatar { flex: 0 0 56px; height: 56px; border-radius: 50%; background: var(--maroon); color: #fff; display: grid;
+  place-items: center; font-weight: 700; font-size: 16px; letter-spacing: .5px; }
 .author-name { font-weight: 700; font-size: 16px; }
 .ta { font-weight: 500; color: var(--muted); margin-left: 6px; font-size: 14px; }
 .tabs { position: sticky; top: 0; z-index: 1000; display: flex; gap: 4px; overflow-x: auto; padding: 8px 12px;
@@ -77,3 +83,9 @@ tr:last-child td { border-bottom: 0; }
 .prose { max-width: 760px; }
 .prose li { margin-bottom: 6px; }
 .plane-icon { font-size: 18px; color: var(--maroon); text-shadow: 0 0 2px #fff; }
+
+.hero-img { width: 100%; aspect-ratio: 3 / 1; object-fit: cover; object-position: 30% center; border-radius: 14px;
+  display: block; margin: 0 0 14px; }
+.author-wrap { margin-bottom: 12px; }
+.author-wrap .hero-img { margin: 0; border-radius: 14px 14px 0 0; }
+.author-wrap .author { border-radius: 0 0 14px 14px; border-top: 0; margin: 0; }
