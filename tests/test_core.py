@@ -258,3 +258,13 @@ def test_generate_pptx(tmp_root, seeded):
     from pptx import Presentation
     prs = Presentation(paths["pptx"])
     assert len(prs.slides) == 10
+
+
+def test_fill_airport_from_name(tmp_root):
+    row = {"date": "2026-10-31", "direction": "arrival", "flight_no": "SG24", "airline": "SpiceJet",
+           "other_name": "Dubai", "other_iata": "", "other_country": "", "is_international": False,
+           "is_cargo": False, "sched_local": "2026-10-31 11:10+05:30"}
+    store.upsert([row])
+    r = store.load_all()[0]
+    assert r["is_international"] and r["other_iata"] == "DXB" and r["other_country"] == "AE"
+    assert reference.fill_airport({"other_name": "Chennai", "other_iata": "", "other_country": ""})["other_country"] == "IN"

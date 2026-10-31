@@ -75,3 +75,35 @@ def looks_cargo(airline: str | None, flag: bool | None = None) -> bool:
         return True
     a = (airline or "").lower()
     return any(h in a for h in CARGO_AIRLINE_HINTS)
+
+
+# Fallback when a flight record names the other airport but omits its code/country.
+# name/city keyword (lower case) -> (IATA, ISO country code)
+KNOWN_AIRPORTS = {
+    "dubai": ("DXB", "AE"), "abu dhabi": ("AUH", "AE"), "sharjah": ("SHJ", "AE"), "ras al khaimah": ("RKT", "AE"),
+    "colombo": ("CMB", "LK"), "jaffna": ("JAF", "LK"), "singapore": ("SIN", "SG"), "kuala lumpur": ("KUL", "MY"),
+    "muscat": ("MCT", "OM"), "doha": ("DOH", "QA"), "kuwait": ("KWI", "KW"), "bahrain": ("BAH", "BH"),
+    "riyadh": ("RUH", "SA"), "jeddah": ("JED", "SA"), "dammam": ("DMM", "SA"), "bangkok": ("BKK", "TH"),
+    "male": ("MLE", "MV"),
+    "chennai": ("MAA", "IN"), "bengaluru": ("BLR", "IN"), "bangalore": ("BLR", "IN"), "mumbai": ("BOM", "IN"),
+    "delhi": ("DEL", "IN"), "hyderabad": ("HYD", "IN"), "kolkata": ("CCU", "IN"), "pune": ("PNQ", "IN"),
+    "ahmedabad": ("AMD", "IN"), "goa": ("GOI", "IN"), "kochi": ("COK", "IN"), "cochin": ("COK", "IN"),
+    "thiruvananthapuram": ("TRV", "IN"), "trivandrum": ("TRV", "IN"), "tirupati": ("TIR", "IN"),
+}
+
+
+def fill_airport(row: dict) -> dict:
+    """Fill missing other_iata / other_country / is_international from the airport name or city."""
+    if row.get("other_country") and row.get("other_iata"):
+        return row
+    text = f"{row.get('other_name', '')} {row.get('other_city', '')}".lower()
+    for key, (iata, cc) in KNOWN_AIRPORTS.items():
+        if key in text:
+            row["other_iata"] = row.get("other_iata") or iata
+            if not row.get("other_country"):
+                row["other_country"] = cc
+                row["is_international"] = cc != "IN"
+            if not row.get("other_city"):
+                row["other_city"] = key.title()
+            break
+    return row

@@ -241,7 +241,7 @@
       datasets: [{ label: "Movements", data: hr, backgroundColor: c.maroon }] },
       options: { plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true } } } });
     else noData("c-hourly", "No timing data yet");
-    table($("rt-table"), [{ h: "Destination", f: (r) => `${r.city} (${r.iata})` }, { h: "Country", f: (r) => r.country },
+    table($("rt-table"), [{ h: "Destination", f: (r) => `${r.city || r.iata || "Unknown"}${r.iata && r.city ? ` (${r.iata})` : ""}` }, { h: "Country", f: (r) => r.country || "–" },
       { h: "Flights", f: (r) => r.flights, num: true }, { h: "Per day", f: (r) => r.per_day, num: true },
       { h: "Est. pax", f: (r) => fmt(r.est_pax), num: true }, { h: "Airlines", f: (r) => r.airlines }], rt, "No route data yet.");
 

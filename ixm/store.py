@@ -8,6 +8,7 @@ from typing import Iterable
 
 from . import config
 from .aerodatabox import FIELDS
+from .reference import fill_airport
 
 BOOL_FIELDS = ("is_cargo", "is_international")
 
@@ -25,7 +26,7 @@ def _norm(r: dict) -> dict:
     for b in BOOL_FIELDS:
         v = out[b]
         out[b] = v if isinstance(v, bool) else str(v).strip().lower() in ("true", "1", "yes")
-    return out
+    return fill_airport(out)
 
 
 def load_month(month: str, base: Path | None = None) -> list[dict]:

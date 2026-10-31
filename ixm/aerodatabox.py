@@ -18,7 +18,7 @@ from typing import Any, Iterable
 import requests
 
 from . import config
-from .reference import looks_cargo
+from .reference import fill_airport, looks_cargo
 
 HOST = os.environ.get("AERODATABOX_HOST", "aerodatabox.p.rapidapi.com")
 BASE = f"https://{HOST}"
@@ -81,6 +81,7 @@ def parse_fids(payload: dict[str, Any], direction_hint: str | None = None) -> li
                 "actual_local": actual,
                 "source": "AeroDataBox",
             })
+            fill_airport(rows[-1])
     return rows
 
 
