@@ -135,7 +135,8 @@ def test_discover_links_and_candidates():
     assert links[(2026, 9, 3)].endswith("Sep2k26Annex3.pdf")
     assert (2026, 8, 2) in links and len(links) == 2
     names = aai.candidate_names(2026, 3, 3)
-    assert "Mar2k26Annex3.pdf" in names and "Mar2k26Annex3_0.pdf" in names and "mar2K26annex3.pdf" in names
+    assert names[0] == "Mar2k26Annex3.pdf" and "Mar2k26Annex3_0.pdf" in names and "mar2k26annex3.pdf" in names
+    assert len(names) <= 8 and aai.candidate_names(2008, 9, 3)[4] == "sep2k8annex3.pdf"
 
 
 def test_apply_annex_fills_prev_year_and_manual_override(tmp_root):
@@ -154,6 +155,7 @@ class FakeFetcher(aai.Fetcher):
     def __init__(self, pdf):
         self.pdf = pdf
         self.index = {}
+        self.requests = 0
 
     def load_index(self, pages=3):
         pass
@@ -268,3 +270,37 @@ def test_fill_airport_from_name(tmp_root):
     r = store.load_all()[0]
     assert r["is_international"] and r["other_iata"] == "DXB" and r["other_country"] == "AE"
     assert reference.fill_airport({"other_name": "Chennai", "other_iata": "", "other_country": ""})["other_country"] == "IN"
+
+
+class DownFetcher(aai.Fetcher):
+    """Simulates aai.aero timing out on every request."""
+    def __init__(self):
+        super().__init__(delay=0)
+
+    def load_index(self, pages=3):
+        pass
+
+    def _request(self, url, **kw):
+        import requests
+        self.errors_in_row += 1
+        if self.errors_in_row >= self.MAX_CONSECUTIVE_ERRORS:
+            raise aai.SiteUnreachable("simulated outage")
+        return None
+
+
+def test_collect_stops_fast_when_site_down(tmp_root):
+    s = aai.collect(date(2018, 4, 1), date(2026, 9, 1), fetcher=DownFetcher())
+    assert "simulated outage" in s["stopped"] and s["months_ok"] == 0
+    assert (tmp_root / "data" / "aai_fetch_log.csv").read_text().count("stopped") == 1
+
+
+def test_collect_newest_first_saves_each_month_and_resumes(tmp_root, tmp_path):
+    p = tmp_path / "x.pdf"
+    _make_pdf(p, [("ANNEXURE-III C TOTAL PASSENGERS", [["38", "MADURAI", "123559", "113397", "9.0", "912121", "866342", "5.3"]])])
+    fx = FakeFetcher(p.read_bytes())
+    s1 = aai.collect(date(2026, 1, 1), date(2026, 9, 1), fetcher=fx, max_months=3)
+    assert s1["months_ok"] == 3 and "run again" in s1["stopped"]
+    saved = aai.read_monthly(tmp_root / "data" / "aai_monthly.csv")
+    assert {"2026-09", "2026-08", "2026-07"} <= set(saved)          # newest months first
+    s2 = aai.collect(date(2026, 1, 1), date(2026, 9, 1), fetcher=fx)
+    assert s2["months_skipped"] == 3 and s2["months_ok"] == 6 and not s2["stopped"]

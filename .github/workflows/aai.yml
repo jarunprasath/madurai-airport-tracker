@@ -17,6 +17,9 @@ on:
         description: "Re-download months already collected"
         type: boolean
         default: false
+      budget:
+        description: "Minutes to spend before saving and stopping (run again to continue)"
+        default: "40"
 permissions:
   contents: write
 concurrency:
@@ -25,7 +28,7 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -39,10 +42,14 @@ jobs:
           [ -n "${{ inputs.start }}" ] && ARGS="$ARGS --start ${{ inputs.start }}"
           [ -n "${{ inputs.end }}" ] && ARGS="$ARGS --end ${{ inputs.end }}"
           [ "${{ inputs.refetch }}" = "true" ] && ARGS="$ARGS --refetch"
-          python -m ixm aai $ARGS
-          echo "### AAI fetch log (latest 30 lines)" >> "$GITHUB_STEP_SUMMARY"
-          tail -n 30 data/aai_fetch_log.csv | sed 's/^/    /' >> "$GITHUB_STEP_SUMMARY" || true
-      - name: Commit data
+          python -u -m ixm aai $ARGS --budget-min "${{ inputs.budget || 40 }}" | tee aai_run.log
+      - name: Summary
+        if: always()
+        run: |
+          echo "### AAI run" >> "$GITHUB_STEP_SUMMARY"
+          tail -n 40 aai_run.log 2>/dev/null | sed 's/^/    /' >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Commit data (also after a partial run)
+        if: always()
         run: |
           git config user.name "ixm-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

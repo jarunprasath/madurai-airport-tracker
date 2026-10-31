@@ -39,6 +39,8 @@ def main(argv: list[str] | None = None) -> int:
     a.add_argument("--start", help="YYYY-MM (default: 4 months ago)")
     a.add_argument("--end", help="YYYY-MM (default: last month)")
     a.add_argument("--refetch", action="store_true")
+    a.add_argument("--max-months", type=int, help="stop after this many new months (resume next run)")
+    a.add_argument("--budget-min", type=float, default=40, help="stop after this many minutes (default 40)")
     sub.add_parser("build")
     r = sub.add_parser("report")
     r.add_argument("--kind", choices=["weekly", "monthly"], required=True)
@@ -65,7 +67,8 @@ def main(argv: list[str] | None = None) -> int:
         end = _ym(args.end) if args.end else date(last.year, last.month, 1)
         m0 = end.year * 12 + end.month - 1 - 3      # AAI sometimes revises recent months
         start = _ym(args.start) if args.start else date(m0 // 12, m0 % 12 + 1, 1)
-        print("aai:", aai.collect(start, end, refetch=args.refetch))
+        print("aai:", aai.collect(start, end, refetch=args.refetch, max_months=args.max_months,
+                                  time_budget_s=args.budget_min * 60))
     elif args.cmd == "build":
         from .build import build
         s = build(today)

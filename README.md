@@ -43,8 +43,10 @@ full tables (daily, airlines, routes, aircraft, hourly, AAI monthly, forecast, e
 3. *(Optional)* OpenSky API client: secrets `OPENSKY_CLIENT_ID` and `OPENSKY_CLIENT_SECRET` for higher
    rate limits. Anonymous access works without them.
 4. **Backfill AAI history:** **Actions → AAI monthly traffic → Run workflow** with start `2018-04`.
-   After that it runs automatically three times a month. Check the run summary / `data/aai_fetch_log.csv`
-   for months that could not be found or parsed.
+   It works newest month first, saves after every month and stops after ~40 minutes; if the summary says
+   "run again to continue", run it again with the same start until it doesn't. It checks first that aai.aero
+   answers and stops within a minute if it doesn't. After that it runs automatically three times a month.
+   Check the run summary / `data/aai_fetch_log.csv` for months that could not be found or parsed.
 
 ## How the numbers are produced — and their limits
 

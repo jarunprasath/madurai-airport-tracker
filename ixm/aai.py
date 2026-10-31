@@ -183,17 +183,18 @@ def _validate(res: AnnexResult) -> None:
 
 # ---------------------------------------------------------------- discovery & download
 def candidate_names(year: int, month: int, annex: int) -> list[str]:
+    """Most likely file names first (observed: Mar2k26Annex3.pdf, Mar2K19Annex3.pdf, Jan2k18annex3.pdf,
+    sep2k8annex3.pdf, Mar2k26Annex3_0.pdf). Kept short so a missing month fails fast."""
     mon = MONTHS[month - 1]
-    yy = f"{year % 100:02d}" if year % 100 >= 10 else f"{year % 100}"
-    yy_variants = {yy, f"{year % 100:02d}"}
-    names = []
-    for m in (mon, mon.lower(), mon.upper()):
-        for k in ("2k", "2K"):
-            for y in yy_variants:
-                for a in ("Annex", "annex", "ANNEX"):
-                    for suf in ("", "_0", "_1", "_2"):
-                        names.append(f"{m}{k}{y}{a}{annex}{suf}.pdf")
+    yy = str(year % 100) if year % 100 < 10 else f"{year % 100:02d}"
+    names = [f"{mon}2k{yy}Annex{annex}.pdf", f"{mon}2k{yy}Annex{annex}_0.pdf", f"{mon}2K{yy}Annex{annex}.pdf",
+             f"{mon}2k{yy}annex{annex}.pdf", f"{mon.lower()}2k{yy}annex{annex}.pdf", f"{mon}2k{yy}Annex{annex}_1.pdf",
+             f"{mon}2K{yy}annex{annex}.pdf", f"{mon.upper()}2K{yy}ANNEX{annex}.pdf"]
     return list(dict.fromkeys(names))
+
+
+class SiteUnreachable(RuntimeError):
+    """AAI's server is not answering (blocked, down or timing out)."""
 
 
 def discover_links(html: str) -> dict[tuple[int, int, int], str]:
@@ -217,29 +218,56 @@ def discover_links(html: str) -> dict[tuple[int, int, int], str]:
 
 
 class Fetcher:
-    def __init__(self, session: requests.Session | None = None, delay: float = 1.0):
+    TIMEOUT = (10, 30)          # connect, read seconds
+    MAX_CONSECUTIVE_ERRORS = 6  # network errors in a row -> give up on the site
+
+    def __init__(self, session: requests.Session | None = None, delay: float = 0.5):
         self.s = session or requests.Session()
-        self.s.headers["User-Agent"] = config.USER_AGENT
+        self.s.headers.update({"User-Agent": config.USER_AGENT, "Accept": "application/pdf,text/html,*/*"})
         self.delay = delay
         self.index: dict[tuple[int, int, int], str] = {}
+        self.errors_in_row = 0
+        self.requests = 0
+
+    def _request(self, url: str, **kw) -> requests.Response | None:
+        self.requests += 1
+        try:
+            r = self.s.get(url, timeout=self.TIMEOUT, **kw)
+            self.errors_in_row = 0
+            return r
+        except requests.RequestException as e:
+            self.errors_in_row += 1
+            print(f"  network error ({type(e).__name__}) for {url}", flush=True)
+            if self.errors_in_row >= self.MAX_CONSECUTIVE_ERRORS:
+                raise SiteUnreachable(f"{self.errors_in_row} network errors in a row - aai.aero is not "
+                                      f"answering from this machine (last: {type(e).__name__})") from e
+            return None
+        finally:
+            time.sleep(self.delay)
+
+    def probe(self) -> str:
+        """Quick reachability check; returns a one-line status."""
+        t0 = time.time()
+        r = self._request(INDEX_URL)
+        if r is None:
+            r = self._request(INDEX_URL)
+        if r is None:
+            return "unreachable"
+        return f"HTTP {r.status_code} in {time.time() - t0:.1f}s"
 
     def load_index(self, pages: int = 3) -> None:
         for p in range(pages):
-            try:
-                r = self.s.get(INDEX_URL, params={"page": p} if p else None, timeout=40)
-                if r.status_code == 200:
-                    self.index.update(discover_links(r.text))
-            except requests.RequestException as e:
-                print(f"AAI index fetch failed (page {p}): {e}")
-            time.sleep(self.delay)
+            r = self._request(INDEX_URL, params={"page": p} if p else None)
+            if r is not None and r.status_code == 200:
+                found = discover_links(r.text)
+                self.index.update(found)
+                if not found:
+                    break
+        print(f"AAI index: {len(self.index)} annexure links found", flush=True)
 
     def _get_pdf(self, url: str) -> bytes | None:
-        try:
-            r = self.s.get(url, timeout=60)
-        except requests.RequestException:
-            return None
-        time.sleep(self.delay)
-        if r.status_code == 200 and r.content[:4] == b"%PDF":
+        r = self._request(url)
+        if r is not None and r.status_code == 200 and r.content[:4] == b"%PDF":
             return r.content
         return None
 
@@ -322,43 +350,82 @@ def months_between(start: date, end: date) -> Iterable[tuple[int, int]]:
             y, m = y + 1, 1
 
 
-def collect(start: date, end: date, refetch: bool = False, fetcher: Fetcher | None = None) -> dict:
-    """Fetch and parse AAI annexures for every month in [start, end]; updates aai_monthly.csv."""
-    table = read_monthly(config.AAI_MONTHLY_CSV)
-    fx = fetcher or Fetcher()
-    fx.load_index()
-    log_rows = []
-    summary = {"months_ok": 0, "months_missing": 0, "warnings": 0}
-    for y, m in months_between(start, end):
-        key = f"{y}-{m:02d}"
-        existing = table.get(key, {})
-        if not refetch and existing.get("source") == "AAI Traffic News" and existing.get("pax_total"):
-            continue
-        got_any = False
-        for annex in (3, 2, 4):
-            data, url = fx.fetch(y, m, annex)
-            if not data:
-                log_rows.append([key, annex, "", "not found"])
-                continue
-            try:
-                res = parse_annex_rows(pdf_rows(data), annex)
-            except Exception as e:  # corrupted PDF etc.
-                log_rows.append([key, annex, url, f"parse error {e}"])
-                continue
-            if not res.sections:
-                log_rows.append([key, annex, url, "Madurai row not found; " + "; ".join(res.warnings)])
-                continue
-            apply_annex(table, y, m, annex, res, url)
-            got_any = True
-            status = "ok" if not res.warnings else "check: " + "; ".join(res.warnings)
-            summary["warnings"] += bool(res.warnings)
-            log_rows.append([key, annex, url, status])
-        summary["months_ok" if got_any else "months_missing"] += 1
-    write_monthly(config.AAI_MONTHLY_CSV, table)
+def _append_log(rows: list[list]) -> None:
+    if not rows:
+        return
     new_log = not config.AAI_LOG_CSV.exists()
+    config.AAI_LOG_CSV.parent.mkdir(parents=True, exist_ok=True)
     with config.AAI_LOG_CSV.open("a", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         if new_log:
             w.writerow(["month", "annex", "url", "status"])
-        w.writerows(log_rows)
+        w.writerows(rows)
+
+
+def collect(start: date, end: date, refetch: bool = False, fetcher: Fetcher | None = None,
+            max_months: int | None = None, time_budget_s: float | None = None) -> dict:
+    """Fetch and parse AAI annexures, NEWEST month first, saving after every month.
+
+    Stops early (keeping everything saved so far) when max_months or time_budget_s is reached,
+    or when the AAI site stops answering. Run again to continue where it stopped.
+    """
+    t0 = time.time()
+    table = read_monthly(config.AAI_MONTHLY_CSV)
+    fx = fetcher or Fetcher()
+    summary = {"months_ok": 0, "months_missing": 0, "months_skipped": 0, "warnings": 0, "stopped": ""}
+    if fetcher is None:
+        status = fx.probe()
+        print(f"AAI site check: {status}", flush=True)
+        if status == "unreachable":
+            summary["stopped"] = "aai.aero unreachable from this machine"
+            _append_log([[date.today().isoformat(), "", INDEX_URL, "site unreachable"]])
+            return summary
+    fx.load_index()
+    months = list(months_between(start, end))[::-1]
+    done = 0
+    for y, m in months:
+        key = f"{y}-{m:02d}"
+        existing = table.get(key, {})
+        if not refetch and existing.get("source") == "AAI Traffic News" and existing.get("pax_total"):
+            summary["months_skipped"] += 1
+            continue
+        if max_months is not None and done >= max_months:
+            summary["stopped"] = f"reached {max_months} months this run - run again to continue"
+            break
+        if time_budget_s is not None and time.time() - t0 > time_budget_s:
+            summary["stopped"] = "time budget used - run again to continue"
+            break
+        done += 1
+        log_rows, got_any = [], False
+        try:
+            for annex in (3, 2, 4):
+                data, url = fx.fetch(y, m, annex)
+                if not data:
+                    log_rows.append([key, annex, "", "not found"])
+                    continue
+                try:
+                    res = parse_annex_rows(pdf_rows(data), annex)
+                except Exception as e:  # corrupted PDF etc.
+                    log_rows.append([key, annex, url, f"parse error {e}"])
+                    continue
+                if not res.sections:
+                    log_rows.append([key, annex, url, "Madurai row not found; " + "; ".join(res.warnings)])
+                    continue
+                apply_annex(table, y, m, annex, res, url)
+                got_any = True
+                summary["warnings"] += bool(res.warnings)
+                log_rows.append([key, annex, url, "ok" if not res.warnings else "check: " + "; ".join(res.warnings)])
+        except SiteUnreachable as e:
+            summary["stopped"] = str(e)
+            log_rows.append([key, "", "", f"stopped: {e}"])
+            _append_log(log_rows)
+            write_monthly(config.AAI_MONTHLY_CSV, table)
+            print(f"STOPPED: {e}", flush=True)
+            break
+        summary["months_ok" if got_any else "months_missing"] += 1
+        write_monthly(config.AAI_MONTHLY_CSV, table)   # save progress every month
+        _append_log(log_rows)
+        pax = table.get(key, {}).get("pax_total") or "-"
+        print(f"{key}: {'ok' if got_any else 'not found'} (passengers {pax}) "
+              f"[{done} done, {time.time() - t0:.0f}s, {fx.requests} requests]", flush=True)
     return summary
