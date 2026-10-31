@@ -3,6 +3,9 @@ name: Deploy dashboard
 # Called by the other workflows; also runs every 30 minutes to refresh the live view.
 on:
   workflow_call:
+  push:
+    branches: [main]
+    paths: ["site/**", "ixm/**"]
   workflow_dispatch:
   schedule:
     - cron: "7,37 * * * *"
