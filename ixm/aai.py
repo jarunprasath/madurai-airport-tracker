@@ -33,6 +33,8 @@ from . import config
 INDEX_URL = "https://www.aai.aero/en/business-opportunities/aai-traffic-news"
 FILE_BASE = "https://www.aai.aero/sites/default/files/traffic-news/"
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+FULL_MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September",
+               "October", "November", "December"]
 ANNEX_METRIC = {2: "mov", 3: "pax", 4: "frt"}
 METRIC_ANNEX = {v: k for k, v in ANNEX_METRIC.items()}
 AIRPORT_TOKEN = "MADURAI"
@@ -112,29 +114,60 @@ def _numbers(row: str) -> tuple[list[float], list[float]]:
     return ints, decs
 
 
+def _after_name(text: str) -> str | None:
+    up = text.upper()
+    i = up.rfind(AIRPORT_TOKEN)
+    return text[i + len(AIRPORT_TOKEN):] if i >= 0 else None
+
+
+def _pick(nums: list[float]) -> AirportFigures | None:
+    """Columns after the airport name: month, month last year, %, YTD, YTD last year, %.
+    Percent columns may be '-' (dropped by the tokenizer)."""
+    if len(nums) >= 6:
+        return AirportFigures(nums[0], nums[1], nums[3], nums[4])
+    if len(nums) == 5:
+        # one percent missing: YTD values are the two largest of the remaining three
+        rest = nums[2:]
+        ytd = sorted(rest, reverse=True)[:2]
+        keep = [v for v in rest if v in ytd][:2]
+        return AirportFigures(nums[0], nums[1], keep[0], keep[1])
+    if len(nums) == 4:
+        return AirportFigures(nums[0], nums[1], nums[2], nums[3])
+    return None
+
+
 def _figures_from(rows: list[str], i: int, is_freight: bool) -> AirportFigures | None:
     row = rows[i]
-    candidates = [row]
+    # 1) preferred: numbers that follow the airport name on the same row (serial number is before it)
+    tail = _after_name(row)
+    if tail is not None:
+        if is_freight:
+            nums = [float(t.replace(",", "")) for t in _NUM.findall(tail)]
+        else:
+            nums, _ = _numbers(tail)
+        f = _pick(nums)
+        if f:
+            f.raw = row
+            return f
+    # 2) fallback: name and numbers split across lines
+    candidates = []
     if i > 0:
         candidates.append(rows[i - 1] + " " + row)
     if i + 1 < len(rows):
         candidates.append(row + " " + rows[i + 1])
     for text in candidates:
-        ints, _ = _numbers(text)
         if is_freight:
-            # freight values are often decimals (tonnes); percent columns are the 3rd and 6th numbers
             nums = [float(t.replace(",", "")) for t in _NUM.findall(text)]
             if len(nums) >= 7 and nums[0] == int(nums[0]) and nums[0] < 400:
-                nums = nums[1:]  # drop serial number
-            if len(nums) >= 6:
-                return AirportFigures(nums[0], nums[1], nums[3], nums[4], text)
-            if len(nums) >= 4:
-                return AirportFigures(nums[0], nums[1], nums[2], nums[3], text)
-            continue
-        if len(ints) >= 5 and ints[0] < 400 and ints[0] < ints[1]:
-            ints = ints[1:]  # leading serial number
-        if len(ints) >= 4:
-            return AirportFigures(ints[0], ints[1], ints[2], ints[3], text)
+                nums = nums[1:]
+        else:
+            nums, _ = _numbers(text)
+            if len(nums) >= 5 and nums[0] < 400 and nums[0] < nums[1]:
+                nums = nums[1:]
+        f = _pick(nums)
+        if f:
+            f.raw = text
+            return f
     return None
 
 
@@ -189,7 +222,8 @@ def candidate_names(year: int, month: int, annex: int) -> list[str]:
     yy = str(year % 100) if year % 100 < 10 else f"{year % 100:02d}"
     names = [f"{mon}2k{yy}Annex{annex}.pdf", f"{mon}2k{yy}Annex{annex}_0.pdf", f"{mon}2K{yy}Annex{annex}.pdf",
              f"{mon}2k{yy}annex{annex}.pdf", f"{mon.lower()}2k{yy}annex{annex}.pdf", f"{mon}2k{yy}Annex{annex}_1.pdf",
-             f"{mon}2K{yy}annex{annex}.pdf", f"{mon.upper()}2K{yy}ANNEX{annex}.pdf"]
+             f"{mon}2K{yy}annex{annex}.pdf", f"{FULL_MONTHS[month - 1]}2k{yy}Annex{annex}.pdf",
+             f"{mon}2k{yy}Annex_{annex}.pdf", f"{mon.upper()}2K{yy}ANNEX{annex}.pdf"]
     return list(dict.fromkeys(names))
 
 
@@ -386,7 +420,8 @@ def collect(start: date, end: date, refetch: bool = False, fetcher: Fetcher | No
     for y, m in months:
         key = f"{y}-{m:02d}"
         existing = table.get(key, {})
-        if not refetch and existing.get("source") == "AAI Traffic News" and existing.get("pax_total"):
+        complete = all(existing.get(k) for k in ("pax_total", "mov_total", "frt_total"))
+        if not refetch and existing.get("source") == "AAI Traffic News" and complete:
             summary["months_skipped"] += 1
             continue
         if max_months is not None and done >= max_months:
@@ -414,7 +449,8 @@ def collect(start: date, end: date, refetch: bool = False, fetcher: Fetcher | No
                 apply_annex(table, y, m, annex, res, url)
                 got_any = True
                 summary["warnings"] += bool(res.warnings)
-                log_rows.append([key, annex, url, "ok" if not res.warnings else "check: " + "; ".join(res.warnings)])
+                raw = " | ".join(f"{k}: {v.raw[:120]}" for k, v in res.sections.items() if v.raw and v.raw != "derived")
+                log_rows.append([key, annex, url, "ok" if not res.warnings else "check: " + "; ".join(res.warnings) + " || rows: " + raw])
         except SiteUnreachable as e:
             summary["stopped"] = str(e)
             log_rows.append([key, "", "", f"stopped: {e}"])

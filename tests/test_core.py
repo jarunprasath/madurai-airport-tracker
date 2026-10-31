@@ -136,7 +136,7 @@ def test_discover_links_and_candidates():
     assert (2026, 8, 2) in links and len(links) == 2
     names = aai.candidate_names(2026, 3, 3)
     assert names[0] == "Mar2k26Annex3.pdf" and "Mar2k26Annex3_0.pdf" in names and "mar2k26annex3.pdf" in names
-    assert len(names) <= 8 and aai.candidate_names(2008, 9, 3)[4] == "sep2k8annex3.pdf"
+    assert len(names) <= 10 and "April2k26Annex3.pdf" in aai.candidate_names(2026, 4, 3) and "Mar2k26Annex_3.pdf" in names and aai.candidate_names(2008, 9, 3)[4] == "sep2k8annex3.pdf"
 
 
 def test_apply_annex_fills_prev_year_and_manual_override(tmp_root):
@@ -304,3 +304,22 @@ def test_collect_newest_first_saves_each_month_and_resumes(tmp_root, tmp_path):
     assert {"2026-09", "2026-08", "2026-07"} <= set(saved)          # newest months first
     s2 = aai.collect(date(2026, 1, 1), date(2026, 9, 1), fetcher=fx)
     assert s2["months_skipped"] == 3 and s2["months_ok"] == 6 and not s2["stopped"]
+
+
+def test_freight_serial_not_taken_as_tonnes():
+    rows = ["ANNEXURE-IV A INTERNATIONAL FREIGHT (IN TONNES)", "8 MADURAI 98.60 83.20 18.5 700.10 650.00 7.7",
+            "ANNEXURE-IV B DOMESTIC FREIGHT (IN TONNES)", "11 MADURAI 311.00 290.10 - 3000.50 2800.20 7.1",
+            "ANNEXURE-IV C TOTAL FREIGHT (IN TONNES)", "8 मदुरै MADURAI 409.60 373.30 9.7 3700.60 3450.20 7.3"]
+    res = aai.parse_annex_rows(rows, 4)
+    assert res.sections["international"].month == pytest.approx(98.6)
+    assert res.sections["domestic"].month == pytest.approx(311.0)
+    assert res.sections["domestic"].ytd == pytest.approx(3000.5)
+    assert res.sections["total"].month == pytest.approx(409.6)
+    assert res.warnings == []
+
+
+def test_discover_full_month_and_underscore_names():
+    html = ('<a href="/sites/default/files/traffic-news/April2k26Annex3.pdf">a</a>'
+            '<a href="/sites/default/files/traffic-news/Sep2k26Annex_4.pdf">b</a>')
+    links = aai.discover_links(html)
+    assert (2026, 4, 3) in links and (2026, 9, 4) in links
