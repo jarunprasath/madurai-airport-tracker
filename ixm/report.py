@@ -1,0 +1,304 @@
+"""On-demand weekly / monthly reports: computes the report data, writes the Excel
+workbook (native charts) and a JSON payload the PowerPoint builder (report_pptx.js) reads."""
+from __future__ import annotations
+
+import json
+import subprocess
+from datetime import date, timedelta
+from pathlib import Path
+
+from openpyxl import Workbook
+from openpyxl.chart import BarChart, LineChart, PieChart, Reference
+from openpyxl.styles import Alignment, Font, PatternFill
+from openpyxl.utils import get_column_letter
+
+from . import aai, analytics as an, config, forecast, store
+from .build import aai_tables
+
+REPORTS_DIR = config.ROOT / "reports"
+INK, ACCENT, MUTED = "17324D", "C8553D", "6B7785"
+
+
+def _pct(cur, prev):
+    if cur is None or not prev:
+        return None
+    return round(100 * (cur - prev) / prev, 1)
+
+
+def _period(kind: str, ref: date) -> tuple[date, date, date, date, str]:
+    if kind == "weekly":
+        s, e = an.week_bounds(ref)
+        ps, pe = s - timedelta(days=7), e - timedelta(days=7)
+        y, w, _ = s.isocalendar()
+        label = f"Week {w}, {y} ({s:%d %b} - {e:%d %b %Y})"
+    elif kind == "monthly":
+        s, e = an.month_bounds(ref.year, ref.month)
+        ps, pe = an.month_bounds(ref.year - (ref.month == 1), (ref.month - 2) % 12 + 1)
+        label = f"{s:%B %Y}"
+    else:
+        raise ValueError("kind must be 'weekly' or 'monthly'")
+    return s, e, ps, pe, label
+
+
+def build_report_data(kind: str, ref: date) -> dict:
+    s, e, ps, pe, label = _period(kind, ref)
+    flights = store.load_all()
+    monthly = aai.merged_monthly()
+    lf, lf_note = an.current_load_factor(an.calibrate_load_factor(flights, monthly))
+
+    cur_rows, prev_rows = an.period_rows(flights, s, e), an.period_rows(flights, ps, pe)
+    cur, prev = an.summarize(cur_rows, lf), an.summarize(prev_rows, lf)
+    days_cur = len({r["date"] for r in cur_rows})
+    days_expected = (e - s).days + 1
+
+    monthly_rows, annual_rows = aai_tables(monthly)
+    end_month = f"{e.year}-{e.month:02d}"
+    aai_hist = [r for r in monthly_rows if r["month"] <= end_month and r["pax_total"]][-24:]
+    aai_this = next((r for r in monthly_rows if r["month"] == end_month and r["pax_total"]), None)
+    fc = forecast.monthly_forecast({k: v for k, v in monthly.items() if k <= end_month})
+
+    airlines = an.airline_table(cur_rows, lf)
+    routes = an.route_table(cur_rows, lf)
+    aircraft = an.aircraft_table(cur_rows)
+    hourly = an.hourly_profile(cur_rows)
+    daily = an.daily_series(cur_rows, lf)
+
+    insights = []
+    if cur["movements"]:
+        ch = _pct(cur["movements"], prev["movements"])
+        insights.append(f"{cur['movements']} flight movements ({cur['arrivals']} arrivals, {cur['departures']} departures)"
+                        + (f", {ch:+.1f}% vs previous {kind[:-2]}" if ch is not None else "") + ".")
+        if airlines:
+            a = airlines[0]
+            insights.append(f"{a['airline']} operated {a['share_pct']}% of movements - the largest carrier.")
+        if routes:
+            r = routes[0]
+            insights.append(f"Busiest route: {r['city'] or r['iata']} with {r['flights']} movements (~{r['per_day']}/day).")
+        intl_share = round(100 * cur["international"] / cur["movements"], 1)
+        insights.append(f"International movements: {cur['international']} ({intl_share}% of total).")
+        if any(hourly):
+            peak = max(range(24), key=lambda h: hourly[h])
+            insights.append(f"Peak hour: {peak:02d}:00-{peak:02d}:59 local with {hourly[peak]} scheduled movements.")
+        if cur["cancelled"]:
+            insights.append(f"{cur['cancelled']} flights were cancelled or diverted.")
+        if cur["on_time_pct"] is not None:
+            insights.append(f"On-time performance (within 15 min): {cur['on_time_pct']}%.")
+        if cur["cargo"]:
+            insights.append(f"{cur['cargo']} dedicated cargo flight movements recorded.")
+    else:
+        insights.append("No flight-schedule data was collected for this period yet.")
+    if aai_this:
+        y = aai_this.get("pax_yoy_pct")
+        insights.append(f"AAI official passengers for {end_month}: {int(aai_this['pax_total']):,}"
+                        + (f" ({y:+.1f}% year on year)." if y is not None else "."))
+    if lf >= 0.85 and "calibrated" in lf_note:
+        insights.append(f"Implied seat load factor is about {round(lf * 100)}% - flights run close to full, "
+                        "which supports a case for added capacity or new frequencies.")
+    if fc.get("available"):
+        nxt = fc["points"][:3]
+        insights.append("Forecast (AAI basis) next 3 months: " +
+                        ", ".join(f"{p['month']} ~{p['forecast']:,}" for p in nxt) + " passengers.")
+
+    caveats = [
+        "Flight movements come from AeroDataBox schedule/status data; coverage may miss some flights.",
+        f"Passenger counts per flight are ESTIMATES: typical seats x load factor {lf} ({lf_note}).",
+        "Official passenger, movement and freight totals come from AAI monthly Traffic News and lag 4-8 weeks.",
+        "Forecasts are statistical estimates, not official projections.",
+    ]
+    if days_cur < days_expected:
+        caveats.insert(0, f"Flight data covers {days_cur} of {days_expected} days in this period.")
+
+    return {
+        "kind": kind, "label": label, "start": s.isoformat(), "end": e.isoformat(),
+        "prev_start": ps.isoformat(), "prev_end": pe.isoformat(),
+        "airport": {"name": config.AIRPORT_NAME, "iata": config.AIRPORT_IATA, "icao": config.AIRPORT_ICAO},
+        "load_factor": lf, "load_factor_note": lf_note,
+        "kpi": cur, "kpi_prev": prev,
+        "kpi_change": {k: _pct(cur[k], prev[k]) for k in ("movements", "est_pax", "international", "cargo")},
+        "days_with_data": days_cur, "days_in_period": days_expected,
+        "daily": daily, "airlines": airlines, "routes": routes, "aircraft": aircraft, "hourly": hourly,
+        "aai_history": aai_hist, "aai_this_month": aai_this, "aai_annual": annual_rows,
+        "forecast": fc, "insights": insights, "caveats": caveats,
+        "flights": sorted(cur_rows, key=lambda r: (r["date"], r["sched_local"])),
+        "sources": ["AAI Traffic News - aai.aero", "AeroDataBox (via RapidAPI)", "OpenSky Network"],
+    }
+
+
+# ---------------------------------------------------------------- Excel
+def _sheet(wb: Workbook, title: str, header: list[str], rows: list[list]):
+    ws = wb.create_sheet(title)
+    ws.append(header)
+    for c in ws[1]:
+        c.font = Font(bold=True, color="FFFFFF")
+        c.fill = PatternFill("solid", fgColor=INK)
+        c.alignment = Alignment(vertical="center", wrap_text=True)
+    for r in rows:
+        ws.append(r)
+    for i, h in enumerate(header, 1):
+        width = max([len(str(h))] + [len(str(r[i - 1])) for r in rows[:200] if i - 1 < len(r)]) + 2
+        ws.column_dimensions[get_column_letter(i)].width = min(max(width, 9), 48)
+    ws.freeze_panes = "A2"
+    return ws
+
+
+def _bar(ws, title, cats_col, val_cols, n, anchor, ytitle="", stacked=False, horizontal=False):
+    if n == 0:
+        return
+    ch = BarChart()
+    ch.type = "bar" if horizontal else "col"
+    ch.title, ch.y_axis.title = title, ytitle
+    if stacked:
+        ch.grouping, ch.overlap = "stacked", 100
+    for c in val_cols:
+        ch.add_data(Reference(ws, min_col=c, min_row=1, max_row=n + 1), titles_from_data=True)
+    ch.set_categories(Reference(ws, min_col=cats_col, min_row=2, max_row=n + 1))
+    ch.height, ch.width = 8, 16
+    ws.add_chart(ch, anchor)
+
+
+def write_excel(d: dict, path: Path) -> Path:
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Summary"
+    ws["A1"] = f"{d['airport']['name']} ({d['airport']['iata']}) - {d['kind'].title()} report"
+    ws["A1"].font = Font(bold=True, size=16, color=INK)
+    ws["A2"] = d["label"]
+    ws["A2"].font = Font(size=12, color=MUTED)
+    k, kp, kc = d["kpi"], d["kpi_prev"], d["kpi_change"]
+    rows = [
+        ("Flight movements", k["movements"], kp["movements"], kc["movements"]),
+        ("Arrivals", k["arrivals"], kp["arrivals"], _pct(k["arrivals"], kp["arrivals"])),
+        ("Departures", k["departures"], kp["departures"], _pct(k["departures"], kp["departures"])),
+        ("International movements", k["international"], kp["international"], kc["international"]),
+        ("Cargo flight movements", k["cargo"], kp["cargo"], kc["cargo"]),
+        ("Cancelled / diverted", k["cancelled"], kp["cancelled"], _pct(k["cancelled"], kp["cancelled"])),
+        ("Estimated seats", k["est_seats"], kp["est_seats"], _pct(k["est_seats"], kp["est_seats"])),
+        ("Estimated passengers", k["est_pax"], kp["est_pax"], kc["est_pax"]),
+        ("On-time % (<=15 min)", k["on_time_pct"], kp["on_time_pct"], None),
+    ]
+    ws.append([])
+    ws.append(["Metric", "This period", "Previous period", "Change %"])
+    for c in ws[4]:
+        c.font = Font(bold=True, color="FFFFFF")
+        c.fill = PatternFill("solid", fgColor=INK)
+    for r in rows:
+        ws.append(list(r))
+    if d["aai_this_month"]:
+        a = d["aai_this_month"]
+        ws.append([])
+        ws.append(["AAI official (month)", "Passengers", "Aircraft movements", "Freight (t)"])
+        ws.append([a["month"], a["pax_total"], a["mov_total"], a["frt_total"]])
+    ws.append([])
+    ws.append(["Key insights"])
+    ws.cell(ws.max_row, 1).font = Font(bold=True, color=INK)
+    for s in d["insights"]:
+        ws.append([s])
+    ws.append([])
+    ws.append(["Notes & caveats"])
+    ws.cell(ws.max_row, 1).font = Font(bold=True, color=INK)
+    for s in d["caveats"]:
+        ws.append([s])
+    ws.append(["Sources: " + "; ".join(d["sources"])])
+    ws.column_dimensions["A"].width = 34
+    for col in "BCD":
+        ws.column_dimensions[col].width = 18
+
+    daily = d["daily"]
+    wsd = _sheet(wb, "Daily", ["Date", "Movements", "Arrivals", "Departures", "International", "Cargo",
+                               "Cancelled", "Est. passengers", "On-time %"],
+                 [[x["date"], x["movements"], x["arrivals"], x["departures"], x["international"], x["cargo"],
+                   x["cancelled"], x["est_pax"], x["on_time_pct"]] for x in daily])
+    _bar(wsd, "Daily arrivals and departures", 1, [3, 4], len(daily), "K2", "Movements", stacked=True)
+
+    al = d["airlines"]
+    wsa = _sheet(wb, "Airlines", ["Airline", "Code", "Flights", "Share %", "Arrivals", "Departures",
+                                  "International", "Cargo", "Est. seats", "Est. passengers", "On-time %",
+                                  "Aircraft (top 3)", "Routes"],
+                 [[x["airline"], x["code"], x["flights"], x["share_pct"], x["arrivals"], x["departures"],
+                   x["international"], x["cargo"], x["est_seats"], x["est_pax"], x["on_time_pct"], x["aircraft"],
+                   x["routes"]] for x in al])
+    if al:
+        pie = PieChart()
+        pie.title = "Share of movements by airline"
+        pie.add_data(Reference(wsa, min_col=3, min_row=1, max_row=len(al) + 1), titles_from_data=True)
+        pie.set_categories(Reference(wsa, min_col=1, min_row=2, max_row=len(al) + 1))
+        pie.height, pie.width = 8, 12
+        wsa.add_chart(pie, "O2")
+
+    rt = d["routes"]
+    wsr = _sheet(wb, "Routes", ["IATA", "City", "Country", "International", "Flights", "Per day", "Airlines",
+                                "Est. passengers"],
+                 [[x["iata"], x["city"], x["country"], "Yes" if x["international"] else "No", x["flights"],
+                   x["per_day"], x["airlines"], x["est_pax"]] for x in rt])
+    _bar(wsr, "Movements by route", 2, [5], min(len(rt), 15), "J2", horizontal=True)
+
+    ac = d["aircraft"]
+    wst = _sheet(wb, "Aircraft types", ["Aircraft", "Flights", "Share %", "Typical seats (assumed)"],
+                 [[x["aircraft"], x["flights"], x["share_pct"], x["typical_seats"]] for x in ac])
+    _bar(wst, "Movements by aircraft type", 1, [2], min(len(ac), 12), "F2", horizontal=True)
+
+    wsh = _sheet(wb, "Hourly", ["Hour (local)", "Scheduled movements"],
+                 [[f"{h:02d}:00", v] for h, v in enumerate(d["hourly"])])
+    _bar(wsh, "Movements by hour of day", 1, [2], 24, "D2")
+
+    hist = d["aai_history"]
+    wsm = _sheet(wb, "AAI monthly", ["Month", "Passengers total", "Domestic", "International", "YoY %",
+                                     "Aircraft movements", "Freight total (t)", "Source"],
+                 [[x["month"], x["pax_total"], x["pax_dom"], x["pax_intl"], x["pax_yoy_pct"], x["mov_total"],
+                   x["frt_total"], x["source"]] for x in hist])
+    if hist:
+        ln = LineChart()
+        ln.title, ln.y_axis.title = "AAI official monthly passengers", "Passengers"
+        ln.add_data(Reference(wsm, min_col=2, min_row=1, max_row=len(hist) + 1), titles_from_data=True)
+        ln.set_categories(Reference(wsm, min_col=1, min_row=2, max_row=len(hist) + 1))
+        ln.height, ln.width = 8, 18
+        wsm.add_chart(ln, "J2")
+
+    fc = d["forecast"]
+    if fc.get("available"):
+        wsf = _sheet(wb, "Forecast", ["Month", "Forecast passengers", "Low (80%)", "High (80%)",
+                                      "Seasonal index", "Season / festivals"],
+                     [[p["month"], p["forecast"], p["low"], p["high"], p["seasonal_index"], "; ".join(p["season"])]
+                      for p in fc["points"]])
+        ln = LineChart()
+        ln.title = "12-month passenger forecast"
+        for c in (2, 3, 4):
+            ln.add_data(Reference(wsf, min_col=c, min_row=1, max_row=len(fc["points"]) + 1), titles_from_data=True)
+        ln.set_categories(Reference(wsf, min_col=1, min_row=2, max_row=len(fc["points"]) + 1))
+        ln.height, ln.width = 8, 18
+        wsf.add_chart(ln, "H2")
+        wsf.append([])
+        wsf.append([f"Method: {fc['method']}. Trained on {fc['trained_on']}. "
+                    f"Backtest MAPE: {fc['backtest_mape_pct']}%."])
+    else:
+        wsf = wb.create_sheet("Forecast")
+        wsf["A1"] = "Forecast not available: " + fc.get("reason", "")
+
+    fl = d["flights"]
+    _sheet(wb, "Flights", ["Date", "Direction", "Flight", "Airline", "Status", "Cargo", "International",
+                           "Aircraft", "Registration", "From/To", "City", "Scheduled", "Revised", "Actual"],
+           [[x["date"], x["direction"], x["flight_no"], x["airline"], x["status"], x["is_cargo"],
+             x["is_international"], x["aircraft_model"], x["aircraft_reg"], x["other_iata"], x["other_city"],
+             x["sched_local"], x["revised_local"], x["actual_local"]] for x in fl])
+    path.parent.mkdir(parents=True, exist_ok=True)
+    wb.save(path)
+    return path
+
+
+def generate(kind: str, ref: date, out_dir: Path | None = None, pptx: bool = True) -> dict[str, Path]:
+    d = build_report_data(kind, ref)
+    out = out_dir or REPORTS_DIR
+    out.mkdir(parents=True, exist_ok=True)
+    tag = (f"{d['start'][:4]}-W{date.fromisoformat(d['start']).isocalendar()[1]:02d}"
+           if kind == "weekly" else d["start"][:7])
+    stem = f"IXM_{kind}_report_{tag}"
+    paths = {"xlsx": write_excel(d, out / f"{stem}.xlsx")}
+    jpath = out / f"{stem}.json"
+    jpath.write_text(json.dumps(d, default=str, indent=1), encoding="utf-8")
+    paths["json"] = jpath
+    if pptx:
+        ppath = out / f"{stem}.pptx"
+        script = config.ROOT / "report_pptx.js"
+        subprocess.run(["node", str(script), str(jpath), str(ppath)], check=True)
+        paths["pptx"] = ppath
+    return paths

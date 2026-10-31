@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IXM Pulse – Madurai Airport Tracker</title>
+<meta name="description" content="Live flights, daily and monthly traffic, airline-wise data, cargo and passenger forecasts for Madurai International Airport (IXM).">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="mark" aria-hidden="true">✈</span>
+    <div>
+      <h1>IXM Pulse</h1>
+      <p class="sub">Madurai International Airport · IXM / VOMD</p>
+    </div>
+  </div>
+  <p class="updated" id="updated">Loading…</p>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" data-tab="live" aria-selected="true">Live</button>
+  <button role="tab" data-tab="today">Today</button>
+  <button role="tab" data-tab="traffic">Traffic</button>
+  <button role="tab" data-tab="airlines">Airlines</button>
+  <button role="tab" data-tab="routes">Routes</button>
+  <button role="tab" data-tab="forecast">Forecast</button>
+  <button role="tab" data-tab="reports">Reports</button>
+  <button role="tab" data-tab="about">About</button>
+</nav>
+
+<main>
+  <section id="tab-live" class="tab active">
+    <div class="row-head">
+      <h2>Aircraft near Madurai now</h2>
+      <span class="pill" id="live-status">–</span>
+    </div>
+    <div id="map" role="img" aria-label="Map of aircraft near Madurai airport"></div>
+    <p class="note">ADS-B positions from the OpenSky Network, refreshed every minute while this page is open.
+      Coverage near Madurai depends on volunteer receivers, so some aircraft may not appear.</p>
+    <div class="table-wrap"><table id="live-table"></table></div>
+  </section>
+
+  <section id="tab-today" class="tab">
+    <h2>Today's arrivals and departures</h2>
+    <div class="seg" id="board-seg">
+      <button data-dir="all" class="on">All</button><button data-dir="arrival">Arrivals</button><button data-dir="departure">Departures</button>
+    </div>
+    <div class="table-wrap"><table id="board"></table></div>
+    <h3>Next 7 days (from published schedules)</h3>
+    <div class="table-wrap"><table id="next7"></table></div>
+  </section>
+
+  <section id="tab-traffic" class="tab">
+    <h2>Traffic statistics</h2>
+    <div class="kpis" id="kpis"></div>
+    <div class="card"><h3>Daily flight movements</h3><div class="chart"><canvas id="c-daily"></canvas></div></div>
+    <div class="card"><h3>Official monthly passengers (AAI)</h3><div class="chart"><canvas id="c-aai"></canvas></div>
+      <p class="note" id="aai-note"></p></div>
+    <div class="grid2">
+      <div class="card"><h3>Annual passengers by fiscal year</h3><div class="chart"><canvas id="c-annual"></canvas></div></div>
+      <div class="card"><h3>Monthly cargo (tonnes, AAI)</h3><div class="chart"><canvas id="c-freight"></canvas></div></div>
+    </div>
+    <div class="card"><h3>Monthly table</h3><div class="table-wrap"><table id="aai-table"></table></div></div>
+  </section>
+
+  <section id="tab-airlines" class="tab">
+    <div class="row-head"><h2>Airlines</h2>
+      <div class="seg" id="al-seg"><button data-p="last30" class="on">Last 30 days</button><button data-p="all">All data</button></div></div>
+    <div class="grid2">
+      <div class="card"><h3>Share of flight movements</h3><div class="chart"><canvas id="c-airlines"></canvas></div></div>
+      <div class="card"><h3>Aircraft types</h3><div class="chart"><canvas id="c-aircraft"></canvas></div></div>
+    </div>
+    <div class="table-wrap"><table id="al-table"></table></div>
+  </section>
+
+  <section id="tab-routes" class="tab">
+    <h2>Routes and peak hours</h2>
+    <div class="card"><h3>Flight movements by route (last 30 days)</h3><div class="chart tall"><canvas id="c-routes"></canvas></div></div>
+    <div class="card"><h3>Scheduled movements by hour (last 30 days)</h3><div class="chart"><canvas id="c-hourly"></canvas></div></div>
+    <div class="table-wrap"><table id="rt-table"></table></div>
+  </section>
+
+  <section id="tab-forecast" class="tab">
+    <h2>Passenger forecast</h2>
+    <div class="card"><h3>Monthly passengers: history and 12-month forecast</h3><div class="chart"><canvas id="c-forecast"></canvas></div>
+      <p class="note" id="fc-note"></p></div>
+    <div class="table-wrap"><table id="fc-table"></table></div>
+  </section>
+
+  <section id="tab-reports" class="tab">
+    <h2>Weekly and monthly reports</h2>
+    <p>PowerPoint and Excel reports with charts and statistics. New ones are created every Monday (weekly) and on
+      the 5th (monthly), or on demand from the <a id="run-link" href="#" target="_blank" rel="noopener">Generate report</a> workflow.</p>
+    <div class="table-wrap"><table id="reports"></table></div>
+  </section>
+
+  <section id="tab-about" class="tab prose">
+    <h2>About this tracker</h2>
+    <p>A community dashboard of air traffic at Madurai International Airport, built to give citizens, businesses and
+      authorities clear evidence for more flights and better connectivity.</p>
+    <h3>Where the numbers come from</h3>
+    <ul>
+      <li><b>Official passengers, aircraft movements and cargo:</b> Airports Authority of India (AAI) monthly Traffic News,
+        published on aai.aero, usually 4–8 weeks after month end.</li>
+      <li><b>Flight schedules, airlines, aircraft types and status:</b> AeroDataBox flight data API.</li>
+      <li><b>Live aircraft positions:</b> OpenSky Network (ADS-B, volunteer receivers).</li>
+    </ul>
+    <h3>Estimates – please read</h3>
+    <ul>
+      <li>AAI does not publish daily or per-flight passenger counts. Daily and weekly passenger numbers here are
+        <b>estimates</b>: typical seats for each aircraft type × a load factor calibrated against AAI monthly totals
+        (<span id="lf-note">–</span>).</li>
+      <li>Forecasts use the seasonal pattern of past years (festivals, school holidays) and the recent trend. They are
+        statistical estimates, not official projections.</li>
+      <li>Data gaps happen when a source is unavailable. Coverage is shown with each figure.</li>
+    </ul>
+    <p class="note">Open source – <a href="https://github.com/jarunprasath/madurai-airport-tracker">github.com/jarunprasath/madurai-airport-tracker</a>.
+      Map data © OpenStreetMap contributors.</p>
+  </section>
+</main>
+
+<script src="vendor/chart.umd.min.js"></script>
+<script src="vendor/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

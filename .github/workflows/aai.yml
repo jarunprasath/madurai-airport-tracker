@@ -1,0 +1,59 @@
+name: AAI monthly traffic
+# Official passengers / aircraft movements / freight from AAI Traffic News PDFs.
+# Runs three times a month because the publication date varies; re-checks the last 4 months.
+# For the first run, start it manually with a start month (e.g. 2018-04) to backfill history.
+on:
+  schedule:
+    - cron: "15 3 3,13,23 * *"
+  workflow_dispatch:
+    inputs:
+      start:
+        description: "First month YYYY-MM (blank = 4 months ago)"
+        default: ""
+      end:
+        description: "Last month YYYY-MM (blank = last month)"
+        default: ""
+      refetch:
+        description: "Re-download months already collected"
+        type: boolean
+        default: false
+permissions:
+  contents: write
+concurrency:
+  group: data-commit
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Collect AAI annexures
+        run: |
+          ARGS=""
+          [ -n "${{ inputs.start }}" ] && ARGS="$ARGS --start ${{ inputs.start }}"
+          [ -n "${{ inputs.end }}" ] && ARGS="$ARGS --end ${{ inputs.end }}"
+          [ "${{ inputs.refetch }}" = "true" ] && ARGS="$ARGS --refetch"
+          python -m ixm aai $ARGS
+          echo "### AAI fetch log (latest 30 lines)" >> "$GITHUB_STEP_SUMMARY"
+          tail -n 30 data/aai_fetch_log.csv | sed 's/^/    /' >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Commit data
+        run: |
+          git config user.name "ixm-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet || git commit -m "data: AAI monthly traffic $(date -u +%F)"
+          git pull --rebase --autostash && git push
+  deploy:
+    needs: collect
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit

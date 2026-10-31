@@ -1,0 +1,49 @@
+name: Collect flights
+# Arrivals/departures for yesterday, today and tomorrow from AeroDataBox.
+# 00:31 UTC = 06:01 IST (finalises yesterday) and 08:31 UTC = 14:01 IST (refreshes today).
+on:
+  schedule:
+    - cron: "31 0 * * *"
+    - cron: "31 8 * * *"
+  workflow_dispatch:
+    inputs:
+      back:
+        description: "Days before today to fetch"
+        default: "1"
+      ahead:
+        description: "Days after today to fetch"
+        default: "1"
+permissions:
+  contents: write
+concurrency:
+  group: data-commit
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Fetch flights
+        env:
+          AERODATABOX_KEY: ${{ secrets.AERODATABOX_KEY }}
+        run: python -m ixm flights --back "${{ inputs.back || 1 }}" --ahead "${{ inputs.ahead || 1 }}"
+      - name: Commit data
+        run: |
+          git config user.name "ixm-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet || git commit -m "data: flights $(date -u +%F)"
+          git pull --rebase --autostash && git push
+  deploy:
+    needs: collect
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit

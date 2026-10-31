@@ -1,0 +1,49 @@
+{
+  "departures": [
+    {
+      "departure": {"airport": {"icao": "VOMD", "iata": "IXM", "name": "Madurai"},
+                    "scheduledTime": {"utc": "2026-10-30 00:45Z", "local": "2026-10-30 06:15+05:30"},
+                    "revisedTime": {"utc": "2026-10-30 00:55Z", "local": "2026-10-30 06:25+05:30"},
+                    "runwayTime": {"utc": "2026-10-30 01:05Z", "local": "2026-10-30 06:35+05:30"}},
+      "arrival": {"airport": {"icao": "VOMM", "iata": "MAA", "name": "Chennai", "shortName": "Chennai",
+                              "municipalityName": "Chennai", "countryCode": "IN"},
+                  "scheduledTime": {"utc": "2026-10-30 01:55Z", "local": "2026-10-30 07:25+05:30"}},
+      "number": "6E 7012", "status": "Departed", "codeshareStatus": "IsOperator", "isCargo": false,
+      "aircraft": {"reg": "VT-ITA", "model": "ATR 72"},
+      "airline": {"name": "IndiGo", "iata": "6E", "icao": "IGO"}
+    },
+    {
+      "departure": {"airport": {"icao": "VOMD", "iata": "IXM", "name": "Madurai"},
+                    "scheduledTime": {"utc": "2026-10-30 14:30Z", "local": "2026-10-30 20:00+05:30"}},
+      "arrival": {"airport": {"icao": "OMDB", "iata": "DXB", "name": "Dubai", "municipalityName": "Dubai",
+                              "countryCode": "AE"},
+                  "scheduledTime": {"utc": "2026-10-30 18:30Z", "local": "2026-10-30 22:30+04:00"}},
+      "number": "SG 23", "status": "Canceled", "isCargo": false,
+      "aircraft": {"model": "Boeing 737-800"},
+      "airline": {"name": "SpiceJet", "iata": "SG", "icao": "SEJ"}
+    }
+  ],
+  "arrivals": [
+    {
+      "departure": {"airport": {"icao": "WSSS", "iata": "SIN", "name": "Singapore", "municipalityName": "Singapore",
+                                "countryCode": "SG"},
+                    "scheduledTime": {"utc": "2026-10-30 03:00Z", "local": "2026-10-30 11:00+08:00"}},
+      "arrival": {"airport": {"icao": "VOMD", "iata": "IXM", "name": "Madurai"},
+                  "scheduledTime": {"utc": "2026-10-30 06:30Z", "local": "2026-10-30 12:00+05:30"},
+                  "runwayTime": {"utc": "2026-10-30 06:40Z", "local": "2026-10-30 12:10+05:30"}},
+      "number": "IX 685", "status": "Arrived", "isCargo": false,
+      "aircraft": {"reg": "VT-AXA", "model": "Boeing 737 MAX 8"},
+      "airline": {"name": "Air India Express", "iata": "IX", "icao": "AXB"}
+    },
+    {
+      "departure": {"airport": {"icao": "VOMM", "iata": "MAA", "name": "Chennai", "municipalityName": "Chennai",
+                                "countryCode": "IN"},
+                    "scheduledTime": {"utc": "2026-10-30 19:00Z", "local": "2026-10-31 00:30+05:30"}},
+      "arrival": {"airport": {"icao": "VOMD", "iata": "IXM", "name": "Madurai"},
+                  "scheduledTime": {"utc": "2026-10-30 20:00Z", "local": "2026-10-31 01:30+05:30"}},
+      "number": "BZ 501", "status": "Expected", "isCargo": true,
+      "aircraft": {"model": "Boeing 737-300"},
+      "airline": {"name": "Blue Dart Aviation", "iata": "BZ", "icao": "BDA"}
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+name: Deploy dashboard
+# Rebuilds the dashboard JSON (plus a fresh live snapshot) and publishes it to GitHub Pages.
+# Called by the other workflows; also runs every 30 minutes to refresh the live view.
+on:
+  workflow_call:
+  workflow_dispatch:
+  schedule:
+    - cron: "7,37 * * * *"
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Live aircraft snapshot (OpenSky)
+        env:
+          OPENSKY_CLIENT_ID: ${{ secrets.OPENSKY_CLIENT_ID }}
+          OPENSKY_CLIENT_SECRET: ${{ secrets.OPENSKY_CLIENT_SECRET }}
+        run: python -m ixm live
+      - run: python -m ixm build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4

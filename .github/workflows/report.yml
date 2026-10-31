@@ -1,0 +1,65 @@
+name: Generate report
+# PowerPoint + Excel reports. Automatic: weekly every Monday, monthly on the 8th.
+# On demand: Actions -> Generate report -> Run workflow (choose weekly/monthly and any date in the period).
+on:
+  schedule:
+    - cron: "41 2 * * 1"   # Monday 08:11 IST - last week
+    - cron: "41 2 8 * *"   # 8th of month - last month
+  workflow_dispatch:
+    inputs:
+      kind:
+        description: "Report type"
+        type: choice
+        options: [weekly, monthly]
+        default: weekly
+      date:
+        description: "Any date inside the wanted week/month, YYYY-MM-DD (blank = last complete period)"
+        default: ""
+permissions:
+  contents: write
+concurrency:
+  group: data-commit
+  cancel-in-progress: false
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: pip install -r requirements.txt && npm install --no-audit --no-fund
+      - name: Build report
+        run: |
+          KIND="${{ inputs.kind }}"
+          if [ -z "$KIND" ]; then
+            if [ "${{ github.event.schedule }}" = "41 2 8 * *" ]; then KIND=monthly; else KIND=weekly; fi
+          fi
+          ARGS="--kind $KIND"
+          [ -n "${{ inputs.date }}" ] && ARGS="$ARGS --date ${{ inputs.date }}"
+          python -m ixm report $ARGS | tee report.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ixm-report
+          path: |
+            reports/*.pptx
+            reports/*.xlsx
+      - name: Commit report
+        run: |
+          git config user.name "ixm-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/*.pptx reports/*.xlsx
+          git diff --cached --quiet || git commit -m "report: $(grep -o 'IXM_[a-z]*_report_[^.]*' report.log | head -1)"
+          git pull --rebase --autostash && git push
+  deploy:
+    needs: report
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit
