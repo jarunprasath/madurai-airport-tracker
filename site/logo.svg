@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="t">
+  <title id="t">Gopuram of the Meenakshi Amman Temple, Madurai</title>
+  <circle cx="32" cy="32" r="32" fill="#D99A2B"/>
+  <g fill="#7A1E2C">
+    <!-- kalasams (finials) -->
+    <rect x="23.2" y="9" width="1.6" height="3" rx=".8"/><rect x="27.6" y="8" width="1.6" height="4" rx=".8"/>
+    <rect x="31.2" y="7" width="1.6" height="5" rx=".8"/><rect x="34.8" y="8" width="1.6" height="4" rx=".8"/>
+    <rect x="39.2" y="9" width="1.6" height="3" rx=".8"/>
+    <!-- barrel-vault crown (shala) -->
+    <path d="M21 16c0-3 5-4.5 11-4.5S43 13 43 16v1H21z"/>
+    <!-- tiers, narrowing upward -->
+    <path d="M22 18h20l1 4H21z"/>
+    <path d="M20.5 23h23l1 4.5h-25z"/>
+    <path d="M19 28.5h26l1.1 4.8H17.9z"/>
+    <path d="M17.4 34.3h29.2l1.2 5H16.2z"/>
+    <path d="M15.6 40.3h32.8l1.3 5.2H14.3z"/>
+    <!-- base with gateway -->
+    <path d="M13.5 46.5h37V55h-37z"/>
+  </g>
+  <g fill="#D99A2B">
+    <!-- niches on each tier -->
+    <rect x="31" y="19.2" width="2" height="2" rx=".4"/>
+    <rect x="25" y="24.2" width="2" height="2.4" rx=".4"/><rect x="31" y="24.2" width="2" height="2.4" rx=".4"/><rect x="37" y="24.2" width="2" height="2.4" rx=".4"/>
+    <rect x="23" y="29.8" width="2" height="2.6" rx=".4"/><rect x="31" y="29.8" width="2" height="2.6" rx=".4"/><rect x="39" y="29.8" width="2" height="2.6" rx=".4"/>
+    <rect x="21" y="35.6" width="2" height="2.8" rx=".4"/><rect x="27" y="35.6" width="2" height="2.8" rx=".4"/><rect x="35" y="35.6" width="2" height="2.8" rx=".4"/><rect x="41" y="35.6" width="2" height="2.8" rx=".4"/>
+    <rect x="19" y="41.6" width="2" height="3" rx=".4"/><rect x="25.5" y="41.6" width="2" height="3" rx=".4"/><rect x="36.5" y="41.6" width="2" height="3" rx=".4"/><rect x="43" y="41.6" width="2" height="3" rx=".4"/>
+    <!-- doorway -->
+    <path d="M28.5 55v-4.5a3.5 3.5 0 0 1 7 0V55z"/>
+    <!-- crown window -->
+    <circle cx="32" cy="14.6" r="1.3"/>
+  </g>
+</svg>

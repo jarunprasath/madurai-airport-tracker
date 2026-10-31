@@ -16,8 +16,7 @@ a { color: var(--maroon); }
 .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
   padding: 16px; background: #7a1e2c; color: #fff; }
 .brand { display: flex; align-items: center; gap: 12px; }
-.mark { width: 42px; height: 42px; border-radius: 50%; background: #d99a2b; color: #7a1e2c; display: grid;
-  place-items: center; font-size: 22px; }
+.mark { width: 48px; height: 48px; flex: 0 0 48px; border-radius: 50%; box-shadow: 0 0 0 2px rgba(255,255,255,.25); }
 .top h1 { margin: 0; font: 700 22px/1.1 Georgia, Cambria, serif; letter-spacing: .3px; }
 .sub { margin: 2px 0 0; font-size: 13px; opacity: .85; }
 .meta { text-align: left; }
