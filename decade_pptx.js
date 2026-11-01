@@ -16,12 +16,12 @@ const mlab = (ym) => `${MON[+ym.slice(5, 7) - 1]} ${ym.slice(2, 4)}`;
 const pres = new pptxgen();
 pres.layout = "LAYOUT_16x9";
 pres.title = "Madurai Airport – 10-year traffic review and growth agenda";
-pres.author = "Arun Prasath J";
+pres.author = "IXM Pulse";
 pres.theme = { headFontFace: FONT_H, bodyFontFace: FONT_B };
 pres.defineSlideMaster({
   title: "CONTENT", background: { color: WHITE },
   objects: [
-    { text: { text: "Madurai Airport (IXM) · 10-year review · Arun Prasath J",
+    { text: { text: "Madurai Airport (IXM) · 10-year review",
       options: { x: 0.5, y: 5.22, w: 6.5, h: 0.28, fontSize: 9, color: MUTED, fontFace: FONT_B } } },
     { placeholder: { options: { name: "title", type: "title", x: 0.5, y: 0.28, w: 9, h: 0.7, fontSize: 24, bold: true,
       color: INK, fontFace: FONT_H, valign: "middle" }, text: "" } },
@@ -81,7 +81,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
   s.addText("Ten years of traffic – and how Madurai can catch up", { x: 0.6, y: 1.35, w: 8.6, h: 1.4, fontSize: 34, bold: true, color: WHITE, fontFace: FONT_H, isTextBox: true });
   s.addText(`Review of FY 2016-17 to FY 2026-27 (to ${mlab(d.aai_range[1])}) with recommendations for authorities and airlines`,
     { x: 0.6, y: 2.85, w: 8.4, h: 0.6, fontSize: 15, color: WHITE, fontFace: FONT_B, isTextBox: true });
-  s.addText(`Prepared by Arun Prasath J · Data: AAI (${d.aai_months} months), AeroDataBox (${d.flight_days} days of flights) · ${d.generated}`,
+  s.addText(`Data: AAI (${d.aai_months} months), AeroDataBox (${d.flight_days} days of flights) · ${d.generated}`,
     { x: 0.6, y: 4.75, w: 8.8, h: 0.35, fontSize: 10.5, color: "E9C9CE", fontFace: FONT_B, isTextBox: true });
 }
 
@@ -375,7 +375,7 @@ const recs = d.recommendations;
     `Limits: AAI months ${d.aai_missing.join(" and ")} not available; flight-level detail covers ${d.flight_days} days (AeroDataBox keeps 365 days of history); peer figures are AAI totals via Wikipedia, without a domestic/international split.`,
     "Not analysed (no data here): fares, catchment and leakage to Trichy or other airports, road and rail competition, and airline-by-airline history before Nov 2025 – so the causes of the fall since FY18-19 are not proven by this review.",
     "Scenarios are illustrative what-ifs using observed growth rates; the 12-month forecast is a statistical model, not an official projection.",
-    "Dashboard: jarunprasath.github.io/madurai-airport-tracker · Contact: linkedin.com/in/arunprasathj",
+    "Dashboard: jarunprasath.github.io/madurai-airport-tracker",
   ], 0.5, 1.15, 9, 3.8, 13, "E5E7EB");
 }
 
