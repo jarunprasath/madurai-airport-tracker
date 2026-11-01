@@ -1,0 +1,1097 @@
+date,direction,flight_no,airline,airline_iata,airline_icao,status,is_cargo,is_international,aircraft_model,aircraft_reg,other_iata,other_icao,other_name,other_city,other_country,sched_local,revised_local,actual_local,source
+2025-11-01,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYD,BLR,VOBL,Bangalore,,IN,2025-11-01 07:30+05:30,,,AeroDataBox
+2025-11-01,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-01 07:35+05:30,,,AeroDataBox
+2025-11-01,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYD,BLR,VOBL,Bangalore,,IN,2025-11-01 07:50+05:30,,,AeroDataBox
+2025-11-01,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-01 08:05+05:30,,,AeroDataBox
+2025-11-01,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIF,HYD,VOHS,Hyderabad,,IN,2025-11-01 08:20+05:30,,,AeroDataBox
+2025-11-01,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,,,Deli,,,2025-11-01 08:30+05:30,,,AeroDataBox
+2025-11-01,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIF,HYD,VOHS,Hyderabad,,IN,2025-11-01 08:50+05:30,,,AeroDataBox
+2025-11-01,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-01 09:05+05:30,,,AeroDataBox
+2025-11-01,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-01 09:35+05:30,,,AeroDataBox
+2025-11-01,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-01 10:00+05:30,,,AeroDataBox
+2025-11-01,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-01 10:40+05:30,,,AeroDataBox
+2025-11-01,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-01 11:35+05:30,,,AeroDataBox
+2025-11-01,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-01 11:55+05:30,,,AeroDataBox
+2025-11-01,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-01 12:10+05:30,,,AeroDataBox
+2025-11-01,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-01 12:20+05:30,,,AeroDataBox
+2025-11-01,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRD,BLR,VOBL,Bangalore,,IN,2025-11-01 12:50+05:30,,,AeroDataBox
+2025-11-01,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-01 12:50+05:30,,,AeroDataBox
+2025-11-01,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-01 13:00+05:30,,,AeroDataBox
+2025-11-01,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRD,BLR,VOBL,Bangalore,,IN,2025-11-01 13:10+05:30,,,AeroDataBox
+2025-11-01,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-01 13:30+05:30,,,AeroDataBox
+2025-11-01,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-01 13:40+05:30,,,AeroDataBox
+2025-11-01,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-01 14:00+05:30,,,AeroDataBox
+2025-11-01,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-01 14:30+05:30,,,AeroDataBox
+2025-11-01,arrival,UL139,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-01 14:40+05:30,,,AeroDataBox
+2025-11-01,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-01 15:05+05:30,,,AeroDataBox
+2025-11-01,departure,UL140,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-01 15:40+05:30,,,AeroDataBox
+2025-11-01,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-01 16:00+05:30,,,AeroDataBox
+2025-11-01,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-01 16:20+05:30,,,AeroDataBox
+2025-11-01,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-01 17:40+05:30,,,AeroDataBox
+2025-11-01,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-01 18:00+05:30,,,AeroDataBox
+2025-11-01,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-01 19:35+05:30,,,AeroDataBox
+2025-11-01,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYD,BLR,VOBL,Bangalore,,IN,2025-11-01 19:45+05:30,,,AeroDataBox
+2025-11-01,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-01 19:55+05:30,,,AeroDataBox
+2025-11-01,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYD,BLR,VOBL,Bangalore,,IN,2025-11-01 20:05+05:30,,,AeroDataBox
+2025-11-01,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-01 21:35+05:30,,,AeroDataBox
+2025-11-01,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-01 21:55+05:30,,,AeroDataBox
+2025-11-02,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRN,BLR,VOBL,Bangalore,,IN,2025-11-02 07:30+05:30,,,AeroDataBox
+2025-11-02,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-02 07:35+05:30,,,AeroDataBox
+2025-11-02,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRN,BLR,VOBL,Bangalore,,IN,2025-11-02 07:50+05:30,,,AeroDataBox
+2025-11-02,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-02 08:05+05:30,,,AeroDataBox
+2025-11-02,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIF,HYD,VOHS,Hyderabad,,IN,2025-11-02 08:20+05:30,,,AeroDataBox
+2025-11-02,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-02 08:30+05:30,,,AeroDataBox
+2025-11-02,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIF,HYD,VOHS,Hyderabad,,IN,2025-11-02 08:50+05:30,,,AeroDataBox
+2025-11-02,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-02 09:05+05:30,,,AeroDataBox
+2025-11-02,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-02 09:35+05:30,,,AeroDataBox
+2025-11-02,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-02 10:00+05:30,,,AeroDataBox
+2025-11-02,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-02 10:40+05:30,,,AeroDataBox
+2025-11-02,arrival,AI3304,Air India,AI,AIC,Unknown,False,False,Airbus A321,VT-PPJ,DEL,VIDP,New Delhi,,IN,2025-11-02 11:00+05:30,,,AeroDataBox
+2025-11-02,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-02 11:35+05:30,,,AeroDataBox
+2025-11-02,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-02 11:55+05:30,,,AeroDataBox
+2025-11-02,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-02 12:10+05:30,,,AeroDataBox
+2025-11-02,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIQ,BOM,VABB,Mumbai,,IN,2025-11-02 12:20+05:30,,,AeroDataBox
+2025-11-02,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYB,BLR,VOBL,Bangalore,,IN,2025-11-02 12:50+05:30,,,AeroDataBox
+2025-11-02,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-02 12:50+05:30,,,AeroDataBox
+2025-11-02,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-02 13:00+05:30,,,AeroDataBox
+2025-11-02,arrival,AI3307,Air India,AI,AIC,Unknown,False,False,Airbus A321,VT-PPO,BOM,VABB,Mumbai,,IN,2025-11-02 13:05+05:30,,,AeroDataBox
+2025-11-02,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYB,BLR,VOBL,Bangalore,,IN,2025-11-02 13:10+05:30,,,AeroDataBox
+2025-11-02,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-02 13:30+05:30,,,AeroDataBox
+2025-11-02,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-02 13:40+05:30,,,AeroDataBox
+2025-11-02,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-02 14:00+05:30,,,AeroDataBox
+2025-11-02,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-02 14:30+05:30,,,AeroDataBox
+2025-11-02,arrival,UL139,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-02 14:40+05:30,,,AeroDataBox
+2025-11-02,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-02 15:05+05:30,,,AeroDataBox
+2025-11-02,departure,UL140,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-02 15:40+05:30,,,AeroDataBox
+2025-11-02,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-02 16:00+05:30,,,AeroDataBox
+2025-11-02,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-02 16:20+05:30,,,AeroDataBox
+2025-11-02,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-02 17:40+05:30,,,AeroDataBox
+2025-11-02,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IYX,MAA,VOMM,Chennai,,IN,2025-11-02 18:00+05:30,,,AeroDataBox
+2025-11-02,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-02 19:35+05:30,,,AeroDataBox
+2025-11-02,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYH,BLR,VOBL,Bangalore,,IN,2025-11-02 19:45+05:30,,,AeroDataBox
+2025-11-02,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-02 19:55+05:30,,,AeroDataBox
+2025-11-02,departure,6E7587,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,,,Bangalor,,,2025-11-02 20:05+05:30,,,AeroDataBox
+2025-11-02,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-02 21:35+05:30,,,AeroDataBox
+2025-11-02,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-02 21:55+05:30,,,AeroDataBox
+2025-11-03,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYH,BLR,VOBL,Bangalore,,IN,2025-11-03 07:30+05:30,,,AeroDataBox
+2025-11-03,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-03 07:35+05:30,,,AeroDataBox
+2025-11-03,departure,6E7257,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IYH,,,Vidzhayavada,,,2025-11-03 07:50+05:30,,,AeroDataBox
+2025-11-03,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-03 08:05+05:30,,,AeroDataBox
+2025-11-03,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-ITB,HYD,VOHS,Hyderabad,,IN,2025-11-03 08:20+05:30,,,AeroDataBox
+2025-11-03,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A321 NEO,VT-ILU,DEL,VIDP,New Delhi,,IN,2025-11-03 08:30+05:30,,,AeroDataBox
+2025-11-03,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-ITB,HYD,VOHS,Hyderabad,,IN,2025-11-03 08:50+05:30,,,AeroDataBox
+2025-11-03,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-03 09:05+05:30,,,AeroDataBox
+2025-11-03,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-03 09:35+05:30,,,AeroDataBox
+2025-11-03,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-03 10:00+05:30,,,AeroDataBox
+2025-11-03,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-03 10:40+05:30,,,AeroDataBox
+2025-11-03,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-03 11:35+05:30,,,AeroDataBox
+2025-11-03,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-03 11:55+05:30,,,AeroDataBox
+2025-11-03,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-03 12:10+05:30,,,AeroDataBox
+2025-11-03,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IZB,BOM,VABB,Mumbai,,IN,2025-11-03 12:20+05:30,,,AeroDataBox
+2025-11-03,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IXX,BLR,VOBL,Bangalore,,IN,2025-11-03 12:50+05:30,,,AeroDataBox
+2025-11-03,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-03 12:50+05:30,,,AeroDataBox
+2025-11-03,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-03 13:00+05:30,,,AeroDataBox
+2025-11-03,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IXX,BLR,VOBL,Bangalore,,IN,2025-11-03 13:10+05:30,,,AeroDataBox
+2025-11-03,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-03 13:30+05:30,,,AeroDataBox
+2025-11-03,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-03 13:40+05:30,,,AeroDataBox
+2025-11-03,arrival,6E1514,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,,AUH,OMAA,Abu Dhabi,,AE,2025-11-03 13:50+05:30,,,AeroDataBox
+2025-11-03,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-03 14:00+05:30,,,AeroDataBox
+2025-11-03,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-03 14:30+05:30,,,AeroDataBox
+2025-11-03,arrival,UL139,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-03 14:40+05:30,,,AeroDataBox
+2025-11-03,departure,6E1513,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,,AUH,OMAA,Abu Dhabi,,AE,2025-11-03 14:50+05:30,,,AeroDataBox
+2025-11-03,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-03 15:05+05:30,,,AeroDataBox
+2025-11-03,departure,UL140,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,4R-ABO,CMB,VCBI,Colombo,,LK,2025-11-03 15:40+05:30,,,AeroDataBox
+2025-11-03,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-03 16:00+05:30,,,AeroDataBox
+2025-11-03,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-03 16:20+05:30,,,AeroDataBox
+2025-11-03,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-03 17:40+05:30,,,AeroDataBox
+2025-11-03,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-03 18:00+05:30,,,AeroDataBox
+2025-11-03,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-03 19:35+05:30,,,AeroDataBox
+2025-11-03,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYL,BLR,VOBL,Bangalore,,IN,2025-11-03 19:45+05:30,,,AeroDataBox
+2025-11-03,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-03 19:55+05:30,,,AeroDataBox
+2025-11-03,departure,6E7587,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,,,Bangalor,,,2025-11-03 20:05+05:30,,,AeroDataBox
+2025-11-03,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-03 21:35+05:30,,,AeroDataBox
+2025-11-03,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-03 21:55+05:30,,,AeroDataBox
+2025-11-04,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRN,BLR,VOBL,Bangalore,,IN,2025-11-04 07:30+05:30,,,AeroDataBox
+2025-11-04,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-04 07:35+05:30,,,AeroDataBox
+2025-11-04,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRN,BLR,VOBL,Bangalore,,IN,2025-11-04 07:50+05:30,,,AeroDataBox
+2025-11-04,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-04 08:05+05:30,,,AeroDataBox
+2025-11-04,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIY,HYD,VOHS,Hyderabad,,IN,2025-11-04 08:20+05:30,,,AeroDataBox
+2025-11-04,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-04 08:30+05:30,,,AeroDataBox
+2025-11-04,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIY,HYD,VOHS,Hyderabad,,IN,2025-11-04 08:50+05:30,,,AeroDataBox
+2025-11-04,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-04 09:05+05:30,,,AeroDataBox
+2025-11-04,arrival,UL137,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-04 09:15+05:30,,,AeroDataBox
+2025-11-04,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-04 09:35+05:30,,,AeroDataBox
+2025-11-04,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-04 10:00+05:30,,,AeroDataBox
+2025-11-04,departure,UL138,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-04 10:15+05:30,,,AeroDataBox
+2025-11-04,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737,,DXB,OMDB,Dubai,,AE,2025-11-04 10:40+05:30,,,AeroDataBox
+2025-11-04,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-04 11:35+05:30,,,AeroDataBox
+2025-11-04,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-04 11:55+05:30,,,AeroDataBox
+2025-11-04,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737,,DXB,OMDB,Dubai,,AE,2025-11-04 12:10+05:30,,,AeroDataBox
+2025-11-04,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-04 12:20+05:30,,,AeroDataBox
+2025-11-04,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IXX,BLR,VOBL,Bangalore,,IN,2025-11-04 12:50+05:30,,,AeroDataBox
+2025-11-04,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-04 12:50+05:30,,,AeroDataBox
+2025-11-04,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-04 13:00+05:30,,,AeroDataBox
+2025-11-04,departure,6E7163,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IXX,,,Bangalor,,,2025-11-04 13:10+05:30,,,AeroDataBox
+2025-11-04,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,VT-TQK,MAA,VOMM,Chennai,,IN,2025-11-04 13:30+05:30,,,AeroDataBox
+2025-11-04,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-04 13:40+05:30,,,AeroDataBox
+2025-11-04,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-04 14:00+05:30,,,AeroDataBox
+2025-11-04,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-04 14:30+05:30,,,AeroDataBox
+2025-11-04,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-04 15:05+05:30,,,AeroDataBox
+2025-11-04,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-04 16:00+05:30,,,AeroDataBox
+2025-11-04,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-04 16:20+05:30,,,AeroDataBox
+2025-11-04,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-04 17:40+05:30,,,AeroDataBox
+2025-11-04,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-04 18:00+05:30,,,AeroDataBox
+2025-11-04,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-04 19:35+05:30,,,AeroDataBox
+2025-11-04,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRN,BLR,VOBL,Bangalore,,IN,2025-11-04 19:45+05:30,,,AeroDataBox
+2025-11-04,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-04 19:55+05:30,,,AeroDataBox
+2025-11-04,departure,6E7587,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,,,Bangalor,,,2025-11-04 20:05+05:30,,,AeroDataBox
+2025-11-04,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-04 21:35+05:30,,,AeroDataBox
+2025-11-04,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-04 21:55+05:30,,,AeroDataBox
+2025-11-05,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRN,BLR,VOBL,Bangalore,,IN,2025-11-05 07:30+05:30,,,AeroDataBox
+2025-11-05,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-05 07:35+05:30,,,AeroDataBox
+2025-11-05,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRN,BLR,VOBL,Bangalore,,IN,2025-11-05 07:50+05:30,,,AeroDataBox
+2025-11-05,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-05 08:05+05:30,,,AeroDataBox
+2025-11-05,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-05 08:20+05:30,,,AeroDataBox
+2025-11-05,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-05 08:30+05:30,,,AeroDataBox
+2025-11-05,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIY,HYD,VOHS,Hyderabad,,IN,2025-11-05 08:50+05:30,,,AeroDataBox
+2025-11-05,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-05 09:05+05:30,,,AeroDataBox
+2025-11-05,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-05 09:35+05:30,,,AeroDataBox
+2025-11-05,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-05 10:00+05:30,,,AeroDataBox
+2025-11-05,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SXE,DXB,OMDB,Dubai,,AE,2025-11-05 10:40+05:30,,,AeroDataBox
+2025-11-05,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-05 11:35+05:30,,,AeroDataBox
+2025-11-05,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-05 11:55+05:30,,,AeroDataBox
+2025-11-05,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SXE,DXB,OMDB,Dubai,,AE,2025-11-05 12:10+05:30,,,AeroDataBox
+2025-11-05,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IXH,BOM,VABB,Mumbai,,IN,2025-11-05 12:20+05:30,,,AeroDataBox
+2025-11-05,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IXX,BLR,VOBL,Bangalore,,IN,2025-11-05 12:50+05:30,,,AeroDataBox
+2025-11-05,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-05 12:50+05:30,,,AeroDataBox
+2025-11-05,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-05 13:00+05:30,,,AeroDataBox
+2025-11-05,departure,6E7163,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IXX,,,Bangalor,,,2025-11-05 13:10+05:30,,,AeroDataBox
+2025-11-05,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-05 13:30+05:30,,,AeroDataBox
+2025-11-05,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-05 13:40+05:30,,,AeroDataBox
+2025-11-05,arrival,6E1514,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,VT-IZN,AUH,OMAA,Abu Dhabi,,AE,2025-11-05 13:50+05:30,,,AeroDataBox
+2025-11-05,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-05 14:00+05:30,,,AeroDataBox
+2025-11-05,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-05 14:30+05:30,,,AeroDataBox
+2025-11-05,arrival,UL139,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-05 14:40+05:30,,,AeroDataBox
+2025-11-05,departure,6E1513,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,VT-IZN,AUH,OMAA,Abu Dhabi,,AE,2025-11-05 14:50+05:30,,,AeroDataBox
+2025-11-05,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-05 15:05+05:30,,,AeroDataBox
+2025-11-05,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-05 16:00+05:30,,,AeroDataBox
+2025-11-05,departure,UL140,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-05 16:20+05:30,,,AeroDataBox
+2025-11-05,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-05 16:20+05:30,,,AeroDataBox
+2025-11-05,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-05 17:40+05:30,,,AeroDataBox
+2025-11-05,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-05 18:00+05:30,,,AeroDataBox
+2025-11-05,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-05 19:35+05:30,,,AeroDataBox
+2025-11-05,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRS,BLR,VOBL,Bangalore,,IN,2025-11-05 19:45+05:30,,,AeroDataBox
+2025-11-05,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-05 19:55+05:30,,,AeroDataBox
+2025-11-05,departure,6E7587,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,,,Bangalor,,,2025-11-05 20:05+05:30,,,AeroDataBox
+2025-11-05,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-05 21:35+05:30,,,AeroDataBox
+2025-11-05,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IYX,MAA,VOMM,Chennai,,IN,2025-11-05 21:55+05:30,,,AeroDataBox
+2025-11-06,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRS,BLR,VOBL,Bangalore,,IN,2025-11-06 07:30+05:30,,,AeroDataBox
+2025-11-06,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-06 07:35+05:30,,,AeroDataBox
+2025-11-06,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRS,BLR,VOBL,Bangalore,,IN,2025-11-06 07:50+05:30,,,AeroDataBox
+2025-11-06,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-06 08:05+05:30,,,AeroDataBox
+2025-11-06,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-06 08:20+05:30,,,AeroDataBox
+2025-11-06,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A321 NEO,VT-IMI,DEL,VIDP,New Delhi,,IN,2025-11-06 08:30+05:30,,,AeroDataBox
+2025-11-06,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-06 08:50+05:30,,,AeroDataBox
+2025-11-06,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-06 09:05+05:30,,,AeroDataBox
+2025-11-06,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-06 09:35+05:30,,,AeroDataBox
+2025-11-06,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-06 10:00+05:30,,,AeroDataBox
+2025-11-06,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SXE,DXB,OMDB,Dubai,,AE,2025-11-06 10:40+05:30,,,AeroDataBox
+2025-11-06,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-06 11:35+05:30,,,AeroDataBox
+2025-11-06,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-06 11:55+05:30,,,AeroDataBox
+2025-11-06,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SXE,DXB,OMDB,Dubai,,AE,2025-11-06 12:10+05:30,,,AeroDataBox
+2025-11-06,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIR,BOM,VABB,Mumbai,,IN,2025-11-06 12:20+05:30,,,AeroDataBox
+2025-11-06,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IXX,BLR,VOBL,Bangalore,,IN,2025-11-06 12:50+05:30,,,AeroDataBox
+2025-11-06,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-06 12:50+05:30,,,AeroDataBox
+2025-11-06,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-06 13:00+05:30,,,AeroDataBox
+2025-11-06,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IXX,BLR,VOBL,Bangalore,,IN,2025-11-06 13:10+05:30,,,AeroDataBox
+2025-11-06,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-06 13:30+05:30,,,AeroDataBox
+2025-11-06,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-06 13:40+05:30,,,AeroDataBox
+2025-11-06,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-06 14:00+05:30,,,AeroDataBox
+2025-11-06,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-06 14:30+05:30,,,AeroDataBox
+2025-11-06,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-06 15:05+05:30,,,AeroDataBox
+2025-11-06,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-06 16:00+05:30,,,AeroDataBox
+2025-11-06,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-06 16:20+05:30,,,AeroDataBox
+2025-11-06,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-06 17:40+05:30,,,AeroDataBox
+2025-11-06,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-06 18:00+05:30,,,AeroDataBox
+2025-11-06,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-06 19:35+05:30,,,AeroDataBox
+2025-11-06,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRS,BLR,VOBL,Bangalore,,IN,2025-11-06 19:45+05:30,,,AeroDataBox
+2025-11-06,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-06 19:55+05:30,,,AeroDataBox
+2025-11-06,departure,6E7587,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,,,Bangalor,,,2025-11-06 20:05+05:30,,,AeroDataBox
+2025-11-06,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-06 21:35+05:30,,,AeroDataBox
+2025-11-06,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IYX,MAA,VOMM,Chennai,,IN,2025-11-06 21:55+05:30,,,AeroDataBox
+2025-11-07,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYQ,BLR,VOBL,Bangalore,,IN,2025-11-07 07:30+05:30,,,AeroDataBox
+2025-11-07,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-07 07:35+05:30,,,AeroDataBox
+2025-11-07,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYQ,BLR,VOBL,Bangalore,,IN,2025-11-07 07:50+05:30,,,AeroDataBox
+2025-11-07,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-07 08:05+05:30,,,AeroDataBox
+2025-11-07,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-07 08:20+05:30,,,AeroDataBox
+2025-11-07,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-07 08:30+05:30,,,AeroDataBox
+2025-11-07,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-07 08:50+05:30,,,AeroDataBox
+2025-11-07,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-07 09:05+05:30,,,AeroDataBox
+2025-11-07,arrival,UL137,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-07 09:15+05:30,,,AeroDataBox
+2025-11-07,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-07 09:35+05:30,,,AeroDataBox
+2025-11-07,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-07 10:00+05:30,,,AeroDataBox
+2025-11-07,departure,UL138,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-07 10:15+05:30,,,AeroDataBox
+2025-11-07,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-07 10:40+05:30,,,AeroDataBox
+2025-11-07,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-07 11:35+05:30,,,AeroDataBox
+2025-11-07,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-07 11:55+05:30,,,AeroDataBox
+2025-11-07,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-07 12:10+05:30,,,AeroDataBox
+2025-11-07,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 (Sharklets),VT-ITN,BOM,VABB,Mumbai,,IN,2025-11-07 12:20+05:30,,,AeroDataBox
+2025-11-07,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRA,BLR,VOBL,Bangalore,,IN,2025-11-07 12:50+05:30,,,AeroDataBox
+2025-11-07,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-07 12:50+05:30,,,AeroDataBox
+2025-11-07,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-07 13:00+05:30,,,AeroDataBox
+2025-11-07,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRA,BLR,VOBL,Bangalore,,IN,2025-11-07 13:10+05:30,,,AeroDataBox
+2025-11-07,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-07 13:30+05:30,,,AeroDataBox
+2025-11-07,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-07 13:40+05:30,,,AeroDataBox
+2025-11-07,arrival,6E1514,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,VT-IIO,AUH,OMAA,Abu Dhabi,,AE,2025-11-07 13:50+05:30,,,AeroDataBox
+2025-11-07,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-07 14:00+05:30,,,AeroDataBox
+2025-11-07,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-07 14:30+05:30,,,AeroDataBox
+2025-11-07,departure,6E1513,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,VT-IIO,AUH,OMAA,Abu Dhabi,,AE,2025-11-07 14:50+05:30,,,AeroDataBox
+2025-11-07,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-07 15:05+05:30,,,AeroDataBox
+2025-11-07,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-07 16:00+05:30,,,AeroDataBox
+2025-11-07,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-07 16:20+05:30,,,AeroDataBox
+2025-11-07,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-07 17:40+05:30,,,AeroDataBox
+2025-11-07,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-07 18:00+05:30,,,AeroDataBox
+2025-11-07,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-07 19:35+05:30,,,AeroDataBox
+2025-11-07,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYW,BLR,VOBL,Bangalore,,IN,2025-11-07 19:45+05:30,,,AeroDataBox
+2025-11-07,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-07 19:55+05:30,,,AeroDataBox
+2025-11-07,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYW,BLR,VOBL,Bangalore,,IN,2025-11-07 20:05+05:30,,,AeroDataBox
+2025-11-07,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-07 21:35+05:30,,,AeroDataBox
+2025-11-07,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-07 21:55+05:30,,,AeroDataBox
+2025-11-08,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYW,BLR,VOBL,Bangalore,,IN,2025-11-08 07:30+05:30,,,AeroDataBox
+2025-11-08,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-08 07:35+05:30,,,AeroDataBox
+2025-11-08,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYW,BLR,VOBL,Bangalore,,IN,2025-11-08 07:50+05:30,,,AeroDataBox
+2025-11-08,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-08 08:05+05:30,,,AeroDataBox
+2025-11-08,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-08 08:20+05:30,,,AeroDataBox
+2025-11-08,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-08 08:30+05:30,,,AeroDataBox
+2025-11-08,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-08 08:50+05:30,,,AeroDataBox
+2025-11-08,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-08 09:05+05:30,,,AeroDataBox
+2025-11-08,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-08 09:35+05:30,,,AeroDataBox
+2025-11-08,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-08 10:00+05:30,,,AeroDataBox
+2025-11-08,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-08 10:40+05:30,,,AeroDataBox
+2025-11-08,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-08 11:35+05:30,,,AeroDataBox
+2025-11-08,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-08 11:55+05:30,,,AeroDataBox
+2025-11-08,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-08 12:10+05:30,,,AeroDataBox
+2025-11-08,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-08 12:20+05:30,,,AeroDataBox
+2025-11-08,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRA,BLR,VOBL,Bangalore,,IN,2025-11-08 12:50+05:30,,,AeroDataBox
+2025-11-08,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-08 12:50+05:30,,,AeroDataBox
+2025-11-08,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-08 13:00+05:30,,,AeroDataBox
+2025-11-08,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRA,BLR,VOBL,Bangalore,,IN,2025-11-08 13:10+05:30,,,AeroDataBox
+2025-11-08,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-08 13:40+05:30,,,AeroDataBox
+2025-11-08,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,VT-TNJ,MAA,VOMM,Chennai,,IN,2025-11-08 13:55+05:30,,,AeroDataBox
+2025-11-08,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-08 14:00+05:30,,,AeroDataBox
+2025-11-08,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-08 14:30+05:30,,,AeroDataBox
+2025-11-08,arrival,UL139,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-08 14:40+05:30,,,AeroDataBox
+2025-11-08,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-08 15:05+05:30,,,AeroDataBox
+2025-11-08,departure,UL140,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-08 15:40+05:30,,,AeroDataBox
+2025-11-08,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-08 16:00+05:30,,,AeroDataBox
+2025-11-08,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-08 16:20+05:30,,,AeroDataBox
+2025-11-08,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-08 17:40+05:30,,,AeroDataBox
+2025-11-08,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-08 18:00+05:30,,,AeroDataBox
+2025-11-08,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-08 19:35+05:30,,,AeroDataBox
+2025-11-08,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRS,BLR,VOBL,Bangalore,,IN,2025-11-08 19:45+05:30,,,AeroDataBox
+2025-11-08,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-08 19:55+05:30,,,AeroDataBox
+2025-11-08,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRS,BLR,VOBL,Bangalore,,IN,2025-11-08 20:05+05:30,,,AeroDataBox
+2025-11-08,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-08 21:35+05:30,,,AeroDataBox
+2025-11-08,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-08 21:55+05:30,,,AeroDataBox
+2025-11-09,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRS,BLR,VOBL,Bangalore,,IN,2025-11-09 07:30+05:30,,,AeroDataBox
+2025-11-09,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-09 07:35+05:30,,,AeroDataBox
+2025-11-09,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRS,BLR,VOBL,Bangalore,,IN,2025-11-09 07:50+05:30,,,AeroDataBox
+2025-11-09,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-09 08:05+05:30,,,AeroDataBox
+2025-11-09,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-09 08:20+05:30,,,AeroDataBox
+2025-11-09,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A321 NEO,VT-ILZ,DEL,VIDP,New Delhi,,IN,2025-11-09 08:30+05:30,,,AeroDataBox
+2025-11-09,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-09 08:50+05:30,,,AeroDataBox
+2025-11-09,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-09 09:05+05:30,,,AeroDataBox
+2025-11-09,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-09 09:35+05:30,,,AeroDataBox
+2025-11-09,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-09 10:00+05:30,,,AeroDataBox
+2025-11-09,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SXE,DXB,OMDB,Dubai,,AE,2025-11-09 10:40+05:30,,,AeroDataBox
+2025-11-09,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-09 11:35+05:30,,,AeroDataBox
+2025-11-09,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-09 11:55+05:30,,,AeroDataBox
+2025-11-09,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SXE,DXB,OMDB,Dubai,,AE,2025-11-09 12:10+05:30,,,AeroDataBox
+2025-11-09,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IJG,BOM,VABB,Mumbai,,IN,2025-11-09 12:20+05:30,,,AeroDataBox
+2025-11-09,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-09 12:50+05:30,,,AeroDataBox
+2025-11-09,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-09 12:50+05:30,,,AeroDataBox
+2025-11-09,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-09 13:00+05:30,,,AeroDataBox
+2025-11-09,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-09 13:10+05:30,,,AeroDataBox
+2025-11-09,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-09 13:30+05:30,,,AeroDataBox
+2025-11-09,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-09 13:40+05:30,,,AeroDataBox
+2025-11-09,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-09 14:00+05:30,,,AeroDataBox
+2025-11-09,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-09 14:30+05:30,,,AeroDataBox
+2025-11-09,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-09 15:05+05:30,,,AeroDataBox
+2025-11-09,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-09 16:00+05:30,,,AeroDataBox
+2025-11-09,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-09 16:20+05:30,,,AeroDataBox
+2025-11-09,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-09 17:40+05:30,,,AeroDataBox
+2025-11-09,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-09 18:00+05:30,,,AeroDataBox
+2025-11-09,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-09 19:35+05:30,,,AeroDataBox
+2025-11-09,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYB,BLR,VOBL,Bangalore,,IN,2025-11-09 19:45+05:30,,,AeroDataBox
+2025-11-09,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-09 19:55+05:30,,,AeroDataBox
+2025-11-09,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYB,BLR,VOBL,Bangalore,,IN,2025-11-09 20:05+05:30,,,AeroDataBox
+2025-11-09,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-09 21:35+05:30,,,AeroDataBox
+2025-11-09,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-09 21:55+05:30,,,AeroDataBox
+2025-11-10,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYQ,BLR,VOBL,Bangalore,,IN,2025-11-10 07:30+05:30,,,AeroDataBox
+2025-11-10,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-10 07:35+05:30,,,AeroDataBox
+2025-11-10,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYQ,BLR,VOBL,Bangalore,,IN,2025-11-10 07:50+05:30,,,AeroDataBox
+2025-11-10,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-10 08:05+05:30,,,AeroDataBox
+2025-11-10,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-10 08:20+05:30,,,AeroDataBox
+2025-11-10,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-10 08:30+05:30,,,AeroDataBox
+2025-11-10,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-10 08:50+05:30,,,AeroDataBox
+2025-11-10,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-10 09:05+05:30,,,AeroDataBox
+2025-11-10,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-10 09:35+05:30,,,AeroDataBox
+2025-11-10,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-10 10:00+05:30,,,AeroDataBox
+2025-11-10,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SXE,DXB,OMDB,Dubai,,AE,2025-11-10 10:40+05:30,,,AeroDataBox
+2025-11-10,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-10 11:35+05:30,,,AeroDataBox
+2025-11-10,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-10 11:55+05:30,,,AeroDataBox
+2025-11-10,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SXE,DXB,OMDB,Dubai,,AE,2025-11-10 12:10+05:30,,,AeroDataBox
+2025-11-10,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-ISO,BOM,VABB,Mumbai,,IN,2025-11-10 12:20+05:30,,,AeroDataBox
+2025-11-10,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-10 12:50+05:30,,,AeroDataBox
+2025-11-10,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-10 12:50+05:30,,,AeroDataBox
+2025-11-10,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-10 13:00+05:30,,,AeroDataBox
+2025-11-10,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-10 13:10+05:30,,,AeroDataBox
+2025-11-10,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-10 13:30+05:30,,,AeroDataBox
+2025-11-10,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-10 13:40+05:30,,,AeroDataBox
+2025-11-10,arrival,6E1514,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,,AUH,OMAA,Abu Dhabi,,AE,2025-11-10 13:50+05:30,,,AeroDataBox
+2025-11-10,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-10 14:00+05:30,,,AeroDataBox
+2025-11-10,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-10 14:30+05:30,,,AeroDataBox
+2025-11-10,arrival,UL139,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-10 14:40+05:30,,,AeroDataBox
+2025-11-10,departure,6E1513,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,,AUH,OMAA,Abu Dhabi,,AE,2025-11-10 14:50+05:30,,,AeroDataBox
+2025-11-10,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-10 15:05+05:30,,,AeroDataBox
+2025-11-10,departure,UL140,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,4R-ABM,CMB,VCBI,Colombo,,LK,2025-11-10 15:40+05:30,,,AeroDataBox
+2025-11-10,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-10 16:00+05:30,,,AeroDataBox
+2025-11-10,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-10 16:20+05:30,,,AeroDataBox
+2025-11-10,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-10 17:40+05:30,,,AeroDataBox
+2025-11-10,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-10 18:00+05:30,,,AeroDataBox
+2025-11-10,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-10 19:35+05:30,,,AeroDataBox
+2025-11-10,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYH,BLR,VOBL,Bangalore,,IN,2025-11-10 19:45+05:30,,,AeroDataBox
+2025-11-10,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-10 19:55+05:30,,,AeroDataBox
+2025-11-10,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYH,BLR,VOBL,Bangalore,,IN,2025-11-10 20:05+05:30,,,AeroDataBox
+2025-11-10,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-10 21:35+05:30,,,AeroDataBox
+2025-11-10,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-10 21:55+05:30,,,AeroDataBox
+2025-11-11,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYH,BLR,VOBL,Bangalore,,IN,2025-11-11 07:30+05:30,,,AeroDataBox
+2025-11-11,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-11 07:35+05:30,,,AeroDataBox
+2025-11-11,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYH,BLR,VOBL,Bangalore,,IN,2025-11-11 07:50+05:30,,,AeroDataBox
+2025-11-11,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-11 08:05+05:30,,,AeroDataBox
+2025-11-11,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-11 08:20+05:30,,,AeroDataBox
+2025-11-11,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-11 08:30+05:30,,,AeroDataBox
+2025-11-11,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-11 08:50+05:30,,,AeroDataBox
+2025-11-11,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-11 09:05+05:30,,,AeroDataBox
+2025-11-11,arrival,UL137,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-11 09:15+05:30,,,AeroDataBox
+2025-11-11,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-11 09:35+05:30,,,AeroDataBox
+2025-11-11,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-11 10:00+05:30,,,AeroDataBox
+2025-11-11,departure,UL138,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-11 10:15+05:30,,,AeroDataBox
+2025-11-11,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-11 10:40+05:30,,,AeroDataBox
+2025-11-11,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-11 11:35+05:30,,,AeroDataBox
+2025-11-11,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-11 11:55+05:30,,,AeroDataBox
+2025-11-11,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-11 12:10+05:30,,,AeroDataBox
+2025-11-11,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIS,BOM,VABB,Mumbai,,IN,2025-11-11 12:20+05:30,,,AeroDataBox
+2025-11-11,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-11 12:50+05:30,,,AeroDataBox
+2025-11-11,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-11 12:50+05:30,,,AeroDataBox
+2025-11-11,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-11 13:00+05:30,,,AeroDataBox
+2025-11-11,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-11 13:10+05:30,,,AeroDataBox
+2025-11-11,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-11 13:40+05:30,,,AeroDataBox
+2025-11-11,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-11 13:55+05:30,,,AeroDataBox
+2025-11-11,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-11 14:00+05:30,,,AeroDataBox
+2025-11-11,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-11 14:30+05:30,,,AeroDataBox
+2025-11-11,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-11 15:05+05:30,,,AeroDataBox
+2025-11-11,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-11 16:00+05:30,,,AeroDataBox
+2025-11-11,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-11 16:20+05:30,,,AeroDataBox
+2025-11-11,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-11 17:40+05:30,,,AeroDataBox
+2025-11-11,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-11 18:00+05:30,,,AeroDataBox
+2025-11-11,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-11 19:35+05:30,,,AeroDataBox
+2025-11-11,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYH,BLR,VOBL,Bangalore,,IN,2025-11-11 19:45+05:30,,,AeroDataBox
+2025-11-11,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-11 19:55+05:30,,,AeroDataBox
+2025-11-11,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYH,BLR,VOBL,Bangalore,,IN,2025-11-11 20:05+05:30,,,AeroDataBox
+2025-11-11,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-11 21:35+05:30,,,AeroDataBox
+2025-11-11,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-11 21:55+05:30,,,AeroDataBox
+2025-11-12,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYH,BLR,VOBL,Bangalore,,IN,2025-11-12 07:30+05:30,,,AeroDataBox
+2025-11-12,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-12 07:35+05:30,,,AeroDataBox
+2025-11-12,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYH,BLR,VOBL,Bangalore,,IN,2025-11-12 07:50+05:30,,,AeroDataBox
+2025-11-12,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-12 08:05+05:30,,,AeroDataBox
+2025-11-12,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-12 08:20+05:30,,,AeroDataBox
+2025-11-12,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A321 NEO,VT-IMC,DEL,VIDP,New Delhi,,IN,2025-11-12 08:30+05:30,,,AeroDataBox
+2025-11-12,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-12 08:50+05:30,,,AeroDataBox
+2025-11-12,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-12 09:05+05:30,,,AeroDataBox
+2025-11-12,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-12 09:35+05:30,,,AeroDataBox
+2025-11-12,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IRD,MAA,VOMM,Chennai,,IN,2025-11-12 10:00+05:30,,,AeroDataBox
+2025-11-12,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-12 10:40+05:30,,,AeroDataBox
+2025-11-12,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-12 11:35+05:30,,,AeroDataBox
+2025-11-12,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-12 11:55+05:30,,,AeroDataBox
+2025-11-12,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-12 12:10+05:30,,,AeroDataBox
+2025-11-12,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-12 12:20+05:30,,,AeroDataBox
+2025-11-12,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-12 12:50+05:30,,,AeroDataBox
+2025-11-12,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-12 12:50+05:30,,,AeroDataBox
+2025-11-12,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-12 13:00+05:30,,,AeroDataBox
+2025-11-12,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-12 13:10+05:30,,,AeroDataBox
+2025-11-12,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-12 13:30+05:30,,,AeroDataBox
+2025-11-12,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-12 13:40+05:30,,,AeroDataBox
+2025-11-12,arrival,6E1514,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 (Sharklets),VT-IAX,AUH,OMAA,Abu Dhabi,,AE,2025-11-12 13:50+05:30,,,AeroDataBox
+2025-11-12,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-12 14:00+05:30,,,AeroDataBox
+2025-11-12,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-12 14:30+05:30,,,AeroDataBox
+2025-11-12,arrival,UL139,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-12 14:40+05:30,,,AeroDataBox
+2025-11-12,departure,6E1513,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 (Sharklets),VT-IAX,AUH,OMAA,Abu Dhabi,,AE,2025-11-12 14:50+05:30,,,AeroDataBox
+2025-11-12,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-12 15:05+05:30,,,AeroDataBox
+2025-11-12,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-12 16:00+05:30,,,AeroDataBox
+2025-11-12,departure,UL140,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,4R-ABS,CMB,VCBI,Colombo,,LK,2025-11-12 16:20+05:30,,,AeroDataBox
+2025-11-12,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-12 16:20+05:30,,,AeroDataBox
+2025-11-12,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-12 17:40+05:30,,,AeroDataBox
+2025-11-12,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-12 18:00+05:30,,,AeroDataBox
+2025-11-12,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-12 19:35+05:30,,,AeroDataBox
+2025-11-12,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRJ,BLR,VOBL,Bangalore,,IN,2025-11-12 19:45+05:30,,,AeroDataBox
+2025-11-12,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-12 19:55+05:30,,,AeroDataBox
+2025-11-12,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRJ,BLR,VOBL,Bangalore,,IN,2025-11-12 20:05+05:30,,,AeroDataBox
+2025-11-12,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-12 21:35+05:30,,,AeroDataBox
+2025-11-12,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-12 21:55+05:30,,,AeroDataBox
+2025-11-13,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRJ,BLR,VOBL,Bangalore,,IN,2025-11-13 07:30+05:30,,,AeroDataBox
+2025-11-13,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-13 07:35+05:30,,,AeroDataBox
+2025-11-13,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRJ,BLR,VOBL,Bangalore,,IN,2025-11-13 07:50+05:30,,,AeroDataBox
+2025-11-13,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-13 08:05+05:30,,,AeroDataBox
+2025-11-13,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-13 08:20+05:30,,,AeroDataBox
+2025-11-13,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-13 08:30+05:30,,,AeroDataBox
+2025-11-13,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-13 08:50+05:30,,,AeroDataBox
+2025-11-13,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-13 09:05+05:30,,,AeroDataBox
+2025-11-13,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IRD,MAA,VOMM,Chennai,,IN,2025-11-13 09:35+05:30,,,AeroDataBox
+2025-11-13,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-13 10:00+05:30,,,AeroDataBox
+2025-11-13,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-13 10:40+05:30,,,AeroDataBox
+2025-11-13,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-13 11:35+05:30,,,AeroDataBox
+2025-11-13,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-13 11:55+05:30,,,AeroDataBox
+2025-11-13,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-13 12:10+05:30,,,AeroDataBox
+2025-11-13,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-13 12:20+05:30,,,AeroDataBox
+2025-11-13,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-13 12:50+05:30,,,AeroDataBox
+2025-11-13,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-13 12:50+05:30,,,AeroDataBox
+2025-11-13,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-13 13:00+05:30,,,AeroDataBox
+2025-11-13,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-13 13:10+05:30,,,AeroDataBox
+2025-11-13,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-13 13:30+05:30,,,AeroDataBox
+2025-11-13,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-13 13:40+05:30,,,AeroDataBox
+2025-11-13,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-13 14:00+05:30,,,AeroDataBox
+2025-11-13,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-13 14:30+05:30,,,AeroDataBox
+2025-11-13,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-13 15:05+05:30,,,AeroDataBox
+2025-11-13,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-13 16:00+05:30,,,AeroDataBox
+2025-11-13,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-13 16:20+05:30,,,AeroDataBox
+2025-11-13,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-13 17:40+05:30,,,AeroDataBox
+2025-11-13,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IRD,MAA,VOMM,Chennai,,IN,2025-11-13 18:00+05:30,,,AeroDataBox
+2025-11-13,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-13 19:35+05:30,,,AeroDataBox
+2025-11-13,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRJ,BLR,VOBL,Bangalore,,IN,2025-11-13 19:45+05:30,,,AeroDataBox
+2025-11-13,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-13 19:55+05:30,,,AeroDataBox
+2025-11-13,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRJ,BLR,VOBL,Bangalore,,IN,2025-11-13 20:05+05:30,,,AeroDataBox
+2025-11-13,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-13 21:35+05:30,,,AeroDataBox
+2025-11-13,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-13 21:55+05:30,,,AeroDataBox
+2025-11-14,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRJ,BLR,VOBL,Bangalore,,IN,2025-11-14 07:30+05:30,,,AeroDataBox
+2025-11-14,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-14 07:35+05:30,,,AeroDataBox
+2025-11-14,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRJ,BLR,VOBL,Bangalore,,IN,2025-11-14 07:50+05:30,,,AeroDataBox
+2025-11-14,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-14 08:05+05:30,,,AeroDataBox
+2025-11-14,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IZD,HYD,VOHS,Hyderabad,,IN,2025-11-14 08:20+05:30,,,AeroDataBox
+2025-11-14,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-14 08:30+05:30,,,AeroDataBox
+2025-11-14,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IZD,HYD,VOHS,Hyderabad,,IN,2025-11-14 08:50+05:30,,,AeroDataBox
+2025-11-14,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-14 09:05+05:30,,,AeroDataBox
+2025-11-14,arrival,UL137,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-14 09:15+05:30,,,AeroDataBox
+2025-11-14,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-14 09:35+05:30,,,AeroDataBox
+2025-11-14,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-14 10:00+05:30,,,AeroDataBox
+2025-11-14,departure,UL138,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,4R-ABO,CMB,VCBI,Colombo,,LK,2025-11-14 10:15+05:30,,,AeroDataBox
+2025-11-14,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SXA,DXB,OMDB,Dubai,,AE,2025-11-14 10:40+05:30,,,AeroDataBox
+2025-11-14,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-14 11:35+05:30,,,AeroDataBox
+2025-11-14,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-14 11:55+05:30,,,AeroDataBox
+2025-11-14,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SXA,DXB,OMDB,Dubai,,AE,2025-11-14 12:10+05:30,,,AeroDataBox
+2025-11-14,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-14 12:20+05:30,,,AeroDataBox
+2025-11-14,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-14 12:50+05:30,,,AeroDataBox
+2025-11-14,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-14 12:50+05:30,,,AeroDataBox
+2025-11-14,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-14 13:00+05:30,,,AeroDataBox
+2025-11-14,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-14 13:10+05:30,,,AeroDataBox
+2025-11-14,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-14 13:30+05:30,,,AeroDataBox
+2025-11-14,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-14 13:40+05:30,,,AeroDataBox
+2025-11-14,arrival,6E1514,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,VT-ISX,AUH,OMAA,Abu Dhabi,,AE,2025-11-14 13:50+05:30,,,AeroDataBox
+2025-11-14,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-14 14:00+05:30,,,AeroDataBox
+2025-11-14,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-14 14:30+05:30,,,AeroDataBox
+2025-11-14,departure,6E1513,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,VT-ISX,AUH,OMAA,Abu Dhabi,,AE,2025-11-14 14:50+05:30,,,AeroDataBox
+2025-11-14,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-14 15:05+05:30,,,AeroDataBox
+2025-11-14,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-14 16:00+05:30,,,AeroDataBox
+2025-11-14,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-14 16:20+05:30,,,AeroDataBox
+2025-11-14,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-14 17:40+05:30,,,AeroDataBox
+2025-11-14,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-14 18:00+05:30,,,AeroDataBox
+2025-11-14,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-14 19:35+05:30,,,AeroDataBox
+2025-11-14,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYQ,BLR,VOBL,Bangalore,,IN,2025-11-14 19:45+05:30,,,AeroDataBox
+2025-11-14,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-14 19:55+05:30,,,AeroDataBox
+2025-11-14,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYQ,BLR,VOBL,Bangalore,,IN,2025-11-14 20:05+05:30,,,AeroDataBox
+2025-11-14,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-14 21:35+05:30,,,AeroDataBox
+2025-11-14,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-14 21:55+05:30,,,AeroDataBox
+2025-11-15,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYQ,BLR,VOBL,Bangalore,,IN,2025-11-15 07:30+05:30,,,AeroDataBox
+2025-11-15,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-15 07:35+05:30,,,AeroDataBox
+2025-11-15,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYQ,BLR,VOBL,Bangalore,,IN,2025-11-15 07:50+05:30,,,AeroDataBox
+2025-11-15,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-15 08:05+05:30,,,AeroDataBox
+2025-11-15,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-ISX,HYD,VOHS,Hyderabad,,IN,2025-11-15 08:20+05:30,,,AeroDataBox
+2025-11-15,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-15 08:30+05:30,,,AeroDataBox
+2025-11-15,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-ISX,HYD,VOHS,Hyderabad,,IN,2025-11-15 08:50+05:30,,,AeroDataBox
+2025-11-15,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-15 09:05+05:30,,,AeroDataBox
+2025-11-15,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-15 09:35+05:30,,,AeroDataBox
+2025-11-15,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-15 10:00+05:30,,,AeroDataBox
+2025-11-15,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737,G-NOLA,DXB,OMDB,Dubai,,AE,2025-11-15 11:10+05:30,,,AeroDataBox
+2025-11-15,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-15 11:35+05:30,,,AeroDataBox
+2025-11-15,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-15 11:55+05:30,,,AeroDataBox
+2025-11-15,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-NOLA,DXB,OMDB,Dubai,,AE,2025-11-15 12:10+05:30,,,AeroDataBox
+2025-11-15,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IZH,BOM,VABB,Mumbai,,IN,2025-11-15 12:20+05:30,,,AeroDataBox
+2025-11-15,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-15 12:50+05:30,,,AeroDataBox
+2025-11-15,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-15 12:50+05:30,,,AeroDataBox
+2025-11-15,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-15 13:00+05:30,,,AeroDataBox
+2025-11-15,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-15 13:10+05:30,,,AeroDataBox
+2025-11-15,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-15 13:40+05:30,,,AeroDataBox
+2025-11-15,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-15 13:55+05:30,,,AeroDataBox
+2025-11-15,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-15 14:00+05:30,,,AeroDataBox
+2025-11-15,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-15 14:30+05:30,,,AeroDataBox
+2025-11-15,arrival,UL139,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-15 14:40+05:30,,,AeroDataBox
+2025-11-15,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-15 15:05+05:30,,,AeroDataBox
+2025-11-15,departure,UL140,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-15 15:40+05:30,,,AeroDataBox
+2025-11-15,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-15 16:00+05:30,,,AeroDataBox
+2025-11-15,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-15 16:20+05:30,,,AeroDataBox
+2025-11-15,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-15 17:40+05:30,,,AeroDataBox
+2025-11-15,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-15 18:00+05:30,,,AeroDataBox
+2025-11-15,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-15 19:35+05:30,,,AeroDataBox
+2025-11-15,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRA,BLR,VOBL,Bangalore,,IN,2025-11-15 19:45+05:30,,,AeroDataBox
+2025-11-15,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-15 19:55+05:30,,,AeroDataBox
+2025-11-15,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRA,BLR,VOBL,Bangalore,,IN,2025-11-15 20:05+05:30,,,AeroDataBox
+2025-11-15,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-15 21:35+05:30,,,AeroDataBox
+2025-11-15,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-15 21:55+05:30,,,AeroDataBox
+2025-11-16,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRA,BLR,VOBL,Bangalore,,IN,2025-11-16 07:30+05:30,,,AeroDataBox
+2025-11-16,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-16 07:35+05:30,,,AeroDataBox
+2025-11-16,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRA,BLR,VOBL,Bangalore,,IN,2025-11-16 07:50+05:30,,,AeroDataBox
+2025-11-16,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-16 08:05+05:30,,,AeroDataBox
+2025-11-16,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-16 08:20+05:30,,,AeroDataBox
+2025-11-16,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-16 08:30+05:30,,,AeroDataBox
+2025-11-16,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-16 08:50+05:30,,,AeroDataBox
+2025-11-16,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-16 09:05+05:30,,,AeroDataBox
+2025-11-16,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-16 09:35+05:30,,,AeroDataBox
+2025-11-16,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-16 10:00+05:30,,,AeroDataBox
+2025-11-16,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-NOLA,DXB,OMDB,Dubai,,AE,2025-11-16 11:10+05:30,,,AeroDataBox
+2025-11-16,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-16 11:35+05:30,,,AeroDataBox
+2025-11-16,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-16 11:55+05:30,,,AeroDataBox
+2025-11-16,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-NOLA,DXB,OMDB,Dubai,,AE,2025-11-16 12:10+05:30,,,AeroDataBox
+2025-11-16,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-16 12:20+05:30,,,AeroDataBox
+2025-11-16,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-16 12:50+05:30,,,AeroDataBox
+2025-11-16,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-16 12:50+05:30,,,AeroDataBox
+2025-11-16,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-16 13:00+05:30,,,AeroDataBox
+2025-11-16,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-16 13:10+05:30,,,AeroDataBox
+2025-11-16,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-16 13:30+05:30,,,AeroDataBox
+2025-11-16,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-16 13:40+05:30,,,AeroDataBox
+2025-11-16,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-16 14:00+05:30,,,AeroDataBox
+2025-11-16,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-16 14:30+05:30,,,AeroDataBox
+2025-11-16,arrival,UL139,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-16 14:40+05:30,,,AeroDataBox
+2025-11-16,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-16 15:05+05:30,,,AeroDataBox
+2025-11-16,departure,UL140,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-16 15:40+05:30,,,AeroDataBox
+2025-11-16,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-16 16:00+05:30,,,AeroDataBox
+2025-11-16,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-16 16:20+05:30,,,AeroDataBox
+2025-11-16,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-16 17:40+05:30,,,AeroDataBox
+2025-11-16,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-16 18:00+05:30,,,AeroDataBox
+2025-11-16,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-16 19:35+05:30,,,AeroDataBox
+2025-11-16,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRJ,BLR,VOBL,Bangalore,,IN,2025-11-16 19:45+05:30,,,AeroDataBox
+2025-11-16,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-16 19:55+05:30,,,AeroDataBox
+2025-11-16,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRJ,BLR,VOBL,Bangalore,,IN,2025-11-16 20:05+05:30,,,AeroDataBox
+2025-11-16,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-16 21:35+05:30,,,AeroDataBox
+2025-11-16,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-16 21:55+05:30,,,AeroDataBox
+2025-11-17,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYQ,BLR,VOBL,Bangalore,,IN,2025-11-17 07:30+05:30,,,AeroDataBox
+2025-11-17,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-17 07:35+05:30,,,AeroDataBox
+2025-11-17,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYQ,BLR,VOBL,Bangalore,,IN,2025-11-17 07:50+05:30,,,AeroDataBox
+2025-11-17,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-17 08:05+05:30,,,AeroDataBox
+2025-11-17,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIP,HYD,VOHS,Hyderabad,,IN,2025-11-17 08:20+05:30,,,AeroDataBox
+2025-11-17,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-17 08:30+05:30,,,AeroDataBox
+2025-11-17,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIP,HYD,VOHS,Hyderabad,,IN,2025-11-17 08:50+05:30,,,AeroDataBox
+2025-11-17,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-17 09:05+05:30,,,AeroDataBox
+2025-11-17,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-17 09:35+05:30,,,AeroDataBox
+2025-11-17,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-17 10:00+05:30,,,AeroDataBox
+2025-11-17,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-NOLA,DXB,OMDB,Dubai,,AE,2025-11-17 11:10+05:30,,,AeroDataBox
+2025-11-17,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-17 11:35+05:30,,,AeroDataBox
+2025-11-17,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-17 11:55+05:30,,,AeroDataBox
+2025-11-17,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-NOLA,DXB,OMDB,Dubai,,AE,2025-11-17 12:10+05:30,,,AeroDataBox
+2025-11-17,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-17 12:20+05:30,,,AeroDataBox
+2025-11-17,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-17 12:50+05:30,,,AeroDataBox
+2025-11-17,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-17 12:50+05:30,,,AeroDataBox
+2025-11-17,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-17 13:00+05:30,,,AeroDataBox
+2025-11-17,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-17 13:10+05:30,,,AeroDataBox
+2025-11-17,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-17 13:30+05:30,,,AeroDataBox
+2025-11-17,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-17 13:40+05:30,,,AeroDataBox
+2025-11-17,arrival,6E1514,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,,AUH,OMAA,Abu Dhabi,,AE,2025-11-17 13:50+05:30,,,AeroDataBox
+2025-11-17,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-17 14:00+05:30,,,AeroDataBox
+2025-11-17,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-17 14:30+05:30,,,AeroDataBox
+2025-11-17,arrival,UL139,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-17 14:40+05:30,,,AeroDataBox
+2025-11-17,departure,6E1513,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,,AUH,OMAA,Abu Dhabi,,AE,2025-11-17 14:50+05:30,,,AeroDataBox
+2025-11-17,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-17 15:05+05:30,,,AeroDataBox
+2025-11-17,departure,UL140,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-17 15:40+05:30,,,AeroDataBox
+2025-11-17,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-17 16:00+05:30,,,AeroDataBox
+2025-11-17,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-17 16:20+05:30,,,AeroDataBox
+2025-11-17,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-17 17:40+05:30,,,AeroDataBox
+2025-11-17,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-17 18:00+05:30,,,AeroDataBox
+2025-11-17,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-17 19:35+05:30,,,AeroDataBox
+2025-11-17,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYS,BLR,VOBL,Bangalore,,IN,2025-11-17 19:45+05:30,,,AeroDataBox
+2025-11-17,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-17 19:55+05:30,,,AeroDataBox
+2025-11-17,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYS,BLR,VOBL,Bangalore,,IN,2025-11-17 20:05+05:30,,,AeroDataBox
+2025-11-17,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-17 21:35+05:30,,,AeroDataBox
+2025-11-17,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-17 21:55+05:30,,,AeroDataBox
+2025-11-18,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYS,BLR,VOBL,Bangalore,,IN,2025-11-18 07:30+05:30,,,AeroDataBox
+2025-11-18,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-18 07:35+05:30,,,AeroDataBox
+2025-11-18,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYS,BLR,VOBL,Bangalore,,IN,2025-11-18 07:50+05:30,,,AeroDataBox
+2025-11-18,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-18 08:05+05:30,,,AeroDataBox
+2025-11-18,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIP,HYD,VOHS,Hyderabad,,IN,2025-11-18 08:20+05:30,,,AeroDataBox
+2025-11-18,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-18 08:30+05:30,,,AeroDataBox
+2025-11-18,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIP,HYD,VOHS,Hyderabad,,IN,2025-11-18 08:50+05:30,,,AeroDataBox
+2025-11-18,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-18 09:05+05:30,,,AeroDataBox
+2025-11-18,arrival,UL137,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-18 09:15+05:30,,,AeroDataBox
+2025-11-18,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IYE,MAA,VOMM,Chennai,,IN,2025-11-18 09:35+05:30,,,AeroDataBox
+2025-11-18,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-18 10:00+05:30,,,AeroDataBox
+2025-11-18,departure,UL138,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-18 10:15+05:30,,,AeroDataBox
+2025-11-18,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-18 11:10+05:30,,,AeroDataBox
+2025-11-18,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-18 11:35+05:30,,,AeroDataBox
+2025-11-18,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-18 11:55+05:30,,,AeroDataBox
+2025-11-18,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-18 12:10+05:30,,,AeroDataBox
+2025-11-18,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-18 12:20+05:30,,,AeroDataBox
+2025-11-18,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-18 12:50+05:30,,,AeroDataBox
+2025-11-18,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-18 12:50+05:30,,,AeroDataBox
+2025-11-18,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-18 13:00+05:30,,,AeroDataBox
+2025-11-18,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRF,BLR,VOBL,Bangalore,,IN,2025-11-18 13:10+05:30,,,AeroDataBox
+2025-11-18,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-18 13:40+05:30,,,AeroDataBox
+2025-11-18,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-18 13:55+05:30,,,AeroDataBox
+2025-11-18,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-18 14:00+05:30,,,AeroDataBox
+2025-11-18,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-18 14:30+05:30,,,AeroDataBox
+2025-11-18,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-18 15:05+05:30,,,AeroDataBox
+2025-11-18,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-18 16:00+05:30,,,AeroDataBox
+2025-11-18,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-18 16:20+05:30,,,AeroDataBox
+2025-11-18,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-18 17:40+05:30,,,AeroDataBox
+2025-11-18,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-18 18:00+05:30,,,AeroDataBox
+2025-11-18,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-18 19:35+05:30,,,AeroDataBox
+2025-11-18,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYS,BLR,VOBL,Bangalore,,IN,2025-11-18 19:45+05:30,,,AeroDataBox
+2025-11-18,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-18 19:55+05:30,,,AeroDataBox
+2025-11-18,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYS,BLR,VOBL,Bangalore,,IN,2025-11-18 20:05+05:30,,,AeroDataBox
+2025-11-18,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-18 21:35+05:30,,,AeroDataBox
+2025-11-18,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-18 21:55+05:30,,,AeroDataBox
+2025-11-19,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRD,BLR,VOBL,Bangalore,,IN,2025-11-19 07:30+05:30,,,AeroDataBox
+2025-11-19,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-19 07:35+05:30,,,AeroDataBox
+2025-11-19,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRD,BLR,VOBL,Bangalore,,IN,2025-11-19 07:50+05:30,,,AeroDataBox
+2025-11-19,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-19 08:05+05:30,,,AeroDataBox
+2025-11-19,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIP,HYD,VOHS,Hyderabad,,IN,2025-11-19 08:20+05:30,,,AeroDataBox
+2025-11-19,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A321 NEO,VT-ILN,DEL,VIDP,New Delhi,,IN,2025-11-19 08:30+05:30,,,AeroDataBox
+2025-11-19,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIP,HYD,VOHS,Hyderabad,,IN,2025-11-19 08:50+05:30,,,AeroDataBox
+2025-11-19,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-19 09:05+05:30,,,AeroDataBox
+2025-11-19,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-19 09:35+05:30,,,AeroDataBox
+2025-11-19,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IYZ,MAA,VOMM,Chennai,,IN,2025-11-19 10:00+05:30,,,AeroDataBox
+2025-11-19,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-19 11:10+05:30,,,AeroDataBox
+2025-11-19,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-19 11:35+05:30,,,AeroDataBox
+2025-11-19,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-19 11:55+05:30,,,AeroDataBox
+2025-11-19,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-19 12:10+05:30,,,AeroDataBox
+2025-11-19,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IXK,BOM,VABB,Mumbai,,IN,2025-11-19 12:20+05:30,,,AeroDataBox
+2025-11-19,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYQ,BLR,VOBL,Bangalore,,IN,2025-11-19 12:50+05:30,,,AeroDataBox
+2025-11-19,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-19 12:50+05:30,,,AeroDataBox
+2025-11-19,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-19 13:00+05:30,,,AeroDataBox
+2025-11-19,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYQ,BLR,VOBL,Bangalore,,IN,2025-11-19 13:10+05:30,,,AeroDataBox
+2025-11-19,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-19 13:30+05:30,,,AeroDataBox
+2025-11-19,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-19 13:40+05:30,,,AeroDataBox
+2025-11-19,arrival,6E1514,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,,AUH,OMAA,Abu Dhabi,,AE,2025-11-19 13:50+05:30,,,AeroDataBox
+2025-11-19,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-19 14:00+05:30,,,AeroDataBox
+2025-11-19,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-19 14:30+05:30,,,AeroDataBox
+2025-11-19,arrival,UL139,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-19 14:40+05:30,,,AeroDataBox
+2025-11-19,departure,6E1513,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,,AUH,OMAA,Abu Dhabi,,AE,2025-11-19 14:50+05:30,,,AeroDataBox
+2025-11-19,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-19 15:05+05:30,,,AeroDataBox
+2025-11-19,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-19 16:00+05:30,,,AeroDataBox
+2025-11-19,departure,UL140,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,4R-ABN,CMB,VCBI,Colombo,,LK,2025-11-19 16:20+05:30,,,AeroDataBox
+2025-11-19,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-19 16:20+05:30,,,AeroDataBox
+2025-11-19,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-19 17:40+05:30,,,AeroDataBox
+2025-11-19,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-19 18:00+05:30,,,AeroDataBox
+2025-11-19,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-19 19:35+05:30,,,AeroDataBox
+2025-11-19,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYI,BLR,VOBL,Bangalore,,IN,2025-11-19 19:45+05:30,,,AeroDataBox
+2025-11-19,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-19 19:55+05:30,,,AeroDataBox
+2025-11-19,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYI,BLR,VOBL,Bangalore,,IN,2025-11-19 20:05+05:30,,,AeroDataBox
+2025-11-19,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-19 21:35+05:30,,,AeroDataBox
+2025-11-19,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-19 21:55+05:30,,,AeroDataBox
+2025-11-20,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IXZ,BLR,VOBL,Bangalore,,IN,2025-11-20 07:30+05:30,,,AeroDataBox
+2025-11-20,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-20 07:35+05:30,,,AeroDataBox
+2025-11-20,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IXZ,BLR,VOBL,Bangalore,,IN,2025-11-20 07:50+05:30,,,AeroDataBox
+2025-11-20,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-20 08:05+05:30,,,AeroDataBox
+2025-11-20,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-20 08:20+05:30,,,AeroDataBox
+2025-11-20,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-20 08:30+05:30,,,AeroDataBox
+2025-11-20,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-20 08:50+05:30,,,AeroDataBox
+2025-11-20,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-20 09:05+05:30,,,AeroDataBox
+2025-11-20,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-20 09:35+05:30,,,AeroDataBox
+2025-11-20,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-20 10:00+05:30,,,AeroDataBox
+2025-11-20,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-20 11:10+05:30,,,AeroDataBox
+2025-11-20,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-20 11:35+05:30,,,AeroDataBox
+2025-11-20,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-20 11:55+05:30,,,AeroDataBox
+2025-11-20,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-20 12:10+05:30,,,AeroDataBox
+2025-11-20,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-20 12:20+05:30,,,AeroDataBox
+2025-11-20,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYI,BLR,VOBL,Bangalore,,IN,2025-11-20 12:50+05:30,,,AeroDataBox
+2025-11-20,departure,6E2310,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-20 12:50+05:30,,,AeroDataBox
+2025-11-20,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,VT-TNI,MAA,VOMM,Chennai,,IN,2025-11-20 13:00+05:30,,,AeroDataBox
+2025-11-20,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYI,BLR,VOBL,Bangalore,,IN,2025-11-20 13:10+05:30,,,AeroDataBox
+2025-11-20,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,VT-TNI,MAA,VOMM,Chennai,,IN,2025-11-20 13:30+05:30,,,AeroDataBox
+2025-11-20,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-20 13:40+05:30,,,AeroDataBox
+2025-11-20,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-20 14:00+05:30,,,AeroDataBox
+2025-11-20,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-20 14:30+05:30,,,AeroDataBox
+2025-11-20,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-20 15:05+05:30,,,AeroDataBox
+2025-11-20,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-20 16:00+05:30,,,AeroDataBox
+2025-11-20,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-20 16:20+05:30,,,AeroDataBox
+2025-11-20,arrival,6E2311,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-20 16:50+05:30,,,AeroDataBox
+2025-11-20,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-20 17:20+05:30,,,AeroDataBox
+2025-11-20,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-20 17:40+05:30,,,AeroDataBox
+2025-11-20,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-20 18:00+05:30,,,AeroDataBox
+2025-11-20,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-20 19:35+05:30,,,AeroDataBox
+2025-11-20,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IXZ,BLR,VOBL,Bangalore,,IN,2025-11-20 19:45+05:30,,,AeroDataBox
+2025-11-20,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-20 19:55+05:30,,,AeroDataBox
+2025-11-20,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IXZ,BLR,VOBL,Bangalore,,IN,2025-11-20 20:05+05:30,,,AeroDataBox
+2025-11-20,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-20 21:35+05:30,,,AeroDataBox
+2025-11-20,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-20 21:55+05:30,,,AeroDataBox
+2025-11-21,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IXZ,BLR,VOBL,Bangalore,,IN,2025-11-21 07:30+05:30,,,AeroDataBox
+2025-11-21,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-21 07:35+05:30,,,AeroDataBox
+2025-11-21,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IXZ,BLR,VOBL,Bangalore,,IN,2025-11-21 07:50+05:30,,,AeroDataBox
+2025-11-21,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-21 08:05+05:30,,,AeroDataBox
+2025-11-21,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-ITI,HYD,VOHS,Hyderabad,,IN,2025-11-21 08:20+05:30,,,AeroDataBox
+2025-11-21,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A321 NEO,VT-IMD,DEL,VIDP,New Delhi,,IN,2025-11-21 08:30+05:30,,,AeroDataBox
+2025-11-21,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-ITI,HYD,VOHS,Hyderabad,,IN,2025-11-21 08:50+05:30,,,AeroDataBox
+2025-11-21,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-21 09:05+05:30,,,AeroDataBox
+2025-11-21,arrival,UL137,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-21 09:15+05:30,,,AeroDataBox
+2025-11-21,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-21 09:35+05:30,,,AeroDataBox
+2025-11-21,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IYZ,MAA,VOMM,Chennai,,IN,2025-11-21 10:00+05:30,,,AeroDataBox
+2025-11-21,departure,UL138,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-21 10:15+05:30,,,AeroDataBox
+2025-11-21,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-21 11:10+05:30,,,AeroDataBox
+2025-11-21,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-21 11:35+05:30,,,AeroDataBox
+2025-11-21,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-21 11:55+05:30,,,AeroDataBox
+2025-11-21,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-21 12:10+05:30,,,AeroDataBox
+2025-11-21,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-21 12:20+05:30,,,AeroDataBox
+2025-11-21,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRH,BLR,VOBL,Bangalore,,IN,2025-11-21 12:50+05:30,,,AeroDataBox
+2025-11-21,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-21 12:50+05:30,,,AeroDataBox
+2025-11-21,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-21 13:00+05:30,,,AeroDataBox
+2025-11-21,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRH,BLR,VOBL,Bangalore,,IN,2025-11-21 13:10+05:30,,,AeroDataBox
+2025-11-21,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-21 13:30+05:30,,,AeroDataBox
+2025-11-21,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-21 13:40+05:30,,,AeroDataBox
+2025-11-21,arrival,6E1514,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,,AUH,OMAA,Abu Dhabi,,AE,2025-11-21 13:50+05:30,,,AeroDataBox
+2025-11-21,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-21 14:00+05:30,,,AeroDataBox
+2025-11-21,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-21 14:30+05:30,,,AeroDataBox
+2025-11-21,departure,6E1513,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,,AUH,OMAA,Abu Dhabi,,AE,2025-11-21 14:50+05:30,,,AeroDataBox
+2025-11-21,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-21 15:05+05:30,,,AeroDataBox
+2025-11-21,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-21 16:00+05:30,,,AeroDataBox
+2025-11-21,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-21 16:20+05:30,,,AeroDataBox
+2025-11-21,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-21 17:40+05:30,,,AeroDataBox
+2025-11-21,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-21 18:00+05:30,,,AeroDataBox
+2025-11-21,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-21 19:35+05:30,,,AeroDataBox
+2025-11-21,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRL,BLR,VOBL,Bangalore,,IN,2025-11-21 19:45+05:30,,,AeroDataBox
+2025-11-21,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-21 19:55+05:30,,,AeroDataBox
+2025-11-21,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRL,BLR,VOBL,Bangalore,,IN,2025-11-21 20:05+05:30,,,AeroDataBox
+2025-11-21,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-21 21:35+05:30,,,AeroDataBox
+2025-11-21,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-21 21:55+05:30,,,AeroDataBox
+2025-11-22,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRL,BLR,VOBL,Bangalore,,IN,2025-11-22 07:30+05:30,,,AeroDataBox
+2025-11-22,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-22 07:35+05:30,,,AeroDataBox
+2025-11-22,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRL,BLR,VOBL,Bangalore,,IN,2025-11-22 07:50+05:30,,,AeroDataBox
+2025-11-22,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-22 08:05+05:30,,,AeroDataBox
+2025-11-22,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-ISY,HYD,VOHS,Hyderabad,,IN,2025-11-22 08:20+05:30,,,AeroDataBox
+2025-11-22,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A321 NEO,VT-IUS,DEL,VIDP,New Delhi,,IN,2025-11-22 08:30+05:30,,,AeroDataBox
+2025-11-22,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-ISY,HYD,VOHS,Hyderabad,,IN,2025-11-22 08:50+05:30,,,AeroDataBox
+2025-11-22,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-22 09:05+05:30,,,AeroDataBox
+2025-11-22,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-22 09:35+05:30,,,AeroDataBox
+2025-11-22,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-22 10:00+05:30,,,AeroDataBox
+2025-11-22,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-LESO,DXB,OMDB,Dubai,,AE,2025-11-22 11:10+05:30,,,AeroDataBox
+2025-11-22,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-22 11:35+05:30,,,AeroDataBox
+2025-11-22,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-22 11:55+05:30,,,AeroDataBox
+2025-11-22,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-LESO,DXB,OMDB,Dubai,,AE,2025-11-22 12:10+05:30,,,AeroDataBox
+2025-11-22,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IXA,BOM,VABB,Mumbai,,IN,2025-11-22 12:20+05:30,,,AeroDataBox
+2025-11-22,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYH,BLR,VOBL,Bangalore,,IN,2025-11-22 12:50+05:30,,,AeroDataBox
+2025-11-22,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-22 12:50+05:30,,,AeroDataBox
+2025-11-22,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-22 13:00+05:30,,,AeroDataBox
+2025-11-22,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYH,BLR,VOBL,Bangalore,,IN,2025-11-22 13:10+05:30,,,AeroDataBox
+2025-11-22,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-22 13:40+05:30,,,AeroDataBox
+2025-11-22,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-22 13:55+05:30,,,AeroDataBox
+2025-11-22,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-22 14:00+05:30,,,AeroDataBox
+2025-11-22,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-22 14:30+05:30,,,AeroDataBox
+2025-11-22,arrival,UL139,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-22 14:40+05:30,,,AeroDataBox
+2025-11-22,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-22 15:05+05:30,,,AeroDataBox
+2025-11-22,departure,UL140,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,4R-ANB,CMB,VCBI,Colombo,,LK,2025-11-22 15:40+05:30,,,AeroDataBox
+2025-11-22,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-22 16:00+05:30,,,AeroDataBox
+2025-11-22,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-22 16:20+05:30,,,AeroDataBox
+2025-11-22,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-22 17:40+05:30,,,AeroDataBox
+2025-11-22,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-22 18:00+05:30,,,AeroDataBox
+2025-11-22,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-22 19:35+05:30,,,AeroDataBox
+2025-11-22,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRL,BLR,VOBL,Bangalore,,IN,2025-11-22 19:45+05:30,,,AeroDataBox
+2025-11-22,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-22 19:55+05:30,,,AeroDataBox
+2025-11-22,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRL,BLR,VOBL,Bangalore,,IN,2025-11-22 20:05+05:30,,,AeroDataBox
+2025-11-22,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-22 21:35+05:30,,,AeroDataBox
+2025-11-22,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-22 21:55+05:30,,,AeroDataBox
+2025-11-23,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRL,BLR,VOBL,Bangalore,,IN,2025-11-23 07:30+05:30,,,AeroDataBox
+2025-11-23,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-23 07:35+05:30,,,AeroDataBox
+2025-11-23,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRL,BLR,VOBL,Bangalore,,IN,2025-11-23 07:50+05:30,,,AeroDataBox
+2025-11-23,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-23 08:05+05:30,,,AeroDataBox
+2025-11-23,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIQ,HYD,VOHS,Hyderabad,,IN,2025-11-23 08:20+05:30,,,AeroDataBox
+2025-11-23,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A321 NEO,VT-IUS,DEL,VIDP,New Delhi,,IN,2025-11-23 08:30+05:30,,,AeroDataBox
+2025-11-23,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIQ,HYD,VOHS,Hyderabad,,IN,2025-11-23 08:50+05:30,,,AeroDataBox
+2025-11-23,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-23 09:05+05:30,,,AeroDataBox
+2025-11-23,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-23 09:35+05:30,,,AeroDataBox
+2025-11-23,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-23 10:00+05:30,,,AeroDataBox
+2025-11-23,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-23 11:10+05:30,,,AeroDataBox
+2025-11-23,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-23 11:35+05:30,,,AeroDataBox
+2025-11-23,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-23 11:55+05:30,,,AeroDataBox
+2025-11-23,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-23 12:10+05:30,,,AeroDataBox
+2025-11-23,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IZK,BOM,VABB,Mumbai,,IN,2025-11-23 12:20+05:30,,,AeroDataBox
+2025-11-23,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRE,BLR,VOBL,Bangalore,,IN,2025-11-23 12:50+05:30,,,AeroDataBox
+2025-11-23,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-23 12:50+05:30,,,AeroDataBox
+2025-11-23,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-23 13:00+05:30,,,AeroDataBox
+2025-11-23,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRE,BLR,VOBL,Bangalore,,IN,2025-11-23 13:10+05:30,,,AeroDataBox
+2025-11-23,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-23 13:30+05:30,,,AeroDataBox
+2025-11-23,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-23 13:40+05:30,,,AeroDataBox
+2025-11-23,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-23 14:00+05:30,,,AeroDataBox
+2025-11-23,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-23 14:30+05:30,,,AeroDataBox
+2025-11-23,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-23 15:05+05:30,,,AeroDataBox
+2025-11-23,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-23 16:00+05:30,,,AeroDataBox
+2025-11-23,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-23 16:20+05:30,,,AeroDataBox
+2025-11-23,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-23 17:40+05:30,,,AeroDataBox
+2025-11-23,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-23 18:00+05:30,,,AeroDataBox
+2025-11-23,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-23 19:35+05:30,,,AeroDataBox
+2025-11-23,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRH,BLR,VOBL,Bangalore,,IN,2025-11-23 19:45+05:30,,,AeroDataBox
+2025-11-23,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-23 19:55+05:30,,,AeroDataBox
+2025-11-23,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRH,BLR,VOBL,Bangalore,,IN,2025-11-23 20:05+05:30,,,AeroDataBox
+2025-11-23,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-23 21:35+05:30,,,AeroDataBox
+2025-11-23,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-23 21:55+05:30,,,AeroDataBox
+2025-11-24,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRH,BLR,VOBL,Bangalore,,IN,2025-11-24 07:30+05:30,,,AeroDataBox
+2025-11-24,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-24 07:35+05:30,,,AeroDataBox
+2025-11-24,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRH,BLR,VOBL,Bangalore,,IN,2025-11-24 07:50+05:30,,,AeroDataBox
+2025-11-24,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-24 08:05+05:30,,,AeroDataBox
+2025-11-24,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIQ,HYD,VOHS,Hyderabad,,IN,2025-11-24 08:20+05:30,,,AeroDataBox
+2025-11-24,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A321 NEO,VT-IUM,DEL,VIDP,New Delhi,,IN,2025-11-24 08:30+05:30,,,AeroDataBox
+2025-11-24,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIQ,HYD,VOHS,Hyderabad,,IN,2025-11-24 08:50+05:30,,,AeroDataBox
+2025-11-24,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-24 09:05+05:30,,,AeroDataBox
+2025-11-24,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-24 09:35+05:30,,,AeroDataBox
+2025-11-24,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-24 10:00+05:30,,,AeroDataBox
+2025-11-24,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-24 11:10+05:30,,,AeroDataBox
+2025-11-24,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-24 11:35+05:30,,,AeroDataBox
+2025-11-24,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-24 11:55+05:30,,,AeroDataBox
+2025-11-24,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-24 12:10+05:30,,,AeroDataBox
+2025-11-24,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-24 12:20+05:30,,,AeroDataBox
+2025-11-24,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYE,BLR,VOBL,Bangalore,,IN,2025-11-24 12:50+05:30,,,AeroDataBox
+2025-11-24,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-24 12:50+05:30,,,AeroDataBox
+2025-11-24,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-24 13:00+05:30,,,AeroDataBox
+2025-11-24,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYE,BLR,VOBL,Bangalore,,IN,2025-11-24 13:10+05:30,,,AeroDataBox
+2025-11-24,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-24 13:30+05:30,,,AeroDataBox
+2025-11-24,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-24 13:40+05:30,,,AeroDataBox
+2025-11-24,arrival,6E1514,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,,AUH,OMAA,Abu Dhabi,,AE,2025-11-24 13:50+05:30,,,AeroDataBox
+2025-11-24,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-24 14:00+05:30,,,AeroDataBox
+2025-11-24,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-24 14:30+05:30,,,AeroDataBox
+2025-11-24,arrival,UL139,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-24 14:40+05:30,,,AeroDataBox
+2025-11-24,departure,6E1513,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,,AUH,OMAA,Abu Dhabi,,AE,2025-11-24 14:50+05:30,,,AeroDataBox
+2025-11-24,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-24 15:05+05:30,,,AeroDataBox
+2025-11-24,departure,UL140,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-24 15:40+05:30,,,AeroDataBox
+2025-11-24,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-24 16:00+05:30,,,AeroDataBox
+2025-11-24,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-24 16:20+05:30,,,AeroDataBox
+2025-11-24,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-24 17:40+05:30,,,AeroDataBox
+2025-11-24,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IYX,MAA,VOMM,Chennai,,IN,2025-11-24 18:00+05:30,,,AeroDataBox
+2025-11-24,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-24 19:35+05:30,,,AeroDataBox
+2025-11-24,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYL,BLR,VOBL,Bangalore,,IN,2025-11-24 19:45+05:30,,,AeroDataBox
+2025-11-24,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-24 19:55+05:30,,,AeroDataBox
+2025-11-24,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYL,BLR,VOBL,Bangalore,,IN,2025-11-24 20:05+05:30,,,AeroDataBox
+2025-11-24,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-24 21:35+05:30,,,AeroDataBox
+2025-11-24,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-24 21:55+05:30,,,AeroDataBox
+2025-11-25,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYL,BLR,VOBL,Bangalore,,IN,2025-11-25 07:30+05:30,,,AeroDataBox
+2025-11-25,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-25 07:35+05:30,,,AeroDataBox
+2025-11-25,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IXZ,BLR,VOBL,Bangalore,,IN,2025-11-25 07:50+05:30,,,AeroDataBox
+2025-11-25,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-25 08:05+05:30,,,AeroDataBox
+2025-11-25,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIQ,HYD,VOHS,Hyderabad,,IN,2025-11-25 08:20+05:30,,,AeroDataBox
+2025-11-25,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A321 NEO,VT-IMC,DEL,VIDP,New Delhi,,IN,2025-11-25 08:30+05:30,,,AeroDataBox
+2025-11-25,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIQ,HYD,VOHS,Hyderabad,,IN,2025-11-25 08:50+05:30,,,AeroDataBox
+2025-11-25,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-25 09:05+05:30,,,AeroDataBox
+2025-11-25,arrival,UL137,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-25 09:15+05:30,,,AeroDataBox
+2025-11-25,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-25 09:35+05:30,,,AeroDataBox
+2025-11-25,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-25 10:00+05:30,,,AeroDataBox
+2025-11-25,departure,UL138,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,4R-ABM,CMB,VCBI,Colombo,,LK,2025-11-25 10:15+05:30,,,AeroDataBox
+2025-11-25,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737,G-LESO,DXB,OMDB,Dubai,,AE,2025-11-25 11:10+05:30,,,AeroDataBox
+2025-11-25,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-25 11:35+05:30,,,AeroDataBox
+2025-11-25,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-25 11:55+05:30,,,AeroDataBox
+2025-11-25,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-LESO,DXB,OMDB,Dubai,,AE,2025-11-25 12:10+05:30,,,AeroDataBox
+2025-11-25,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-25 12:20+05:30,,,AeroDataBox
+2025-11-25,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRH,BLR,VOBL,Bangalore,,IN,2025-11-25 12:50+05:30,,,AeroDataBox
+2025-11-25,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-25 12:50+05:30,,,AeroDataBox
+2025-11-25,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-25 13:00+05:30,,,AeroDataBox
+2025-11-25,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRH,BLR,VOBL,Bangalore,,IN,2025-11-25 13:10+05:30,,,AeroDataBox
+2025-11-25,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-25 13:40+05:30,,,AeroDataBox
+2025-11-25,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-25 13:55+05:30,,,AeroDataBox
+2025-11-25,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-25 14:00+05:30,,,AeroDataBox
+2025-11-25,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-25 14:30+05:30,,,AeroDataBox
+2025-11-25,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-25 15:05+05:30,,,AeroDataBox
+2025-11-25,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-25 16:00+05:30,,,AeroDataBox
+2025-11-25,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-25 16:20+05:30,,,AeroDataBox
+2025-11-25,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-25 17:40+05:30,,,AeroDataBox
+2025-11-25,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IYX,MAA,VOMM,Chennai,,IN,2025-11-25 18:00+05:30,,,AeroDataBox
+2025-11-25,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-25 19:35+05:30,,,AeroDataBox
+2025-11-25,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRL,BLR,VOBL,Bangalore,,IN,2025-11-25 19:45+05:30,,,AeroDataBox
+2025-11-25,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-25 19:55+05:30,,,AeroDataBox
+2025-11-25,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRL,BLR,VOBL,Bangalore,,IN,2025-11-25 20:05+05:30,,,AeroDataBox
+2025-11-25,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-25 21:35+05:30,,,AeroDataBox
+2025-11-25,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-25 21:55+05:30,,,AeroDataBox
+2025-11-26,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRL,BLR,VOBL,Bangalore,,IN,2025-11-26 07:30+05:30,,,AeroDataBox
+2025-11-26,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-26 07:35+05:30,,,AeroDataBox
+2025-11-26,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRL,BLR,VOBL,Bangalore,,IN,2025-11-26 07:50+05:30,,,AeroDataBox
+2025-11-26,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-26 08:05+05:30,,,AeroDataBox
+2025-11-26,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-26 08:20+05:30,,,AeroDataBox
+2025-11-26,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-26 08:30+05:30,,,AeroDataBox
+2025-11-26,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-26 08:50+05:30,,,AeroDataBox
+2025-11-26,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-26 09:05+05:30,,,AeroDataBox
+2025-11-26,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IYE,MAA,VOMM,Chennai,,IN,2025-11-26 09:35+05:30,,,AeroDataBox
+2025-11-26,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-26 10:00+05:30,,,AeroDataBox
+2025-11-26,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-LESO,DXB,OMDB,Dubai,,AE,2025-11-26 11:10+05:30,,,AeroDataBox
+2025-11-26,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-26 11:35+05:30,,,AeroDataBox
+2025-11-26,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-26 11:55+05:30,,,AeroDataBox
+2025-11-26,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-NOLA,DXB,OMDB,Dubai,,AE,2025-11-26 12:10+05:30,,,AeroDataBox
+2025-11-26,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-26 12:20+05:30,,,AeroDataBox
+2025-11-26,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRJ,BLR,VOBL,Bangalore,,IN,2025-11-26 12:50+05:30,,,AeroDataBox
+2025-11-26,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-26 12:50+05:30,,,AeroDataBox
+2025-11-26,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-26 13:00+05:30,,,AeroDataBox
+2025-11-26,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRJ,BLR,VOBL,Bangalore,,IN,2025-11-26 13:10+05:30,,,AeroDataBox
+2025-11-26,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-26 13:30+05:30,,,AeroDataBox
+2025-11-26,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-26 13:40+05:30,,,AeroDataBox
+2025-11-26,arrival,6E1514,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,VT-ISR,AUH,OMAA,Abu Dhabi,,AE,2025-11-26 13:50+05:30,,,AeroDataBox
+2025-11-26,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-26 14:00+05:30,,,AeroDataBox
+2025-11-26,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-26 14:30+05:30,,,AeroDataBox
+2025-11-26,arrival,UL139,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-26 14:40+05:30,,,AeroDataBox
+2025-11-26,departure,6E1513,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,,AUH,OMAA,Abu Dhabi,,AE,2025-11-26 14:50+05:30,,,AeroDataBox
+2025-11-26,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-26 15:05+05:30,,,AeroDataBox
+2025-11-26,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-26 16:00+05:30,,,AeroDataBox
+2025-11-26,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-26 16:20+05:30,,,AeroDataBox
+2025-11-26,departure,UL140,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-26 16:20+05:30,,,AeroDataBox
+2025-11-26,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-26 17:40+05:30,,,AeroDataBox
+2025-11-26,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-26 18:00+05:30,,,AeroDataBox
+2025-11-26,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-26 19:35+05:30,,,AeroDataBox
+2025-11-26,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYP,BLR,VOBL,Bangalore,,IN,2025-11-26 19:45+05:30,,,AeroDataBox
+2025-11-26,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-26 19:55+05:30,,,AeroDataBox
+2025-11-26,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYP,BLR,VOBL,Bangalore,,IN,2025-11-26 20:05+05:30,,,AeroDataBox
+2025-11-26,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-26 21:35+05:30,,,AeroDataBox
+2025-11-26,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-26 21:55+05:30,,,AeroDataBox
+2025-11-27,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYQ,BLR,VOBL,Bangalore,,IN,2025-11-27 07:30+05:30,,,AeroDataBox
+2025-11-27,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-27 07:35+05:30,,,AeroDataBox
+2025-11-27,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYQ,BLR,VOBL,Bangalore,,IN,2025-11-27 07:50+05:30,,,AeroDataBox
+2025-11-27,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-27 08:05+05:30,,,AeroDataBox
+2025-11-27,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-ISL,HYD,VOHS,Hyderabad,,IN,2025-11-27 08:20+05:30,,,AeroDataBox
+2025-11-27,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A321 NEO,VT-IUM,DEL,VIDP,New Delhi,,IN,2025-11-27 08:30+05:30,,,AeroDataBox
+2025-11-27,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-ISL,HYD,VOHS,Hyderabad,,IN,2025-11-27 08:50+05:30,,,AeroDataBox
+2025-11-27,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-27 09:05+05:30,,,AeroDataBox
+2025-11-27,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IYE,MAA,VOMM,Chennai,,IN,2025-11-27 09:35+05:30,,,AeroDataBox
+2025-11-27,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-27 10:00+05:30,,,AeroDataBox
+2025-11-27,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-NOLA,DXB,OMDB,Dubai,,AE,2025-11-27 11:10+05:30,,,AeroDataBox
+2025-11-27,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-27 11:35+05:30,,,AeroDataBox
+2025-11-27,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-27 11:55+05:30,,,AeroDataBox
+2025-11-27,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737-800,VT-SYJ,DXB,OMDB,Dubai,,AE,2025-11-27 12:10+05:30,,,AeroDataBox
+2025-11-27,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IIW,BOM,VABB,Mumbai,,IN,2025-11-27 12:20+05:30,,,AeroDataBox
+2025-11-27,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IRH,BLR,VOBL,Bangalore,,IN,2025-11-27 12:50+05:30,,,AeroDataBox
+2025-11-27,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-27 12:50+05:30,,,AeroDataBox
+2025-11-27,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-27 13:00+05:30,,,AeroDataBox
+2025-11-27,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IRH,BLR,VOBL,Bangalore,,IN,2025-11-27 13:10+05:30,,,AeroDataBox
+2025-11-27,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-27 13:30+05:30,,,AeroDataBox
+2025-11-27,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-27 13:40+05:30,,,AeroDataBox
+2025-11-27,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-27 14:00+05:30,,,AeroDataBox
+2025-11-27,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-27 14:30+05:30,,,AeroDataBox
+2025-11-27,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-27 15:05+05:30,,,AeroDataBox
+2025-11-27,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-27 16:00+05:30,,,AeroDataBox
+2025-11-27,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-27 16:20+05:30,,,AeroDataBox
+2025-11-27,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-27 17:40+05:30,,,AeroDataBox
+2025-11-27,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IYX,MAA,VOMM,Chennai,,IN,2025-11-27 18:00+05:30,,,AeroDataBox
+2025-11-27,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-27 19:35+05:30,,,AeroDataBox
+2025-11-27,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IXG,BLR,VOBL,Bangalore,,IN,2025-11-27 19:45+05:30,,,AeroDataBox
+2025-11-27,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-27 19:55+05:30,,,AeroDataBox
+2025-11-27,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IXG,BLR,VOBL,Bangalore,,IN,2025-11-27 20:05+05:30,,,AeroDataBox
+2025-11-27,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-27 21:35+05:30,,,AeroDataBox
+2025-11-27,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-27 21:55+05:30,,,AeroDataBox
+2025-11-28,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYC,BLR,VOBL,Bangalore,,IN,2025-11-28 07:30+05:30,,,AeroDataBox
+2025-11-28,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-28 07:35+05:30,,,AeroDataBox
+2025-11-28,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYC,BLR,VOBL,Bangalore,,IN,2025-11-28 07:50+05:30,,,AeroDataBox
+2025-11-28,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-28 08:05+05:30,,,AeroDataBox
+2025-11-28,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-ISV,HYD,VOHS,Hyderabad,,IN,2025-11-28 08:20+05:30,,,AeroDataBox
+2025-11-28,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A321 NEO,VT-IUK,DEL,VIDP,New Delhi,,IN,2025-11-28 08:30+05:30,,,AeroDataBox
+2025-11-28,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-ISV,HYD,VOHS,Hyderabad,,IN,2025-11-28 08:50+05:30,,,AeroDataBox
+2025-11-28,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-28 09:05+05:30,,,AeroDataBox
+2025-11-28,arrival,UL137,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-28 09:15+05:30,,,AeroDataBox
+2025-11-28,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-28 09:35+05:30,,,AeroDataBox
+2025-11-28,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-28 10:00+05:30,,,AeroDataBox
+2025-11-28,departure,UL138,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-28 10:15+05:30,,,AeroDataBox
+2025-11-28,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-28 11:10+05:30,,,AeroDataBox
+2025-11-28,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-28 11:35+05:30,,,AeroDataBox
+2025-11-28,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-28 11:55+05:30,,,AeroDataBox
+2025-11-28,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-28 12:10+05:30,,,AeroDataBox
+2025-11-28,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,VT-IXJ,BOM,VABB,Mumbai,,IN,2025-11-28 12:20+05:30,,,AeroDataBox
+2025-11-28,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYY,BLR,VOBL,Bangalore,,IN,2025-11-28 12:50+05:30,,,AeroDataBox
+2025-11-28,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-28 12:50+05:30,,,AeroDataBox
+2025-11-28,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-28 13:00+05:30,,,AeroDataBox
+2025-11-28,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYY,BLR,VOBL,Bangalore,,IN,2025-11-28 13:10+05:30,,,AeroDataBox
+2025-11-28,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-28 13:30+05:30,,,AeroDataBox
+2025-11-28,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-28 13:40+05:30,,,AeroDataBox
+2025-11-28,arrival,6E1514,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,VT-ISR,AUH,OMAA,Abu Dhabi,,AE,2025-11-28 13:50+05:30,,,AeroDataBox
+2025-11-28,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-28 14:00+05:30,,,AeroDataBox
+2025-11-28,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-28 14:30+05:30,,,AeroDataBox
+2025-11-28,departure,6E1513,IndiGo,6E,IGO,Unknown,False,True,Airbus A320 NEO,,AUH,OMAA,Abu Dhabi,,AE,2025-11-28 14:50+05:30,,,AeroDataBox
+2025-11-28,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-28 15:05+05:30,,,AeroDataBox
+2025-11-28,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-28 16:00+05:30,,,AeroDataBox
+2025-11-28,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-28 16:20+05:30,,,AeroDataBox
+2025-11-28,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IYK,MAA,VOMM,Chennai,,IN,2025-11-28 17:40+05:30,,,AeroDataBox
+2025-11-28,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IYK,MAA,VOMM,Chennai,,IN,2025-11-28 18:00+05:30,,,AeroDataBox
+2025-11-28,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-28 19:35+05:30,,,AeroDataBox
+2025-11-28,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYL,BLR,VOBL,Bangalore,,IN,2025-11-28 19:45+05:30,,,AeroDataBox
+2025-11-28,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-28 19:55+05:30,,,AeroDataBox
+2025-11-28,departure,6E7587,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYL,BLR,VOBL,Bangalore,,IN,2025-11-28 20:05+05:30,,,AeroDataBox
+2025-11-28,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-28 21:35+05:30,,,AeroDataBox
+2025-11-28,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-28 21:55+05:30,,,AeroDataBox
+2025-11-29,arrival,6E7171,IndiGo,6E,IGO,Canceled,False,False,ATR 72,,BLR,VOBL,Bangalore,,IN,2025-11-29 07:30+05:30,,,AeroDataBox
+2025-11-29,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-29 07:35+05:30,,,AeroDataBox
+2025-11-29,departure,6E7257,IndiGo,6E,IGO,Canceled,False,False,ATR 72,,BLR,VOBL,Bangalore,,IN,2025-11-29 07:50+05:30,,,AeroDataBox
+2025-11-29,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-29 08:05+05:30,,,AeroDataBox
+2025-11-29,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-29 08:20+05:30,,,AeroDataBox
+2025-11-29,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A321 NEO,VT-IUM,DEL,VIDP,New Delhi,,IN,2025-11-29 08:30+05:30,,,AeroDataBox
+2025-11-29,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-29 08:50+05:30,,,AeroDataBox
+2025-11-29,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-29 09:05+05:30,,,AeroDataBox
+2025-11-29,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-29 09:35+05:30,,,AeroDataBox
+2025-11-29,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-29 10:00+05:30,,,AeroDataBox
+2025-11-29,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-29 11:10+05:30,,,AeroDataBox
+2025-11-29,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-29 11:35+05:30,,,AeroDataBox
+2025-11-29,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-29 11:55+05:30,,,AeroDataBox
+2025-11-29,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-29 12:10+05:30,,,AeroDataBox
+2025-11-29,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-29 12:20+05:30,,,AeroDataBox
+2025-11-29,arrival,6E7207,IndiGo,6E,IGO,Canceled,False,False,ATR 72,,BLR,VOBL,Bangalore,,IN,2025-11-29 12:50+05:30,,,AeroDataBox
+2025-11-29,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-29 12:50+05:30,,,AeroDataBox
+2025-11-29,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-29 13:00+05:30,,,AeroDataBox
+2025-11-29,departure,6E7163,IndiGo,6E,IGO,Canceled,False,False,ATR 72,,BLR,VOBL,Bangalore,,IN,2025-11-29 13:10+05:30,,,AeroDataBox
+2025-11-29,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-29 13:40+05:30,,,AeroDataBox
+2025-11-29,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-29 13:55+05:30,,,AeroDataBox
+2025-11-29,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-29 14:00+05:30,,,AeroDataBox
+2025-11-29,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-29 14:30+05:30,,,AeroDataBox
+2025-11-29,arrival,UL139,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-29 14:40+05:30,,,AeroDataBox
+2025-11-29,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-29 15:05+05:30,,,AeroDataBox
+2025-11-29,departure,UL140,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-29 15:40+05:30,,,AeroDataBox
+2025-11-29,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-29 16:00+05:30,,,AeroDataBox
+2025-11-29,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-29 16:20+05:30,,,AeroDataBox
+2025-11-29,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-29 17:40+05:30,,,AeroDataBox
+2025-11-29,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,VT-IYK,MAA,VOMM,Chennai,,IN,2025-11-29 18:00+05:30,,,AeroDataBox
+2025-11-29,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-29 19:35+05:30,,,AeroDataBox
+2025-11-29,arrival,6E7586,IndiGo,6E,IGO,Canceled,False,False,ATR 72,,BLR,VOBL,Bangalore,,IN,2025-11-29 19:45+05:30,,,AeroDataBox
+2025-11-29,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-29 19:55+05:30,,,AeroDataBox
+2025-11-29,departure,6E7587,IndiGo,6E,IGO,Canceled,False,False,ATR 72,,BLR,VOBL,Bangalore,,IN,2025-11-29 20:05+05:30,,,AeroDataBox
+2025-11-29,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-29 21:35+05:30,,,AeroDataBox
+2025-11-29,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-29 21:55+05:30,,,AeroDataBox
+2025-11-30,arrival,6E7171,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYI,BLR,VOBL,Bangalore,,IN,2025-11-30 07:30+05:30,,,AeroDataBox
+2025-11-30,arrival,6E7183,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-30 07:35+05:30,,,AeroDataBox
+2025-11-30,departure,6E7257,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYI,BLR,VOBL,Bangalore,,IN,2025-11-30 07:50+05:30,,,AeroDataBox
+2025-11-30,departure,6E7194,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-30 08:05+05:30,,,AeroDataBox
+2025-11-30,arrival,6E6467,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-30 08:20+05:30,,,AeroDataBox
+2025-11-30,arrival,6E2059,IndiGo,6E,IGO,Unknown,False,False,Airbus A321 NEO,VT-IUK,DEL,VIDP,New Delhi,,IN,2025-11-30 08:30+05:30,,,AeroDataBox
+2025-11-30,departure,6E6092,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,HYD,VOHS,Hyderabad,,IN,2025-11-30 08:50+05:30,,,AeroDataBox
+2025-11-30,departure,6E2088,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,DEL,VIDP,New Delhi,,IN,2025-11-30 09:05+05:30,,,AeroDataBox
+2025-11-30,arrival,6E7167,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-30 09:35+05:30,,,AeroDataBox
+2025-11-30,departure,6E7196,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-30 10:00+05:30,,,AeroDataBox
+2025-11-30,arrival,SG24,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737 MAX 8,G-LESO,DXB,OMDB,Dubai,,AE,2025-11-30 11:10+05:30,,,AeroDataBox
+2025-11-30,arrival,6E7185,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-30 11:35+05:30,,,AeroDataBox
+2025-11-30,departure,6E7135,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-30 11:55+05:30,,,AeroDataBox
+2025-11-30,departure,SG23,SpiceJet,SG,SEJ,Unknown,False,True,Boeing 737,G-MULR,DXB,OMDB,Dubai,,AE,2025-11-30 12:10+05:30,,,AeroDataBox
+2025-11-30,arrival,6E6596,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-30 12:20+05:30,,,AeroDataBox
+2025-11-30,arrival,6E7207,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYP,BLR,VOBL,Bangalore,,IN,2025-11-30 12:50+05:30,,,AeroDataBox
+2025-11-30,departure,6E420,IndiGo,6E,IGO,Unknown,False,False,Airbus A320 NEO,,BOM,VABB,Mumbai,,IN,2025-11-30 12:50+05:30,,,AeroDataBox
+2025-11-30,arrival,AI2739,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,,MAA,VOMM,Chennai,,IN,2025-11-30 13:00+05:30,,,AeroDataBox
+2025-11-30,departure,6E7163,IndiGo,6E,IGO,Departed,False,False,ATR 72,VT-IYP,BLR,VOBL,Bangalore,,IN,2025-11-30 13:10+05:30,,,AeroDataBox
+2025-11-30,departure,AI2740,Air India,AI,AIC,Unknown,False,False,Airbus A320 NEO,VT-TNX,MAA,VOMM,Chennai,,IN,2025-11-30 13:30+05:30,,,AeroDataBox
+2025-11-30,arrival,6E7124,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-30 13:40+05:30,,,AeroDataBox
+2025-11-30,departure,6E7125,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-30 14:00+05:30,,,AeroDataBox
+2025-11-30,arrival,6E6781,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-30 14:30+05:30,,,AeroDataBox
+2025-11-30,arrival,UL139,SriLankan,UL,ALK,Unknown,False,True,Airbus A320,,CMB,VCBI,Colombo,,LK,2025-11-30 14:40+05:30,,,AeroDataBox
+2025-11-30,departure,6E6782,IndiGo,6E,IGO,Unknown,False,False,Airbus A320,,HYD,VOHS,Hyderabad,,IN,2025-11-30 15:05+05:30,,,AeroDataBox
+2025-11-30,departure,UL140,SriLankan,UL,ALK,Unknown,False,True,Airbus A321 (Sharklets),4R-ANA,CMB,VCBI,Colombo,,LK,2025-11-30 15:40+05:30,,,AeroDataBox
+2025-11-30,arrival,6E7515,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-30 16:00+05:30,,,AeroDataBox
+2025-11-30,departure,6E7684,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-30 16:20+05:30,,,AeroDataBox
+2025-11-30,arrival,6E7301,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-30 17:40+05:30,,,AeroDataBox
+2025-11-30,departure,6E7593,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-30 18:00+05:30,,,AeroDataBox
+2025-11-30,arrival,6E7181,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-30 19:35+05:30,,,AeroDataBox
+2025-11-30,arrival,6E7586,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYP,BLR,VOBL,Bangalore,,IN,2025-11-30 19:45+05:30,,,AeroDataBox
+2025-11-30,departure,6E7182,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-30 19:55+05:30,,,AeroDataBox
+2025-11-30,departure,6E7587,IndiGo,6E,IGO,Expected,False,False,ATR 72,VT-IYP,BLR,VOBL,Bangalore,,IN,2025-11-30 20:05+05:30,,,AeroDataBox
+2025-11-30,arrival,6E7592,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-30 21:35+05:30,,,AeroDataBox
+2025-11-30,departure,6E7253,IndiGo,6E,IGO,Unknown,False,False,ATR 72,,MAA,VOMM,Chennai,,IN,2025-11-30 21:55+05:30,,,AeroDataBox
