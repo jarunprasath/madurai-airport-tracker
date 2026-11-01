@@ -13,6 +13,12 @@ on:
       ahead:
         description: "Days after today to fetch"
         default: "1"
+      from_date:
+        description: "History backfill: first date YYYY-MM-DD (leave blank for the normal daily run)"
+        default: ""
+      to_date:
+        description: "History backfill: last date YYYY-MM-DD (max 31 days per run; blank = same day)"
+        default: ""
 permissions:
   contents: write
 concurrency:
@@ -31,7 +37,13 @@ jobs:
       - name: Fetch flights
         env:
           AERODATABOX_KEY: ${{ secrets.AERODATABOX_KEY }}
-        run: python -m ixm flights --back "${{ inputs.back || 1 }}" --ahead "${{ inputs.ahead || 1 }}"
+        run: |
+          if [ -n "${{ inputs.from_date }}" ]; then
+            python -u -m ixm flights --from "${{ inputs.from_date }}" ${{ inputs.to_date && format('--to {0}', inputs.to_date) || '' }} | tee flights_run.log
+          else
+            python -u -m ixm flights --back "${{ inputs.back || 1 }}" --ahead "${{ inputs.ahead || 1 }}" | tee flights_run.log
+          fi
+          { echo "### Flight collection"; echo '```'; tail -n 40 flights_run.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Commit data
         run: |
           git config user.name "ixm-bot"

@@ -35,6 +35,9 @@ def main(argv: list[str] | None = None) -> int:
     f = sub.add_parser("flights")
     f.add_argument("--back", type=int, default=1, help="days before today (default 1 = yesterday)")
     f.add_argument("--ahead", type=int, default=1, help="days after today (default 1 = tomorrow)")
+    f.add_argument("--from", dest="date_from", help="first date YYYY-MM-DD for a historical backfill")
+    f.add_argument("--to", dest="date_to", help="last date YYYY-MM-DD (default: same as --from)")
+    f.add_argument("--max-days", type=int, default=31, help="safety cap on days per run (API quota)")
     a = sub.add_parser("aai")
     a.add_argument("--start", help="YYYY-MM (default: 4 months ago)")
     a.add_argument("--end", help="YYYY-MM (default: last month)")
@@ -58,9 +61,24 @@ def main(argv: list[str] | None = None) -> int:
         print(f"live: {snap['status']}, {len(snap['aircraft'])} aircraft")
     elif args.cmd == "flights":
         from . import aerodatabox, store
-        days = [today + timedelta(days=i) for i in range(-args.back, args.ahead + 1)]
+        if args.date_from:
+            d0 = date.fromisoformat(args.date_from)
+            d1 = date.fromisoformat(args.date_to) if args.date_to else d0
+            days = [d0 + timedelta(days=i) for i in range((d1 - d0).days + 1)]
+            if len(days) > args.max_days:
+                print(f"flights: {len(days)} days requested; capped to the first {args.max_days} "
+                      f"(about {2 * args.max_days} API calls). Run again from {days[args.max_days]} to continue.")
+                days = days[:args.max_days]
+        else:
+            days = [today + timedelta(days=i) for i in range(-args.back, args.ahead + 1)]
         rows = aerodatabox.fetch_days(days)
-        print(f"flights: fetched {len(rows)} movements, {store.upsert(rows)} new/updated")
+        per_day = {}
+        for r in rows:
+            per_day[r["date"]] = per_day.get(r["date"], 0) + 1
+        for d in days:
+            print(f"  {d}: {per_day.get(d.isoformat(), 0)} movements")
+        print(f"flights: fetched {len(rows)} movements over {len(days)} days "
+              f"(~{2 * len(days)} API calls), {store.upsert(rows)} new/updated")
     elif args.cmd == "aai":
         from . import aai
         last = date(today.year, today.month, 1) - timedelta(days=1)
