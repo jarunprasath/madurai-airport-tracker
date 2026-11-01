@@ -53,16 +53,32 @@ def _series(monthly: dict[str, dict], field: str = "pax_total") -> list[tuple[st
     return out
 
 
-def _contiguous_tail(series: list[tuple[str, float]]) -> list[tuple[str, float]]:
-    """Longest run of consecutive months ending at the latest observation."""
+MAX_GAP = 3   # months; shorter gaps are filled by interpolation, longer ones break the series
+
+
+def _contiguous_tail(series: list[tuple[str, float]], interpolated: list[str] | None = None) -> list[tuple[str, float]]:
+    """Consecutive months ending at the latest observation. Gaps of up to MAX_GAP months are
+    filled by straight-line interpolation between the neighbouring months (their names are
+    appended to `interpolated`); a longer gap ends the series."""
     if not series:
         return []
     tail = [series[-1]]
     for m, v in reversed(series[:-1]):
-        if _add_months(m, 1) == tail[0][0]:
-            tail.insert(0, (m, v))
-        else:
+        nxt_m, nxt_v = tail[0]
+        gap = 0
+        probe = m
+        while _add_months(probe, 1) != nxt_m and gap <= MAX_GAP:
+            probe = _add_months(probe, 1)
+            gap += 1
+        if gap > MAX_GAP:
             break
+        fills = []
+        for k in range(1, gap + 1):
+            fm = _add_months(m, k)
+            fills.append((fm, v + (nxt_v - v) * k / (gap + 1)))
+            if interpolated is not None:
+                interpolated.append(fm)
+        tail[0:0] = [(m, v)] + fills
     return tail
 
 
@@ -110,7 +126,8 @@ def _fit_predict(series: list[tuple[str, float]], idx: dict[int, float], horizon
 
 def monthly_forecast(monthly: dict[str, dict], horizon: int = 12) -> dict:
     series = _series(monthly)
-    tail = _contiguous_tail(series)
+    interpolated: list[str] = []
+    tail = _contiguous_tail(series, interpolated)
     if len(tail) < 24:
         return {"available": False,
                 "reason": f"needs at least 24 consecutive months of AAI data (have {len(tail)})",
@@ -135,6 +152,7 @@ def monthly_forecast(monthly: dict[str, dict], horizon: int = 12) -> dict:
         "available": True,
         "method": "seasonal index x linear trend (last 36 non-COVID months); 80% band from backtest",
         "trained_on": f"{tail[0][0]} to {tail[-1][0]}",
+        "interpolated_months": sorted(interpolated),
         "backtest_mape_pct": round(100 * mean(pct_errors), 1) if pct_errors else None,
         "seasonal_index": {str(m): round(v, 3) for m, v in sorted(idx.items())},
         "points": points,

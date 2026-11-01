@@ -303,7 +303,7 @@ def test_collect_newest_first_saves_each_month_and_resumes(tmp_root, tmp_path):
     saved = aai.read_monthly(tmp_root / "data" / "aai_monthly.csv")
     assert {"2026-09", "2026-08", "2026-07"} <= set(saved)          # newest months first
     s2 = aai.collect(date(2026, 1, 1), date(2026, 9, 1), fetcher=fx)
-    assert s2["months_skipped"] == 3 and s2["months_ok"] == 6 and not s2["stopped"]
+    assert s2["months_skipped"] >= 3 and s2["months_ok"] + s2["months_skipped"] == 9 and not s2["stopped"]
 
 
 def test_freight_serial_not_taken_as_tonnes():
@@ -338,3 +338,54 @@ def test_collect_continues_after_unexpected_error(tmp_root, tmp_path):
     s = aai.collect(date(2026, 6, 1), date(2026, 9, 1), fetcher=CrashFetcher(p.read_bytes()))
     assert s["errors"] == 1 and s["months_ok"] == 3
     assert "error: ValueError" in (tmp_root / "data" / "aai_fetch_log.csv").read_text()
+
+
+def test_april_derived_from_may_ytd_and_not_overwritten():
+    may = aai.parse_annex_rows(["ANNEXURE-III C TOTAL PASSENGERS", "38 MADURAI 120000 110000 9.1 245000 228000 7.5"], 3)
+    bad_april = aai.parse_annex_rows(["ANNEXURE-III C TOTAL PASSENGERS", "38 MADURAI 194670 105000 85.4 194670 105000 85.4"], 3)
+    table = {}
+    aai.apply_annex(table, 2019, 5, 3, may, "u")
+    assert table["2019-04"]["pax_total"] == "125000" and table["2018-04"]["pax_total"] == "118000"
+    aai.apply_annex(table, 2019, 4, 3, bad_april, "u")          # later direct April read must not overwrite
+    assert table["2019-04"]["pax_total"] == "125000" and table["2019-04"]["source"] == aai.APRIL_DERIVED
+
+
+def test_impossible_cargo_ignored_and_inconsistent_rows_cleaned():
+    res = aai.parse_annex_rows(["ANNEXURE-IV C TOTAL FREIGHT", "8 MADURAI 107112 98000 9.3 300000 280000 7.1"], 4)
+    table = {}
+    aai.apply_annex(table, 2017, 7, 4, res, "u")
+    assert not table.get("2017-07", {}).get("frt_total")
+    from ixm.build import clean_monthly
+    c = clean_monthly({"2018-04": {"month": "2018-04", "frt_dom": "370", "frt_intl": "31", "frt_total": "370",
+                                   "pax_dom": "100", "pax_intl": "20", "pax_total": "120"}})
+    assert c["2018-04"]["frt_total"] == "" and c["2018-04"]["pax_total"] == "120"
+
+
+def test_forecast_bridges_short_gap():
+    m = synthetic_monthly()
+    del m["2025-11"]
+    fc = forecast.monthly_forecast(m)
+    assert fc["available"] and fc["interpolated_months"] == ["2025-11"]
+    assert fc["trained_on"].startswith("2017")
+    m2 = synthetic_monthly()
+    for k in ("2025-06", "2025-07", "2025-08", "2025-09"):
+        del m2[k]                                   # 4-month gap: too long to bridge
+    fc2 = forecast.monthly_forecast(m2)
+    assert not fc2["available"] and "12" in fc2["reason"]      # only Oct 2025 onwards is usable
+
+
+def test_cross_check_prefers_revised_and_blanks_column_slip():
+    from ixm.build import clean_monthly
+    data = {
+        "2024-12": {"month": "2024-12", "frt_dom": "166", "frt_intl": "534", "frt_total": "700"},
+        # current read slipped last year's intl/total into this year's columns
+        "2025-12": {"month": "2025-12", "frt_dom": "232", "frt_intl": "534", "frt_total": "766",
+                    "pax_dom": "96000", "pax_intl": "20000", "pax_total": "116000"},
+        # first read wrong, revised copy from next year's report is consistent and differs
+        "2019-04": {"month": "2019-04", "pax_dom": "182841", "pax_intl": "11829", "pax_total": "194670",
+                    "pax_dom_rev": "92000", "pax_intl_rev": "22000", "pax_total_rev": "114000"},
+    }
+    c = clean_monthly(data)
+    assert c["2025-12"]["frt_total"] == "" and "frt" in c["2025-12"]["checks"]
+    assert c["2025-12"]["pax_total"] == "116000"
+    assert c["2019-04"]["pax_total"] == 114000 and "revised" in c["2019-04"]["checks"]

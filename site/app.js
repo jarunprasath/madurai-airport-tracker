@@ -5,9 +5,36 @@
   const AIRPORT = { lat: 9.8336, lon: 78.0894 };
   const BBOX = { lamin: 9.3, lamax: 10.4, lomin: 77.5, lomax: 78.7 };
   const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
-  const C = () => ({ maroon: css("--maroon"), gold: css("--gold"), teal: css("--teal"), ink: css("--ink"),
-    muted: css("--muted"), line: css("--line") });
-  const SERIES = () => { const c = C(); return [c.maroon, c.gold, c.teal, "#8d6a9f", "#5b8c5a", "#b5651d", "#4a6fa5", "#9c9c9c"]; };
+  // Categorical palette (validated for colour-vision deficiency, light and dark): kumkum, marigold,
+  // peacock teal, saffron, indigo, leaf, plum. Fixed order - colour follows the series, never its rank.
+  const SERIES = () => [1, 2, 3, 4, 5, 6, 7].map((i) => css(`--s${i}`));
+  const C = () => { const s = SERIES(); return { maroon: s[0], gold: s[1], teal: s[2], saffron: s[3], indigo: s[4],
+    ink: css("--ink"), muted: css("--muted"), line: css("--line"), card: css("--card") }; };
+  const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const monthLabel = (ym) => `${MON[+ym.slice(5, 7) - 1]} ${ym.slice(2, 4)}`;          // "Jan 26"
+  const dayLabel = (d) => `${+d.slice(8, 10)} ${MON[+d.slice(5, 7) - 1]}`;            // "5 Nov"
+  const niceDate = (d) => (d ? `${+d.slice(8, 10)} ${MON[+d.slice(5, 7) - 1]} ${d.slice(0, 4)}` : "–");
+  const alpha = (hex, a) => { const h = hex.replace("#", ""); const n = parseInt(h.length === 3 ? h.replace(/./g, "$&$&") : h, 16);
+    return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`; };
+  // Continuous axes: every day / month between first and last appears, missing ones as gaps
+  function fillDays(rows) {
+    if (!rows.length) return rows;
+    const by = Object.fromEntries(rows.map((r) => [r.date, r])); const out = [];
+    for (let t = Date.parse(rows[0].date + "T00:00:00Z"), end = Date.parse(rows[rows.length - 1].date + "T00:00:00Z"); t <= end; t += 864e5) {
+      const k = new Date(t).toISOString().slice(0, 10); out.push(by[k] || { date: k, missing: true });
+    }
+    return out;
+  }
+  // Regular tick labels: months -> quarter starts (or Januaries on long spans); days -> 1st/8th/15th/22nd (or 1st only)
+  const monthTicks = (labels) => ({ autoSkip: false, maxRotation: 0, callback: (v, i) => {
+    const ym = labels[i]; const mo = +ym.slice(5, 7);
+    const narrow = window.innerWidth < 640;
+    const every = labels.length > 48 ? 12 : labels.length > 18 ? (narrow ? 6 : 3) : labels.length > 9 ? (narrow ? 3 : 1) : 1;
+    return (mo - 1) % every === 0 ? (every === 12 ? ym.slice(0, 4) : monthLabel(ym)) : ""; } });
+  const dayTicks = (dates) => ({ autoSkip: false, maxRotation: 0, callback: (v, i) => {
+    const day = +dates[i].slice(8, 10);
+    if (dates.length > 62) return day === 1 ? `${MON[+dates[i].slice(5, 7) - 1]}${dates[i].slice(5, 7) === "01" ? " " + dates[i].slice(2, 4) : ""}` : "";
+    return [1, 8, 15, 22].includes(day) ? dayLabel(dates[i]) : ""; } });
   const nf = new Intl.NumberFormat("en-IN");
   const fmt = (v) => (v === null || v === undefined || Number.isNaN(v) ? "–" : nf.format(Math.round(v)));
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -31,11 +58,39 @@
   function chart(id, config) {
     if (charts[id]) charts[id].destroy();
     const c = C();
-    Chart.defaults.color = c.muted;
-    Chart.defaults.borderColor = c.line;
-    Chart.defaults.font.family = "system-ui, -apple-system, Segoe UI, Roboto, sans-serif";
-    config.options = Object.assign({ responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { labels: { boxWidth: 12 } } } }, config.options || {});
+    const D = Chart.defaults;
+    D.color = c.muted; D.borderColor = c.line;
+    D.font.family = "system-ui, -apple-system, Segoe UI, Roboto, sans-serif"; D.font.size = 11.5;
+    D.elements.bar.borderRadius = 4; D.elements.bar.borderSkipped = "start";
+    D.elements.line.borderWidth = 2.25; D.elements.line.tension = 0.32;
+    D.elements.point.radius = 0; D.elements.point.hoverRadius = 5; D.elements.point.hitRadius = 10;
+    D.elements.arc.borderColor = c.card; D.elements.arc.borderWidth = 2;
+    D.plugins.legend.labels.usePointStyle = true; D.plugins.legend.labels.pointStyle = "rectRounded"; D.plugins.legend.labels.boxWidth = 10;
+    Object.assign(D.plugins.tooltip, { backgroundColor: c.card, titleColor: c.ink, bodyColor: c.ink, borderColor: c.line,
+      borderWidth: 1, padding: 10, cornerRadius: 10, boxPadding: 4, usePointStyle: true });
+    D.plugins.tooltip.callbacks.label = (t) => {
+      const v = typeof t.parsed === "number" ? t.parsed : (t.chart.options.indexAxis === "y" ? t.parsed.x : t.parsed.y);
+      return v === null || v === undefined ? null : ` ${t.dataset.label || t.label}: ${fmt(v)}`; };
+    const o = config.options || {};
+    o.responsive = true; o.maintainAspectRatio = false;
+    o.interaction = o.interaction || { mode: config.type === "doughnut" ? "nearest" : "index", intersect: config.type === "doughnut" };
+    if (config.type !== "doughnut") {
+      o.scales = o.scales || {};
+      for (const ax of ["x", "y"]) {
+        const sc = (o.scales[ax] = o.scales[ax] || {});
+        const valueAxis = (ax === "y") !== (o.indexAxis === "y");
+        sc.border = { display: false };
+        sc.grid = Object.assign(valueAxis ? { color: alpha(c.muted.startsWith("#") ? c.muted : "#888888", 0.18), drawTicks: false } : { display: false }, sc.grid || {});
+        if (valueAxis) { sc.beginAtZero = true; sc.ticks = Object.assign({ padding: 6, precision: 0, maxTicksLimit: 6, callback: (v) => fmt(v) }, sc.ticks || {}); }
+      }
+    }
+    config.options = o;
+    // stacked bar segments get a 1px gap in the card colour
+    const n = (config.data.labels || []).length;
+    if (config.type === "bar") for (const ds of config.data.datasets) {
+      if (ds.stack && n <= 60) { ds.borderColor = c.card; ds.borderWidth = { top: 1.5 }; }
+      if (n > 60) { ds.borderRadius = 1; ds.barPercentage = 1; ds.categoryPercentage = 0.92; }
+    }
     charts[id] = new Chart($(id), config);
   }
   const noData = (id, msg) => {
@@ -166,13 +221,24 @@
       { h: "Cargo", f: (r) => r.cargo, num: true }], fc && fc.next7, "No upcoming schedule data yet.");
 
     // daily
-    if (daily && daily.length) {
-      const d = daily.slice(-90);
-      chart("c-daily", { type: "bar", data: { labels: d.map((x) => x.date.slice(5)), datasets: [
-        { label: "Arrivals", data: d.map((x) => x.arrivals), backgroundColor: c.maroon, stack: "s" },
-        { label: "Departures", data: d.map((x) => x.departures), backgroundColor: c.gold, stack: "s" }] },
-        options: { scales: { x: { grid: { display: false } }, y: { beginAtZero: true } } } });
-    } else noData("c-daily", "Daily data appears after the first collection run");
+    const allDays = fillDays(daily || []);
+    function renderDaily(range) {
+      if (!allDays.length) { noData("c-daily", "Daily data appears after the first collection run"); return; }
+      const d = range === "all" ? allDays : allDays.slice(-Number(range));
+      const dates = d.map((x) => x.date);
+      const have = d.filter((x) => !x.missing);
+      chart("c-daily", { type: "bar", data: { labels: dates.map(dayLabel), datasets: [
+        { label: "Arrivals", data: d.map((x) => x.missing ? null : x.arrivals), backgroundColor: c.maroon, stack: "s" },
+        { label: "Departures", data: d.map((x) => x.missing ? null : x.departures), backgroundColor: c.gold, stack: "s" }] },
+        options: { scales: { x: { stacked: true, ticks: dayTicks(dates) }, y: { stacked: true } } } });
+      $("daily-note").textContent = `${niceDate(dates[0])} – ${niceDate(dates[dates.length - 1])} · ${have.length} of ${d.length} days have flight data` +
+        (have.length < d.length ? " (days without data are left blank)" : "");
+    }
+    document.querySelectorAll("#daily-seg button").forEach((b) => b.addEventListener("click", () => {
+      document.querySelectorAll("#daily-seg button").forEach((x) => x.classList.toggle("on", x === b));
+      renderDaily(b.dataset.r);
+    }));
+    renderDaily("all");
 
     // AAI monthly
     const am = (aaiM || []).filter((r) => r.pax_total);
@@ -191,19 +257,21 @@
     if (am.length) {
       const m = fillMonths(am).slice(-36);
       const split = m.every((r) => r.missing || (r.pax_dom !== null && r.pax_intl !== null));
-      chart("c-aai", { type: split ? "bar" : "line", data: { labels: m.map((r) => r.month), datasets: split ? [
-        { label: "Domestic", data: m.map((r) => r.pax_dom), backgroundColor: c.maroon, stack: "p" },
-        { label: "International", data: m.map((r) => r.pax_intl), backgroundColor: c.gold, stack: "p" }]
-        : [{ label: "Passengers", data: m.map((r) => r.pax_total), borderColor: c.maroon, backgroundColor: c.maroon }] },
-        options: { scales: { x: { grid: { display: false } }, y: { beginAtZero: true } } } });
+      const months = m.map((r) => r.month);
+      chart("c-aai", { type: split ? "bar" : "line", data: { labels: months.map(monthLabel), datasets: split ? [
+        { label: "Domestic", data: m.map((r) => r.pax_dom ?? null), backgroundColor: c.maroon, stack: "p" },
+        { label: "International", data: m.map((r) => r.pax_intl ?? null), backgroundColor: c.gold, stack: "p" }]
+        : [{ label: "Passengers", data: m.map((r) => r.pax_total ?? null), borderColor: c.maroon, backgroundColor: alpha(c.maroon, 0.12), fill: true }] },
+        options: { scales: { x: { stacked: split, ticks: monthTicks(months) }, y: { stacked: split } } } });
       const gaps = m.filter((r) => r.missing).map((r) => r.month);
       $("aai-note").textContent = `Source: AAI monthly Traffic News. ${am.length} months collected; latest ${am[am.length - 1].month}.` +
         (gaps.length ? ` Not yet collected: ${gaps.join(", ")} (shown as gaps).` : "");
       const fr = fillMonths(am).slice(-36);
       const hasFr = fr.some((r) => r.frt_total !== null && r.frt_total !== undefined);
-      if (hasFr) chart("c-freight", { type: "bar", data: { labels: fr.map((r) => r.month),
-        datasets: [{ label: "Freight (t)", data: fr.map((r) => r.frt_total), backgroundColor: c.teal }] },
-        options: { plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true } } } });
+      const frMonths = fr.map((r) => r.month);
+      if (hasFr) chart("c-freight", { type: "bar", data: { labels: frMonths.map(monthLabel),
+        datasets: [{ label: "Cargo (tonnes)", data: fr.map((r) => r.frt_total ?? null), backgroundColor: c.teal }] },
+        options: { plugins: { legend: { display: false } }, scales: { x: { ticks: monthTicks(frMonths) } } } });
       else noData("c-freight", "No cargo data yet");
     } else {
       noData("c-aai", "AAI monthly data not collected yet"); noData("c-freight", "No cargo data yet");
@@ -218,21 +286,26 @@
 
     if (annual && annual.length) {
       chart("c-annual", { type: "bar", data: { labels: annual.map((r) => r.fiscal_year),
-        datasets: [{ label: "Passengers", data: annual.map((r) => Number(r.passengers)), backgroundColor: c.maroon }] },
+        datasets: [{ label: "Passengers", data: annual.map((r) => Number(r.passengers)),
+          backgroundColor: annual.map((r) => (/2020-21|2021-22/.test(r.fiscal_year) ? alpha(c.maroon, 0.45) : c.maroon)) }] },
         options: { plugins: { legend: { display: false }, tooltip: { callbacks: { afterLabel: (t) => annual[t.dataIndex].source } } },
-          scales: { x: { grid: { display: false } }, y: { beginAtZero: true } } } });
+          scales: { x: { ticks: { maxRotation: 0, autoSkip: true, autoSkipPadding: 8, callback: (v, i) => annual[i].fiscal_year.replace(/^20/, "") } } } } });
     } else noData("c-annual", "No annual data");
 
     // airlines
+    const periodText = (pd) => (pd && pd.days ? `${pd.label}: ${niceDate(pd.from)} – ${niceDate(pd.to)} · ${pd.days} day${pd.days > 1 ? "s" : ""} of flight data` : "No flight data in this period yet");
+    const setPeriod = (group, pd) => document.querySelectorAll(`[data-period="${group}"]`).forEach((e) => { e.textContent = periodText(pd); });
     function renderAirlines(p) {
       const al = (airlines && airlines[p]) || [], ac = (aircraft && aircraft[p]) || [];
+      setPeriod("al", airlines && airlines.periods && airlines.periods[p]);
       if (al.length) chart("c-airlines", { type: "doughnut", data: { labels: al.map((a) => a.airline),
-        datasets: [{ data: al.map((a) => a.flights), backgroundColor: SERIES(), borderWidth: 0 }] },
-        options: { cutout: "60%", plugins: { legend: { position: "bottom" } } } });
+        datasets: [{ data: al.map((a) => a.flights), backgroundColor: al.map((a, i) => SERIES()[Math.min(i, 6)]), hoverOffset: 6 }] },
+        options: { cutout: "62%", plugins: { legend: { position: "bottom" },
+          tooltip: { callbacks: { label: (t) => ` ${t.label}: ${fmt(t.parsed)} flights (${al[t.dataIndex].share_pct}%)` } } } } });
       else noData("c-airlines", "No airline data yet");
       if (ac.length) chart("c-aircraft", { type: "bar", data: { labels: ac.slice(0, 8).map((a) => a.aircraft),
-        datasets: [{ label: "Movements", data: ac.slice(0, 8).map((a) => a.flights), backgroundColor: c.gold }] },
-        options: { indexAxis: "y", plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } } });
+        datasets: [{ label: "Movements", data: ac.slice(0, 8).map((a) => a.flights), backgroundColor: c.gold, barPercentage: 0.7 }] },
+        options: { indexAxis: "y", plugins: { legend: { display: false } } } });
       else noData("c-aircraft", "No aircraft data yet");
       table($("al-table"), [{ h: "Airline", f: (a) => a.airline }, { h: "Code", f: (a) => a.code },
         { h: "Flights", f: (a) => a.flights, num: true }, { h: "Share %", f: (a) => a.share_pct, num: true },
@@ -248,14 +321,16 @@
 
     // routes + hourly
     const rt = (routes && routes.last30) || [];
+    setPeriod("rt", routes && routes.periods && routes.periods.last30);
     if (rt.length) chart("c-routes", { type: "bar", data: { labels: rt.slice(0, 12).map((r) => `${r.city || r.iata}${r.international ? " ✈" : ""}`),
-      datasets: [{ label: "Movements", data: rt.slice(0, 12).map((r) => r.flights), backgroundColor: c.teal }] },
-      options: { indexAxis: "y", plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } } });
+      datasets: [{ label: "Movements", data: rt.slice(0, 12).map((r) => r.flights),
+        backgroundColor: rt.slice(0, 12).map((r) => (r.international ? c.saffron : c.teal)), barPercentage: 0.7 }] },
+      options: { indexAxis: "y", plugins: { legend: { display: false } } } });
     else noData("c-routes", "No route data yet");
     const hr = hourly && hourly.last30;
     if (hr && hr.some((x) => x)) chart("c-hourly", { type: "bar", data: { labels: hr.map((_, h) => String(h).padStart(2, "0")),
       datasets: [{ label: "Movements", data: hr, backgroundColor: c.maroon }] },
-      options: { plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true } } } });
+      options: { plugins: { legend: { display: false } }, scales: { x: { ticks: { autoSkip: false, maxRotation: 0, callback: (v, i) => (i % 3 === 0 ? `${String(i).padStart(2, "0")}:00` : "") } } } } });
     else noData("c-hourly", "No timing data yet");
     table($("rt-table"), [{ h: "Destination", f: (r) => `${r.city || r.iata || "Unknown"}${r.iata && r.city ? ` (${r.iata})` : ""}` }, { h: "Country", f: (r) => r.country || "–" },
       { h: "Flights", f: (r) => r.flights, num: true }, { h: "Per day", f: (r) => r.per_day, num: true },
@@ -264,16 +339,22 @@
     // forecast
     const mf = fc && fc.monthly;
     if (mf && mf.available) {
-      const hist = am.slice(-24);
-      const labels = [...hist.map((r) => r.month), ...mf.points.map((p) => p.month)];
+      const hist = fillMonths(am).slice(-24);
+      const months = [...hist.map((r) => r.month), ...mf.points.map((p) => p.month)];
       const pad = (arr, n) => Array(n).fill(null).concat(arr);
-      chart("c-forecast", { type: "line", data: { labels, datasets: [
-        { label: "Actual (AAI)", data: hist.map((r) => r.pax_total), borderColor: c.maroon, backgroundColor: c.maroon, pointRadius: 2 },
-        { label: "Forecast", data: pad(mf.points.map((p) => p.forecast), hist.length), borderColor: c.gold, backgroundColor: c.gold, borderDash: [6, 4], pointRadius: 2 },
-        { label: "80% range", data: pad(mf.points.map((p) => p.high), hist.length), borderColor: "transparent", backgroundColor: "rgba(217,154,43,.18)", fill: "+1", pointRadius: 0 },
-        { label: "low", data: pad(mf.points.map((p) => p.low), hist.length), borderColor: "transparent", pointRadius: 0, fill: false }] },
-        options: { plugins: { legend: { labels: { filter: (i) => i.text !== "low" } } }, scales: { y: { beginAtZero: true }, x: { grid: { display: false } } } } });
-      $("fc-note").textContent = `${mf.method}. Trained on ${mf.trained_on}. Backtest error ${mf.backtest_mape_pct ?? "–"}%. Statistical estimate, not an official projection.`;
+      const lastActual = hist.map((r) => r.pax_total ?? null);
+      // join forecast to the last actual point so the lines connect
+      const join = (arr) => { const a = pad(arr, hist.length); a[hist.length - 1] = lastActual[hist.length - 1]; return a; };
+      chart("c-forecast", { type: "line", data: { labels: months.map(monthLabel), datasets: [
+        { label: "Actual (AAI)", data: lastActual, borderColor: c.maroon, backgroundColor: alpha(c.maroon, 0.06), fill: true, spanGaps: false },
+        { label: "Forecast", data: join(mf.points.map((p) => p.forecast)), borderColor: c.gold, borderDash: [6, 4], backgroundColor: c.gold },
+        { label: "80% range", data: join(mf.points.map((p) => p.high)), borderColor: "transparent", backgroundColor: alpha(c.gold, 0.18), fill: "+1" },
+        { label: "low", data: join(mf.points.map((p) => p.low)), borderColor: "transparent", fill: false }] },
+        options: { plugins: { legend: { labels: { filter: (i) => i.text !== "low" } }, tooltip: { filter: (t) => t.dataset.label !== "low" } },
+          scales: { x: { ticks: monthTicks(months) } } } });
+      $("fc-note").textContent = `${mf.method}. Trained on ${mf.trained_on}` +
+        (mf.interpolated_months && mf.interpolated_months.length ? ` (${mf.interpolated_months.join(", ")} not published yet – filled by interpolation)` : "") +
+        `. Backtest error ${mf.backtest_mape_pct ?? "–"}%. Statistical estimate, not an official projection.`;
       table($("fc-table"), [{ h: "Month", f: (p) => p.month }, { h: "Forecast", f: (p) => fmt(p.forecast), num: true },
         { h: "Range (80%)", f: (p) => `${fmt(p.low)} – ${fmt(p.high)}` }, { h: "Season index", f: (p) => p.seasonal_index, num: true },
         { h: "Festivals / season", html: true, f: (p) => p.season.map((s) => `<span class="tag">${esc(s)}</span>`).join("") || "–" }], mf.points);

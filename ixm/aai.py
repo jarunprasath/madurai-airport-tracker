@@ -39,9 +39,14 @@ ANNEX_METRIC = {2: "mov", 3: "pax", 4: "frt"}
 METRIC_ANNEX = {v: k for k, v in ANNEX_METRIC.items()}
 AIRPORT_TOKEN = "MADURAI"
 
-MONTHLY_FIELDS = ["month", "pax_dom", "pax_intl", "pax_total", "mov_dom", "mov_intl", "mov_total",
-                  "frt_dom", "frt_intl", "frt_total", "source", "parser_v"]
-PARSER_VERSION = 2   # bump when parsing changes so already-collected months are read again once
+VALUE_FIELDS = ["pax_dom", "pax_intl", "pax_total", "mov_dom", "mov_intl", "mov_total", "frt_dom", "frt_intl", "frt_total"]
+# *_rev = the same month as printed a year later in the next report's "last year" column (usually revised/final)
+MONTHLY_FIELDS = ["month", *VALUE_FIELDS, "source", "parser_v", *[f"{f}_rev" for f in VALUE_FIELDS]]
+PARSER_VERSION = 4   # bump when parsing changes so already-collected months are read again once
+# v3: April derived from May's year-to-date. v4: store the revised "last year" copy of every month.
+MIN_VERSION = {m: 4 for m in range(1, 13)}
+APRIL_DERIVED = "AAI Traffic News (April = May YTD - May)"
+FREIGHT_MAX_T = 5000   # a month of cargo at Madurai is a few hundred tonnes; anything above this is a mis-read
 
 _NUM = re.compile(r"(?<![\w.])-?\d[\d,]*(?:\.\d+)?(?![\w])")
 _FNAME = re.compile(r"([A-Za-z]{3})[A-Za-z]*\s*2\s*[kK]\s*(\d{1,2})\s*[_\-\s]*annex(?:ure)?[_\-\s]*(\d)",
@@ -365,14 +370,33 @@ def apply_annex(table: dict[str, dict], year: int, month: int, annex: int, res: 
     row = table.setdefault(key, {"month": key})
     prev = table.setdefault(prev_key, {"month": prev_key})
     tag = {"international": "intl", "domestic": "dom", "total": "total"}
+    if metric == "frt" and any(f.month is not None and f.month > FREIGHT_MAX_T for f in res.sections.values()):
+        return   # cargo table mis-read (passenger numbers in the wrong place) - leave blank
+    keep_derived_april = month == 4 and row.get("source") == APRIL_DERIVED
     for sec, f in res.sections.items():
-        row[f"{metric}_{tag[sec]}"] = _fmt(f.month)
-        # previous-year column fills last year's month only if we have nothing better
-        if not prev.get(f"{metric}_{tag[sec]}") and f.month_prev_year is not None:
-            prev[f"{metric}_{tag[sec]}"] = _fmt(f.month_prev_year)
-            prev.setdefault("source", "AAI Traffic News (prev-year column)")
-    row["source"] = "AAI Traffic News"
-    row["parser_v"] = PARSER_VERSION
+        col = f"{metric}_{tag[sec]}"
+        if not keep_derived_april:   # April layouts are unreliable; keep the value derived from May's report
+            row[col] = _fmt(f.month)
+        if month != 4 and f.month_prev_year is not None:
+            prev[f"{col}_rev"] = _fmt(f.month_prev_year)          # second source for cross-checking
+            # previous-year column fills last year's month only if we have nothing better
+            if not prev.get(col):
+                prev[col] = _fmt(f.month_prev_year)
+                prev.setdefault("source", "AAI Traffic News (prev-year column)")
+    if month == 5:
+        # April of the same financial year = May year-to-date minus May (and likewise for last year)
+        for y, pick in ((year, lambda f: (f.ytd, f.month)), (year - 1, lambda f: (f.ytd_prev_year, f.month_prev_year))):
+            vals = {sec: pick(f) for sec, f in res.sections.items()}
+            if not vals or any(v[0] is None or v[1] is None or v[0] < v[1] for v in vals.values()):
+                continue
+            apr = table.setdefault(f"{y}-04", {"month": f"{y}-04"})
+            for sec, (ytd, mon) in vals.items():
+                apr[f"{metric}_{tag[sec]}"] = _fmt(ytd - mon)
+            apr["source"] = APRIL_DERIVED
+            apr["parser_v"] = PARSER_VERSION
+    if not keep_derived_april:
+        row["source"] = "AAI Traffic News"
+        row["parser_v"] = PARSER_VERSION
     if not prev.get("source"):
         prev["source"] = "AAI Traffic News (prev-year column)"
 
@@ -422,8 +446,12 @@ def collect(start: date, end: date, refetch: bool = False, fetcher: Fetcher | No
     for y, m in months:
         key = f"{y}-{m:02d}"
         existing = table.get(key, {})
-        current = str(existing.get("parser_v", "")) == str(PARSER_VERSION)
-        if not refetch and existing.get("source") == "AAI Traffic News" and existing.get("pax_total") and current:
+        try:
+            have_v = int(existing.get("parser_v") or 0)
+        except ValueError:
+            have_v = 0
+        current = have_v >= MIN_VERSION.get(m, 2)
+        if not refetch and existing.get("source") in ("AAI Traffic News", APRIL_DERIVED) and existing.get("pax_total") and current:
             summary["months_skipped"] += 1
             continue
         if max_months is not None and done >= max_months:

@@ -43,7 +43,8 @@ def _period(kind: str, ref: date) -> tuple[date, date, date, date, str]:
 def build_report_data(kind: str, ref: date) -> dict:
     s, e, ps, pe, label = _period(kind, ref)
     flights = store.load_all()
-    monthly = aai.merged_monthly()
+    from .build import clean_monthly
+    monthly = clean_monthly(aai.merged_monthly())
     lf, lf_note = an.current_load_factor(an.calibrate_load_factor(flights, monthly))
 
     cur_rows, prev_rows = an.period_rows(flights, s, e), an.period_rows(flights, ps, pe)

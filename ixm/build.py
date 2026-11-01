@@ -30,17 +30,57 @@ def read_annual() -> list[dict]:
         return list(csv.DictReader(f))
 
 
+def _consistent(d, i, t) -> bool:
+    return None not in (d, i, t) and (not t or abs(d + i - t) <= max(2.0, 0.01 * t))
+
+
+def clean_monthly(monthly: dict[str, dict]) -> dict[str, dict]:
+    """Cross-check every metric group (passengers, movements, cargo) of every month:
+    1. prefer the revised copy from next year's report when it is consistent and differs from ours;
+    2. a value identical to the same month last year (a column slip in the PDF) is treated as a misread;
+    3. groups where domestic + international != total, or impossible cargo, are blanked."""
+    out = {}
+    for m, src in monthly.items():
+        r = dict(src)
+        prev = monthly.get(f"{int(m[:4]) - 1}-{m[5:]}", {})
+        notes = []
+        for g in ("pax", "mov", "frt"):
+            keys = [f"{g}_dom", f"{g}_intl", f"{g}_total"]
+            cur = [_f(r.get(k)) for k in keys]
+            rev = [_f(r.get(f"{k}_rev")) for k in keys]
+            last = [_f(prev.get(k)) for k in keys]
+            if _consistent(*rev) and cur != rev and any(
+                    c is None or (v and abs(c - v) > max(2.0, 0.02 * v)) for c, v in zip(cur, rev)):
+                for k, v in zip(keys, rev):
+                    r[k] = v
+                cur = rev
+                notes.append(f"{g}: revised figures used")
+            slip = any(c is not None and c > 10 and l is not None and c == l and not (rev[n] is not None and rev[n] == c)
+                       for n, (c, l) in enumerate(zip(cur, last)))
+            bad = (slip or not _consistent(*cur) if None not in cur else False) or (
+                g == "frt" and any(v is not None and v > aai.FREIGHT_MAX_T for v in cur))
+            if bad:
+                for k in keys:
+                    r[k] = ""
+                notes.append(f"{g}: failed cross-check, left blank")
+        r["checks"] = "; ".join(notes)
+        out[m] = r
+    return out
+
+
 def aai_tables(monthly: dict[str, dict]) -> tuple[list[dict], list[dict]]:
+    if not any("checks" in r for r in monthly.values()):
+        monthly = clean_monthly(monthly)
     rows = []
     for m in sorted(monthly):
         r = monthly[m]
         prev = monthly.get(f"{int(m[:4]) - 1}-{m[5:]}", {})
         cur, old = _f(r.get("pax_total")), _f(prev.get("pax_total"))
         rows.append({
-            "month": m, **{k: _f(r.get(k)) for k in aai.MONTHLY_FIELDS if k not in ("month", "source", "parser_v")},
+            "month": m, **{k: _f(r.get(k)) for k in aai.VALUE_FIELDS},
             "pax_yoy_pct": round(100 * (cur - old) / old, 1) if cur and old else None,
             "pax_per_day": round(cur / an.month_bounds(int(m[:4]), int(m[5:]))[1].day) if cur else None,
-            "source": r.get("source", ""),
+            "source": r.get("source", ""), "checks": r.get("checks", ""),
         })
     # fiscal-year totals from complete monthly data, merged with the annual seed
     fy = defaultdict(list)
@@ -87,7 +127,7 @@ def build(today: date | None = None) -> dict:
     tz = ZoneInfo(config.LOCAL_TZ)
     today = today or datetime.now(tz).date()
     flights = store.load_all()
-    monthly = aai.merged_monthly()
+    monthly = clean_monthly(aai.merged_monthly())
     cal = an.calibrate_load_factor(flights, monthly)
     lf, lf_note = an.current_load_factor(cal)
 
@@ -148,10 +188,14 @@ def build(today: date | None = None) -> dict:
     _write("monthly_flights.json", flight_months)
     _write("aai_monthly.json", monthly_rows)
     _write("aai_annual.json", annual_rows)
-    _write("airlines.json", {"last30": an.airline_table(last30, lf), "all": an.airline_table(past, lf)})
-    _write("routes.json", {"last30": an.route_table(last30, lf), "all": an.route_table(past, lf)})
-    _write("aircraft.json", {"last30": an.aircraft_table(last30), "all": an.aircraft_table(past)})
-    _write("hourly.json", {"last30": an.hourly_profile(last30)})
+    def span(rows, label):
+        ds = sorted({r["date"] for r in rows})
+        return {"label": label, "from": ds[0] if ds else None, "to": ds[-1] if ds else None, "days": len(ds)}
+    periods = {"last30": span(last30, "Last 30 days"), "all": span(past, "All collected data")}
+    _write("airlines.json", {"last30": an.airline_table(last30, lf), "all": an.airline_table(past, lf), "periods": periods})
+    _write("routes.json", {"last30": an.route_table(last30, lf), "all": an.route_table(past, lf), "periods": periods})
+    _write("aircraft.json", {"last30": an.aircraft_table(last30), "all": an.aircraft_table(past), "periods": periods})
+    _write("hourly.json", {"last30": an.hourly_profile(last30), "periods": periods})
     _write("forecast.json", {"monthly": forecast.monthly_forecast(monthly), "next7": next7,
                              "load_factor": lf})
     _write("reports.json", publish_reports())
