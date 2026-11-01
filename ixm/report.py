@@ -85,7 +85,8 @@ def build_report_data(kind: str, ref: date) -> dict:
                             + ("For past periods use the monthly report, which is based on AAI's official figures."
                                if kind == "weekly" else "Official AAI monthly figures are shown instead."))
     else:
-        no_flight_reason = "No flights were recorded in this period (the data source may have had an outage)."
+        no_flight_reason = ("No flight records were collected for this period (flight collection was not running or the "
+                            "API quota was used up), so flight-level slides are omitted.")
     cur, prev = an.summarize(cur_rows, lf), an.summarize(prev_rows, lf)
     days_cur = len({r["date"] for r in cur_rows})
     days_expected = (e - s).days + 1
@@ -132,6 +133,13 @@ def build_report_data(kind: str, ref: date) -> dict:
             insights.append(f"{cur['cargo']} dedicated cargo flight movements recorded.")
     else:
         insights.append(no_flight_reason)
+    aai_is_latest_available = False
+    if not aai_this and kind != "yearly":
+        # period not yet published by AAI: show the latest published month instead of empty cards
+        latest = [r for r in monthly_rows if r["month"] <= end_month and r["pax_total"]]
+        if latest:
+            aai_this, aai_is_latest_available = latest[-1], True
+            end_month = aai_this["month"]
     aai_prev_year = None
     if aai_this:
         if kind == "yearly":
@@ -188,8 +196,8 @@ def build_report_data(kind: str, ref: date) -> dict:
             if m0 == 13:
                 y0, m0 = y0 + 1, 1
     if lf >= 0.85 and "calibrated" in lf_note:
-        insights.append(f"Implied seat load factor is about {round(lf * 100)}% - flights run close to full, "
-                        "which supports a case for added capacity or new frequencies.")
+        insights.append(f"Estimated seat load factor about {round(lf * 100)}% (AAI passengers ÷ estimated seats; seat "
+                        "counts are typical configurations) – flights appear well filled, supporting a case for more capacity.")
     if fc.get("available"):
         nxt = fc["points"][:3]
         insights.append("Forecast (AAI basis) next 3 months: " +
@@ -217,6 +225,7 @@ def build_report_data(kind: str, ref: date) -> dict:
         "daily": daily, "airlines": airlines, "routes": routes, "aircraft": aircraft, "hourly": hourly,
         "aai_history": aai_hist, "aai_this_month": aai_this, "aai_prev_year": aai_prev_year,
         "aai_gaps": gaps, "aai_annual": annual_rows, "no_flight_reason": no_flight_reason, "fy_months": fy_months,
+        "aai_is_latest_available": aai_is_latest_available,
         "flight_coverage": {"first": first_day, "last": last_day},
         "forecast": fc, "insights": insights, "caveats": caveats,
         "flights": sorted(cur_rows, key=lambda r: (r["date"], r["sched_local"])),
@@ -390,8 +399,58 @@ def write_excel(d: dict, path: Path) -> Path:
     return path
 
 
+def render_charts(d: dict, folder: Path) -> dict[str, str]:
+    """PNG charts for the deck (native PowerPoint charts show empty in many phone previewers)."""
+    from . import charts as C
+    MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    ml = lambda ym: f"{MON[int(ym[5:7]) - 1]} {ym[2:4]}"
+    out, k = {}, d["kpi"]
+    if k["movements"]:
+        out["domintl"] = C.donut(folder / "domintl.png", ["Domestic", "International"], [k["domestic"], k["international"]],
+                                 title="Domestic vs international")
+    if d.get("fy_months"):
+        fm = d["fy_months"]
+        out["fy_months"] = C.bars(folder / "fy_months.png", [ml(x["month"]) for x in fm],
+                                  [("Domestic", [x["pax_dom"] for x in fm]), ("International", [x["pax_intl"] for x in fm])], stacked=True)
+    if d["daily"]:
+        dl = d["daily"]
+        out["daily"] = C.bars(folder / "daily.png", [x["date"][8:] for x in dl],
+                              [("Arrivals", [x["arrivals"] for x in dl]), ("Departures", [x["departures"] for x in dl])],
+                              stacked=True, every=1 if len(dl) <= 10 else 3, values=False)
+    if d["airlines"]:
+        top = d["airlines"][:8]
+        out["airlines"] = C.bars(folder / "airlines.png", [a["airline"] for a in top], [("Movements", [a["flights"] for a in top])],
+                                 horizontal=True, values=True, w=4.6, h=3.8, colors=[C.MAROON])
+    if d["routes"]:
+        top = d["routes"][:10]
+        out["routes"] = C.bars(folder / "routes.png", [(r["city"] or r["iata"]) + (" (intl)" if r["international"] else "") for r in top],
+                               [("Movements", [r["flights"] for r in top])], horizontal=True, values=True, colors=[C.TEAL],
+                               highlight={i: C.SAFFRON for i, r in enumerate(top) if r["international"]})
+    if d["aircraft"]:
+        ac = d["aircraft"][:6]
+        out["aircraft"] = C.bars(folder / "aircraft.png", [a["aircraft"] for a in ac], [("Movements", [a["flights"] for a in ac])],
+                                 horizontal=True, values=True, w=4.4, h=3.8, colors=[C.GOLD], title="Aircraft types")
+    if any(d["hourly"]):
+        out["hourly"] = C.bars(folder / "hourly.png", [f"{i:02d}" for i in range(24)], [("Movements", d["hourly"])], every=3,
+                               w=4.4, h=3.8, title="Scheduled movements by hour (local)")
+    h = d["aai_history"]
+    if h:
+        ser = [("Total", [x["pax_total"] for x in h])]
+        if all(x["pax_intl"] is not None for x in h):
+            ser.append(("International", [x["pax_intl"] for x in h]))
+        out["aai"] = C.lines(folder / "aai.png", [ml(x["month"]) for x in h], ser, every=3 if len(h) > 12 else 1, markers=True, rotate=35)
+    fc = d["forecast"]
+    if fc.get("available"):
+        pts = fc["points"]
+        out["forecast"] = C.lines(folder / "forecast.png", [ml(p["month"]) for p in pts], [("Forecast", [p["forecast"] for p in pts])],
+                                  every=2, band=([p["low"] for p in pts], [p["high"] for p in pts], C.GOLD), markers=True, rotate=35)
+    return out
+
+
 def generate(kind: str, ref: date, out_dir: Path | None = None, pptx: bool = True) -> dict[str, Path]:
     d = build_report_data(kind, ref)
+    import tempfile
+    d["charts"] = render_charts(d, Path(tempfile.mkdtemp(prefix="ixm_charts_"))) if pptx else {}
     out = out_dir or REPORTS_DIR
     out.mkdir(parents=True, exist_ok=True)
     if kind == "weekly":

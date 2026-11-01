@@ -44,6 +44,11 @@ const axis = () => ({
   dataLabelFontSize: 9, dataLabelFontFace: FONT_B, valAxisMinVal: 0,
 });
 
+function img(s, key, box, alt) {
+  if (!d.charts || !d.charts[key] || !fs.existsSync(d.charts[key])) return false;
+  s.addImage({ path: d.charts[key], ...box, altText: alt || key });
+  return true;
+}
 function contentSlide(title) {
   const s = pres.addSlide({ masterName: "CONTENT" });
   s.addText(title, { placeholder: "title" });
@@ -122,7 +127,10 @@ const k = d.kpi, kc = d.kpi_change;
       fontFace: FONT_B, isTextBox: true });
   });
   const a = d.aai_this_month;
-  const line2 = (d.kind === "yearly" && a)
+  const line2 = (a && d.aai_is_latest_available)
+    ? `AAI has not yet published figures for this period; cards show the latest published month, ${a.month} (domestic ${fmt(a.pax_dom)} passengers).` +
+      (hasFlights ? "" : ` ${d.no_flight_reason}`)
+    : (d.kind === "yearly" && a)
     ? `Official AAI figures for ${a.month}: domestic ${fmt(a.pax_dom)} passengers` + (a.missing && a.missing.length ? ` (${a.months} of ${a.months_expected} months; ${a.missing.join(", ")} not published).` : ".") +
       (hasFlights ? ` Flight-level detail covers ${d.days_with_data} of ${d.days_in_period} days.` : "")
     : (!hasFlights && a)
@@ -144,7 +152,7 @@ const k = d.kpi, kc = d.kpi_change;
     { x: 0.5, y: 1.2, w: hasFlights ? 5.8 : 9, h: 3.8, fontSize: 14, color: INK, fontFace: FONT_B,
       valign: "top", paraSpaceAfter: 8, isTextBox: true });
   if (hasFlights) {
-    s.addChart(pres.charts.DOUGHNUT, [{ name: "Movements", labels: ["Domestic", "International"],
+    img(s, "domintl", { x: 6.5, y: 1.2, w: 3.0, h: 3.6 }, "Domestic vs international movements") || s.addChart(pres.charts.DOUGHNUT, [{ name: "Movements", labels: ["Domestic", "International"],
       values: [k.domestic, k.international] }], {
       x: 6.5, y: 1.2, w: 3.0, h: 3.6, holeSize: 60, chartColors: [MAROON, GOLD], showLegend: true,
       legendPos: "b", legendFontSize: 10, legendColor: INK, legendFontFace: FONT_B, showPercent: true,
@@ -159,7 +167,7 @@ if (d.kind === "yearly" && (d.fy_months || []).length) {
   const s = contentSlide(`Month by month – ${d.label.split(" (")[0]}`);
   const fm = d.fy_months;
   const labels = fm.map((x) => { const [y, m] = x.month.split("-"); return ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][+m - 1] + " " + y.slice(2); });
-  s.addChart(pres.charts.BAR, [
+  img(s, "fy_months", { x: 0.5, y: 1.2, w: 6.2, h: 3.8 }, "Monthly passengers in the financial year") || s.addChart(pres.charts.BAR, [
     { name: "Domestic", labels, values: fm.map((x) => x.pax_dom || 0) },
     { name: "International", labels, values: fm.map((x) => x.pax_intl || 0) },
   ], { x: 0.5, y: 1.2, w: 6.2, h: 3.8, barDir: "col", barGrouping: "stacked", chartColors: [MAROON, GOLD],
@@ -174,11 +182,11 @@ if (d.kind === "yearly" && (d.fy_months || []).length) {
     A.pax_intl ? `International share ${(100 * A.pax_intl / A.pax_total).toFixed(1)}%` : "Source: AAI monthly Traffic News",
     ...(A.missing && A.missing.length ? [`Not published by AAI: ${A.missing.join(", ")}`] : []),
   ]);
-} else {
+} else if (hasFlights) {
   const s = contentSlide(d.kind === "weekly" ? "Daily flight movements this week" : `Daily flight movements – ${d.label}`);
   if (hasFlights) {
     const labels = d.daily.map((x) => x.date.slice(8));
-    s.addChart(pres.charts.BAR, [
+    img(s, "daily", { x: 0.5, y: 1.2, w: 6.2, h: 3.8 }, "Daily arrivals and departures") || s.addChart(pres.charts.BAR, [
       { name: "Arrivals", labels, values: d.daily.map((x) => x.arrivals) },
       { name: "Departures", labels, values: d.daily.map((x) => x.departures) },
     ], { x: 0.5, y: 1.2, w: 6.2, h: 3.8, barDir: "col", barGrouping: "stacked", chartColors: [MAROON, GOLD],
@@ -192,15 +200,15 @@ if (d.kind === "yearly" && (d.fy_months || []).length) {
       `${k.cancelled} cancelled or diverted`,
       k.on_time_pct !== null ? `On-time (≤15 min): ${k.on_time_pct}%` : "On-time data not available",
     ]);
-  } else emptyNote(s, d.no_flight_reason);
+  }
 }
 
 // 5. Airlines
-{
+if (d.airlines.length) {
   const s = contentSlide("Airlines serving Madurai");
   if (d.airlines.length) {
     const top = d.airlines.slice(0, 8);
-    s.addChart(pres.charts.BAR, [{ name: "Movements", labels: top.map((a) => a.airline), values: top.map((a) => a.flights) }],
+    img(s, "airlines", { x: 0.5, y: 1.2, w: 4.6, h: 3.8 }, "Movements by airline") || s.addChart(pres.charts.BAR, [{ name: "Movements", labels: top.map((a) => a.airline), values: top.map((a) => a.flights) }],
       { x: 0.5, y: 1.2, w: 4.6, h: 3.8, barDir: "bar", chartColors: [MAROON], showLegend: false,
         showValue: true, dataLabelPosition: "outEnd", catAxisOrientation: "maxMin", ...axis() });
     const rows = [["Airline", "Flights", "Share", "Est. pax"].map((t) => ({ text: t,
@@ -208,15 +216,15 @@ if (d.kind === "yearly" && (d.fy_months || []).length) {
     top.slice(0, 7).forEach((a) => rows.push([a.airline, fmt(a.flights), `${a.share_pct}%`, fmt(a.est_pax)]));
     s.addTable(rows, { x: 5.3, y: 1.25, w: 4.2, colW: [1.8, 0.7, 0.75, 0.95], fontSize: 11, fontFace: FONT_B,
       color: INK, border: { type: "solid", pt: 0.5, color: GRID }, rowH: 0.34 });
-  } else emptyNote(s, d.no_flight_reason);
+  }
 }
 
 // 6. Routes
-{
+if (d.routes.length) {
   const s = contentSlide("Routes and connectivity");
   if (d.routes.length) {
     const top = d.routes.slice(0, 10);
-    s.addChart(pres.charts.BAR, [{ name: "Movements", labels: top.map((r) => `${r.city || r.iata}${r.international ? " ✈" : ""}`),
+    img(s, "routes", { x: 0.5, y: 1.2, w: 6.2, h: 3.8 }, "Movements by route") || s.addChart(pres.charts.BAR, [{ name: "Movements", labels: top.map((r) => `${r.city || r.iata}${r.international ? " ✈" : ""}`),
       values: top.map((r) => r.flights) }], { x: 0.5, y: 1.2, w: 6.2, h: 3.8, barDir: "bar",
       chartColors: [TEAL], showLegend: false, showValue: true, dataLabelPosition: "outEnd",
       catAxisOrientation: "maxMin", ...axis() });
@@ -225,34 +233,34 @@ if (d.kind === "yearly" && (d.fy_months || []).length) {
       `${d.routes.length} destinations connected`,
       `${intl.length} international: ${intl.map((r) => r.city || r.iata).join(", ") || "none"}`,
       `Top route: ${top[0].city || top[0].iata} (~${top[0].per_day}/day)`,
-      "✈ marks international routes",
+      "Orange bars marked (intl) are international routes",
     ]);
-  } else emptyNote(s, d.no_flight_reason);
+  }
 }
 
 // 7. Aircraft types & peak hours
-{
+if (hasFlights) {
   const s = contentSlide("Fleet mix and peak hours");
   if (hasFlights) {
     const ac = d.aircraft.slice(0, 6);
-    s.addChart(pres.charts.BAR, [{ name: "Movements", labels: ac.map((a) => a.aircraft), values: ac.map((a) => a.flights) }],
+    img(s, "aircraft", { x: 0.5, y: 1.2, w: 4.4, h: 3.8 }, "Movements by aircraft type") || s.addChart(pres.charts.BAR, [{ name: "Movements", labels: ac.map((a) => a.aircraft), values: ac.map((a) => a.flights) }],
       { x: 0.5, y: 1.2, w: 4.4, h: 3.8, barDir: "bar", chartColors: [GOLD], showLegend: false, showValue: true,
         dataLabelPosition: "outEnd", catAxisOrientation: "maxMin", showTitle: true, title: "Aircraft types", ...axis() });
-    s.addChart(pres.charts.BAR, [{ name: "Movements", labels: d.hourly.map((_, h) => String(h).padStart(2, "0")), values: d.hourly }],
+    img(s, "hourly", { x: 5.1, y: 1.2, w: 4.4, h: 3.8 }, "Movements by hour of day") || s.addChart(pres.charts.BAR, [{ name: "Movements", labels: d.hourly.map((_, h) => String(h).padStart(2, "0")), values: d.hourly }],
       { x: 5.1, y: 1.2, w: 4.4, h: 3.8, barDir: "col", chartColors: [MAROON], showLegend: false, showValue: false,
         showTitle: true, title: "Scheduled movements by hour (local)", ...axis(), catAxisLabelFontSize: 8 });
-  } else emptyNote(s, d.no_flight_reason);
+  }
 }
 
 // 8. AAI official trend
-{
+if ((d.aai_history || []).length) {
   const s = contentSlide("Official passenger traffic (AAI)");
   const h = d.aai_history;
   if (h.length) {
     const labels = h.map((x) => x.month);
     const series = [{ name: "Total", labels, values: h.map((x) => x.pax_total || 0) }];
     if (h.every((x) => x.pax_intl !== null)) series.push({ name: "International", labels, values: h.map((x) => x.pax_intl || 0) });
-    s.addChart(pres.charts.LINE, series, { x: 0.5, y: 1.2, w: 6.2, h: 3.8, chartColors: [MAROON, GOLD],
+    img(s, "aai", { x: 0.5, y: 1.2, w: 6.2, h: 3.8 }, "Official monthly passengers (AAI)") || s.addChart(pres.charts.LINE, series, { x: 0.5, y: 1.2, w: 6.2, h: 3.8, chartColors: [MAROON, GOLD],
       lineSize: 2.5, lineDataSymbol: "circle", lineDataSymbolSize: 5, showLegend: series.length > 1,
       legendPos: "b", legendFontSize: 10, legendColor: INK, ...axis(), catAxisLabelFontSize: 8,
       catAxisLabelRotate: -45 });
@@ -264,16 +272,16 @@ if (d.kind === "yearly" && (d.fy_months || []).length) {
       ...fy.map((y) => `FY ${y.fiscal_year}: ${fmt(Number(y.passengers))} passengers`),
       "Source: AAI monthly Traffic News",
     ]);
-  } else emptyNote(s, "AAI monthly data has not been collected yet.\nRun the 'AAI monthly backfill' workflow once.");
+  }
 }
 
 // 9. Forecast
-{
+if (d.forecast && d.forecast.available) {
   const s = contentSlide("Passenger forecast – next 12 months");
   const fc = d.forecast;
   if (fc.available) {
     const labels = fc.points.map((p) => p.month);
-    s.addChart(pres.charts.LINE, [
+    img(s, "forecast", { x: 0.5, y: 1.2, w: 6.2, h: 3.8 }, "12-month passenger forecast") || s.addChart(pres.charts.LINE, [
       { name: "Forecast", labels, values: fc.points.map((p) => p.forecast) },
       { name: "Low (80%)", labels, values: fc.points.map((p) => p.low) },
       { name: "High (80%)", labels, values: fc.points.map((p) => p.high) },
@@ -287,7 +295,7 @@ if (d.kind === "yearly" && (d.fy_months || []).length) {
       `Backtest error (MAPE): ${fc.backtest_mape_pct ?? "–"}%`,
       "Seasonal pattern learned from past years (festivals, holidays)",
     ]);
-  } else emptyNote(s, `Forecast not available yet: ${fc.reason || "insufficient history"}.`);
+  }
 }
 
 // 10. Notes & sources

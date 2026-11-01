@@ -351,12 +351,65 @@ def write_excel(d: dict, path: Path) -> Path:
     return path
 
 
+def render_charts(d: dict, folder: Path) -> dict[str, str]:
+    """PNG charts for the deck (see ixm/charts.py for why images, not native charts)."""
+    from . import charts as C
+    MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    FYt = d["fy_table"]
+    lab = [f["fy"] + ("*" if f["months"] < 12 else "") for f in FYt]
+    out = {}
+    out["fy_pax"] = C.bars(folder / "fy_pax.png", lab, [("Domestic", [f["pax_dom"] for f in FYt]),
+                                                         ("International", [f["pax_intl"] for f in FYt])], stacked=True, rotate=35)
+    rows = sorted([(p["airport"].split(" (")[0], p["index_vs_1819"]) for p in d["peers"]] + [("All India", d["india"]["index_vs_1819"])],
+                  key=lambda x: -x[1])
+    out["peers"] = C.bars(folder / "peers.png", [r[0] for r in rows], [("Index", [r[1] for r in rows])], horizontal=True,
+                          values=True, value_fmt=lambda v: f"{v:.1f}", colors=[C.TEAL], ylim=(0, 160),
+                          highlight={i: C.MAROON for i, r in enumerate(rows) if r[0] == "Madurai"})
+    m = d["monthly"]
+    out["monthly"] = C.lines(folder / "monthly.png", [r["month"][:4] if r["month"].endswith("-04") else "" for r in m],
+                             [("Passengers", [r["pax_total"] for r in m]), ("International", [r["pax_intl"] for r in m])], every=1)
+    se = d["season"]
+    out["season"] = C.bars(folder / "season.png", [x["name"] for x in se], [("Seasonal index", [x["index"] for x in se])],
+                           values=True, value_fmt=lambda v: f"{v:.2f}", colors=[C.GOLD], ylim=(0.8, 1.15))
+    out["intl_fy"] = C.bars(folder / "intl_fy.png", lab, [("International passengers", [f["pax_intl"] for f in FYt])],
+                            colors=[C.GOLD], rotate=35)
+    x = d["intl_2026"]
+    out["intl_2026"] = C.bars(folder / "intl_2026.png", [MON[int(r["month"][5:]) - 1] for r in x],
+                              [("International 2025", [r["intl_2025"] for r in x]), ("International 2026", [r["intl_2026"] for r in x])],
+                              colors=[C.PALE, C.MAROON])
+    mv = [f for f in FYt if f["mov_total"] and f["mov_months"] == f["months"]]
+    out["movements"] = C.bars(folder / "movements.png", [f["fy"] + ("*" if f["months"] < 12 else "") for f in mv],
+                              [("Aircraft movements", [f["mov_total"] for f in mv])], colors=[C.INDIGO], rotate=35)
+    cg = [c for c in d["cargo_fy"] if c["tonnes"] is not None]
+    out["cargo"] = C.bars(folder / "cargo.png", [c["fy"] + ("*" if c["months"] < 12 else "") for c in cg],
+                          [("Cargo (tonnes)", [c["tonnes"] for c in cg])], colors=[C.TEAL], rotate=35)
+    nms = sorted(d["network"])
+    labs = [f"{MON[int(mm[5:]) - 1]} {mm[2:4]}" for mm in nms]
+    atr = lambda i: [next((r["atr_share_pct"] for r in d["network"][mm]["routes"] if r["iata"] == i), 0) for mm in nms]
+    out["atr"] = C.bars(folder / "atr.png", labs, [("Chennai", atr("MAA")), ("Bengaluru", atr("BLR"))], w=4.5, h=3.8,
+                        values=True, value_fmt=lambda v: f"{v:.0f}%", ylim=(0, 115), title="% of flights on 78-seat ATR 72")
+    igo = [next((a["share_pct"] for a in d["network"][mm]["airlines"] if a["airline"] == "IndiGo"), 0) for mm in nms]
+    out["igo"] = C.bars(folder / "igo.png", labs, [("IndiGo share", igo)], w=4.4, h=3.8, values=True,
+                        value_fmt=lambda v: f"{v:.1f}%", colors=[C.INDIGO], ylim=(0, 115), title="IndiGo share of all movements")
+    if nms:
+        h = d["network"][nms[0]]["hourly"]
+        out["hourly"] = C.bars(folder / "hourly.png", [f"{i:02d}" for i in range(24)], [("Movements", h)], every=2,
+                               title=f"Scheduled movements by hour (local), {labs[0]}")
+    sc = d["scenarios"]
+    out["scenarios"] = C.lines(folder / "scenarios.png", [p["fy"] for p in sc[0]["path"]],
+                               [(f"{x['name']} ({x['cagr_pct']:+.2f}%/yr)", [p["passengers"] for p in x["path"]]) for x in sc],
+                               every=1, colors=[C.PALE, C.TEAL, C.MAROON], ymin=1_000_000, markers=True)
+    return out
+
+
 def generate(out_dir: Path | None = None, recommendations: list | None = None) -> dict[str, Path]:
     d = compute()
     d["recommendations"] = recommendations or RECOMMENDATIONS(d)
     out = out_dir or (config.ROOT / "reports")
     out.mkdir(parents=True, exist_ok=True)
     stem = "IXM_10_year_review"
+    import tempfile
+    d["charts"] = render_charts(d, Path(tempfile.mkdtemp(prefix="ixm_charts_")))
     j = out / f"{stem}.json"
     j.write_text(json.dumps(d, default=str, indent=1), encoding="utf-8")
     paths = {"json": j, "xlsx": write_excel(d, out / f"{stem}.xlsx")}

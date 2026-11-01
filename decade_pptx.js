@@ -32,6 +32,11 @@ const axis = () => ({ catAxisLabelColor: MUTED, valAxisLabelColor: MUTED, catAxi
   catAxisLabelFontSize: 9, valAxisLabelFontSize: 9, valGridLine: { color: GRID, size: 0.5 }, catGridLine: { style: "none" },
   dataLabelColor: INK, dataLabelFontSize: 9, dataLabelFontFace: FONT_B, valAxisMinVal: 0, titleColor: INK, titleFontSize: 11,
   titleFontFace: FONT_B, legendFontSize: 9, legendColor: INK, legendFontFace: FONT_B, valAxisLabelFormatCode: "#,##0" });
+function img(s, key, box, alt) {
+  if (!d.charts || !d.charts[key] || !fs.existsSync(d.charts[key])) return false;
+  s.addImage({ path: d.charts[key], ...box, altText: alt || key });
+  return true;
+}
 function slide(title, source) {
   const s = pres.addSlide({ masterName: "CONTENT" });
   s.addText(title, { placeholder: "title" });
@@ -119,7 +124,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
 {
   const s = slide("Ten years of passengers: a pre-COVID peak not yet regained", AAI);
   const labels = FY.map((f) => f.fy + (f.months < 12 ? "*" : ""));
-  s.addChart(pres.charts.BAR, [
+  img(s, "fy_pax", { x: 0.4, y: 1.05, w: 6.3, h: 3.85 }, "Passengers by financial year, domestic and international") || s.addChart(pres.charts.BAR, [
     { name: "Domestic", labels, values: FY.map((f) => f.pax_dom || 0) },
     { name: "International", labels, values: FY.map((f) => f.pax_intl || 0) },
   ], { x: 0.4, y: 1.05, w: 6.3, h: 3.85, barDir: "col", barGrouping: "stacked", chartColors: [MAROON, GOLD], showLegend: true, legendPos: "b", ...axis() });
@@ -138,7 +143,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
   const s = slide("Peers grew past pre-COVID levels – Madurai did not", PEER_SRC);
   const rows = [...peers.map((p) => ({ n: p.airport.replace(/ \(.*/, ""), v: p.index_vs_1819 })), { n: "All India", v: d.india.index_vs_1819 }]
     .sort((a, b) => b.v - a.v);
-  s.addChart(pres.charts.BAR, [{ name: "FY25-26 traffic (FY18-19 = 100)", labels: rows.map((r) => r.n), values: rows.map((r) => r.v) }],
+  img(s, "peers", { x: 0.4, y: 1.05, w: 6.3, h: 3.85 }, "Recovery index FY25-26 vs FY18-19 by airport") || s.addChart(pres.charts.BAR, [{ name: "FY25-26 traffic (FY18-19 = 100)", labels: rows.map((r) => r.n), values: rows.map((r) => r.v) }],
     { x: 0.4, y: 1.05, w: 6.3, h: 3.85, barDir: "bar", catAxisOrientation: "maxMin", showLegend: false, showValue: true, dataLabelPosition: "outEnd",
       dataLabelFormatCode: "0.0", chartColors: [TEAL], ...axis(), valAxisMaxVal: 160 });
   side(s, [
@@ -170,7 +175,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
   const s = slide("Month by month since 2016", AAI);
   const m = d.monthly;
   const ylab = m.map((r) => r.month.slice(0, 4));
-  s.addChart(pres.charts.LINE, [{ name: "Passengers", labels: ylab, values: m.map((r) => r.pax_total) },
+  img(s, "monthly", { x: 0.4, y: 1.05, w: 6.3, h: 3.85 }, "Monthly passengers since 2016") || s.addChart(pres.charts.LINE, [{ name: "Passengers", labels: ylab, values: m.map((r) => r.pax_total) },
     { name: "International", labels: ylab, values: m.map((r) => r.pax_intl || 0) }],
     { x: 0.4, y: 1.05, w: 6.3, h: 3.85, chartColors: [MAROON, GOLD], lineSize: 1.75, lineDataSymbol: "none", showLegend: true, legendPos: "b",
       ...axis(), catAxisLabelFrequency: 12, catAxisLabelRotate: 0 });
@@ -186,7 +191,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
 // 8 ---------------------------------------------------------------- seasonality
 {
   const s = slide("A festival and holiday rhythm airlines can plan around", AAI + " (seasonal model, COVID months excluded)");
-  s.addChart(pres.charts.BAR, [{ name: "Seasonal index", labels: d.season.map((x) => x.name), values: d.season.map((x) => x.index) }],
+  img(s, "season", { x: 0.4, y: 1.05, w: 6.3, h: 3.85 }, "Seasonal index by month") || s.addChart(pres.charts.BAR, [{ name: "Seasonal index", labels: d.season.map((x) => x.name), values: d.season.map((x) => x.index) }],
     { x: 0.4, y: 1.05, w: 6.3, h: 3.85, barDir: "col", chartColors: [GOLD], showLegend: false, showValue: true, dataLabelPosition: "outEnd",
       dataLabelFormatCode: "0.00", ...axis(), valAxisMinVal: 0.8, valAxisMaxVal: 1.15, valAxisLabelFormatCode: "0.00" });
   const srt = [...d.season].sort((a, b) => b.index - a.index);
@@ -202,7 +207,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
 {
   const s = slide("International travel: once a quarter of all passengers", AAI);
   const labels = FY.map((f) => f.fy + (f.months < 12 ? "*" : ""));
-  s.addChart(pres.charts.BAR, [{ name: "International passengers", labels, values: FY.map((f) => f.pax_intl || 0) }],
+  img(s, "intl_fy", { x: 0.4, y: 1.05, w: 6.3, h: 3.85 }, "International passengers by financial year") || s.addChart(pres.charts.BAR, [{ name: "International passengers", labels, values: FY.map((f) => f.pax_intl || 0) }],
     { x: 0.4, y: 1.05, w: 6.3, h: 3.85, barDir: "col", chartColors: [GOLD], showLegend: false, ...axis() });
   side(s, [
     `International share: ${fy("2019-20").intl_share}% in FY19-20 → ${fy("2024-25").intl_share}% in FY24-25 → ${fy("2025-26").intl_share}% in FY25-26*`,
@@ -216,7 +221,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
 {
   const s = slide("2026: the Gulf suspension – and a weak domestic first half", AAI + "; DT Next, 26 Jun 2026");
   const x = d.intl_2026; const labels = x.map((r) => MON[+r.month.slice(5) - 1]);
-  s.addChart(pres.charts.BAR, [{ name: "International 2025", labels, values: x.map((r) => r.intl_2025) },
+  img(s, "intl_2026", { x: 0.4, y: 1.05, w: 6.3, h: 3.85 }, "International passengers 2026 vs 2025 by month") || s.addChart(pres.charts.BAR, [{ name: "International 2025", labels, values: x.map((r) => r.intl_2025) },
     { name: "International 2026", labels, values: x.map((r) => r.intl_2026) }],
     { x: 0.4, y: 1.05, w: 6.3, h: 3.85, barDir: "col", barGrouping: "clustered", chartColors: [PALE, MAROON], showLegend: true, legendPos: "b", ...axis() });
   const dom = x.filter((r) => r.month <= "2026-06");
@@ -233,7 +238,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
   const s = slide("Fewer flights, fuller flights", AAI);
   const rows = FY.filter((f) => f.mov_total && f.mov_months === f.months);
   const labels = rows.map((f) => f.fy + (f.months < 12 ? "*" : ""));
-  s.addChart(pres.charts.BAR, [{ name: "Aircraft movements", labels, values: rows.map((f) => f.mov_total) }],
+  img(s, "movements", { x: 0.4, y: 1.05, w: 6.3, h: 3.85 }, "Aircraft movements by financial year") || s.addChart(pres.charts.BAR, [{ name: "Aircraft movements", labels, values: rows.map((f) => f.mov_total) }],
     { x: 0.4, y: 1.05, w: 6.3, h: 3.85, barDir: "col", chartColors: [INDIGO], showLegend: false, ...axis() });
   const ppm = rows.filter((f) => f.pax_per_mov);
   side(s, [
@@ -248,7 +253,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
   const s = slide("Air cargo: climbing back towards its 2018-19 peak", AAI);
   const rows = d.cargo_fy.filter((c) => c.tonnes !== null);
   const labels = rows.map((c) => c.fy + (c.months < 12 ? "*" : ""));
-  s.addChart(pres.charts.BAR, [{ name: "Cargo (tonnes)", labels, values: rows.map((c) => c.tonnes) }],
+  img(s, "cargo", { x: 0.4, y: 1.05, w: 6.3, h: 3.85 }, "Cargo tonnes by financial year") || s.addChart(pres.charts.BAR, [{ name: "Cargo (tonnes)", labels, values: rows.map((c) => c.tonnes) }],
     { x: 0.4, y: 1.05, w: 6.3, h: 3.85, barDir: "col", chartColors: [TEAL], showLegend: false, ...axis() });
   side(s, [
     `Cargo operations began in Dec 2017 and peaked at ${fmt(fy("2018-19").frt_total)} t in FY 2018-19 (confirmed by AAI's revised figures)`,
@@ -279,11 +284,11 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
   const s = slide("Turboprops on busy routes, one airline dominates", ADB);
   const labs = nmonths.map(mlab);
   const atr = (i) => nmonths.map((m) => (d.network[m].routes.find((r) => r.iata === i) || {}).atr_share_pct || 0);
-  s.addChart(pres.charts.BAR, [{ name: "Chennai", labels: labs, values: atr("MAA") }, { name: "Bengaluru", labels: labs, values: atr("BLR") }],
+  img(s, "atr", { x: 0.4, y: 1.05, w: 4.5, h: 3.8 }, "Share of flights on ATR 72, Chennai and Bengaluru") || s.addChart(pres.charts.BAR, [{ name: "Chennai", labels: labs, values: atr("MAA") }, { name: "Bengaluru", labels: labs, values: atr("BLR") }],
     { x: 0.4, y: 1.05, w: 4.5, h: 3.8, barDir: "col", barGrouping: "clustered", chartColors: [MAROON, GOLD], showLegend: true, legendPos: "b",
       showValue: true, dataLabelPosition: "outEnd", ...axis(), valAxisMaxVal: 110, showTitle: true, title: "% of flights on 78-seat ATR 72" });
   const igo = nmonths.map((m) => (d.network[m].airlines.find((a) => a.airline === "IndiGo") || {}).share_pct || 0);
-  s.addChart(pres.charts.BAR, [{ name: "IndiGo share of movements %", labels: labs, values: igo }],
+  img(s, "igo", { x: 5.1, y: 1.05, w: 4.4, h: 3.8 }, "IndiGo share of movements by month") || s.addChart(pres.charts.BAR, [{ name: "IndiGo share of movements %", labels: labs, values: igo }],
     { x: 5.1, y: 1.05, w: 4.4, h: 3.8, barDir: "col", chartColors: [INDIGO], showLegend: false, showValue: true, dataLabelPosition: "outEnd",
       dataLabelFormatCode: "0.0", ...axis(), valAxisMaxVal: 110, showTitle: true, title: "IndiGo share of all movements, %" });
 }
@@ -292,7 +297,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
 {
   const nm = nmonths[0]; const h = d.network[nm].hourly;
   const s = slide("Daytime only: no scheduled flights 22:00–06:00", ADB);
-  s.addChart(pres.charts.BAR, [{ name: "Movements", labels: h.map((_, i) => String(i).padStart(2, "0")), values: h }],
+  img(s, "hourly", { x: 0.4, y: 1.05, w: 6.3, h: 3.85 }, "Scheduled movements by hour of day") || s.addChart(pres.charts.BAR, [{ name: "Movements", labels: h.map((_, i) => String(i).padStart(2, "0")), values: h }],
     { x: 0.4, y: 1.05, w: 6.3, h: 3.85, barDir: "col", chartColors: [MAROON], showLegend: false, ...axis(), showTitle: true,
       title: `Scheduled movements by hour (local), ${mlab(nm)}` });
   side(s, [
@@ -320,7 +325,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
 {
   const s = slide("Outlook: decisions, not destiny", AAI + "; scenario growth rates from AAI annual figures");
   const labels = scen[0].path.map((p) => p.fy);
-  s.addChart(pres.charts.LINE, scen.map((x) => ({ name: `${x.name} (${x.cagr_pct > 0 ? "+" : ""}${x.cagr_pct}%/yr)`, labels, values: x.path.map((p) => p.passengers) })),
+  img(s, "scenarios", { x: 0.4, y: 1.05, w: 6.3, h: 3.85 }, "What-if passenger paths to FY 2030-31") || s.addChart(pres.charts.LINE, scen.map((x) => ({ name: `${x.name} (${x.cagr_pct > 0 ? "+" : ""}${x.cagr_pct}%/yr)`, labels, values: x.path.map((p) => p.passengers) })),
     { x: 0.4, y: 1.05, w: 6.3, h: 3.85, chartColors: [PALE, TEAL, MAROON], lineSize: 2.5, lineDataSymbol: "circle", lineDataSymbolSize: 5,
       showLegend: true, legendPos: "b", ...axis(), valAxisMinVal: 1000000 });
   const fc = d.forecast;

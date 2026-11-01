@@ -259,7 +259,14 @@ def test_generate_pptx(tmp_root, seeded):
     paths = generate("monthly", date(2026, 9, 1), tmp_root / "reports")
     from pptx import Presentation
     prs = Presentation(paths["pptx"])
-    assert len(prs.slides) == 10
+    if seeded:
+        assert len(prs.slides) == 10
+        pics = sum(1 for sl in prs.slides for sh in sl.shapes if sh.shape_type == 13)
+        assert pics >= 8                                   # charts embedded as images, not empty native charts
+    else:
+        assert 3 <= len(prs.slides) < 10                   # no data: no placeholder pages
+    texts = " ".join(sh.text_frame.text for sl in prs.slides for sh in sl.shapes if sh.has_text_frame)
+    assert "No airline data" not in texts and "No route data" not in texts
 
 
 def test_fill_airport_from_name(tmp_root):
