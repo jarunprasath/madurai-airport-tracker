@@ -49,14 +49,16 @@ def clean_monthly(monthly: dict[str, dict]) -> dict[str, dict]:
             cur = [_f(r.get(k)) for k in keys]
             rev = [_f(r.get(f"{k}_rev")) for k in keys]
             last = [_f(prev.get(k)) for k in keys]
+            # the same report's own "last year" column for this row (stored on last year's month as *_rev)
+            last_same_pdf = [_f(prev.get(f"{k}_rev")) for k in keys]
             if _consistent(*rev) and cur != rev and any(
                     c is None or (v and abs(c - v) > max(2.0, 0.02 * v)) for c, v in zip(cur, rev)):
                 for k, v in zip(keys, rev):
                     r[k] = v
                 cur = rev
                 notes.append(f"{g}: revised figures used")
-            slip = any(c is not None and c > 10 and l is not None and c == l and not (rev[n] is not None and rev[n] == c)
-                       for n, (c, l) in enumerate(zip(cur, last)))
+            slip = any(c is not None and c > 10 and c in (l, l2) and not (rev[n] is not None and rev[n] == c)
+                       for n, (c, l, l2) in enumerate(zip(cur, last, last_same_pdf)))
             bad = (slip or not _consistent(*cur) if None not in cur else False) or (
                 g == "frt" and any(v is not None and v > aai.FREIGHT_MAX_T for v in cur))
             if bad:

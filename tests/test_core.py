@@ -389,3 +389,12 @@ def test_cross_check_prefers_revised_and_blanks_column_slip():
     assert c["2025-12"]["frt_total"] == "" and "frt" in c["2025-12"]["checks"]
     assert c["2025-12"]["pax_total"] == "116000"
     assert c["2019-04"]["pax_total"] == 114000 and "revised" in c["2019-04"]["checks"]
+
+
+def test_column_slip_detected_against_same_report_prev_year_column():
+    from ixm.build import clean_monthly
+    data = {"2024-12": {"month": "2024-12", "frt_dom": "166", "frt_intl": "129", "frt_total": "296",
+                        "frt_dom_rev": "166", "frt_intl_rev": "534", "frt_total_rev": "766"},
+            "2025-12": {"month": "2025-12", "frt_dom": "232", "frt_intl": "534", "frt_total": "766"}}
+    c = clean_monthly(data)
+    assert c["2025-12"]["frt_total"] == "" and c["2024-12"]["frt_total"] == "296"
