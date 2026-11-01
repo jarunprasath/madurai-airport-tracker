@@ -232,7 +232,8 @@
         { label: "Departures", data: d.map((x) => x.missing ? null : x.departures), backgroundColor: c.gold, stack: "s" }] },
         options: { scales: { x: { stacked: true, ticks: dayTicks(dates) }, y: { stacked: true } } } });
       $("daily-note").textContent = `${niceDate(dates[0])} – ${niceDate(dates[dates.length - 1])} · ${have.length} of ${d.length} days have flight data` +
-        (have.length < d.length ? " (days without data are left blank)" : "");
+        (have.length < d.length ? " (days without data are left blank)" : "") +
+        ". Source: AeroDataBox flight schedules and status (cancelled/diverted flights excluded).";
     }
     document.querySelectorAll("#daily-seg button").forEach((b) => b.addEventListener("click", () => {
       document.querySelectorAll("#daily-seg button").forEach((x) => x.classList.toggle("on", x === b));
@@ -293,7 +294,7 @@
     } else noData("c-annual", "No annual data");
 
     // airlines
-    const periodText = (pd) => (pd && pd.days ? `${pd.label}: ${niceDate(pd.from)} – ${niceDate(pd.to)} · ${pd.days} day${pd.days > 1 ? "s" : ""} of flight data` : "No flight data in this period yet");
+    const periodText = (pd) => (pd && pd.days ? `${pd.label}: ${niceDate(pd.from)} – ${niceDate(pd.to)} · ${pd.days} day${pd.days > 1 ? "s" : ""} of flight data · Source: AeroDataBox` : "No flight data in this period yet");
     const setPeriod = (group, pd) => document.querySelectorAll(`[data-period="${group}"]`).forEach((e) => { e.textContent = periodText(pd); });
     function renderAirlines(p) {
       const al = (airlines && airlines[p]) || [], ac = (aircraft && aircraft[p]) || [];
