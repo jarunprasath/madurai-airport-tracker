@@ -21,6 +21,8 @@ from . import config
 from .reference import fill_airport, looks_cargo
 
 HOST = os.environ.get("AERODATABOX_HOST", "aerodatabox.p.rapidapi.com")
+# The API refuses dates earlier than this many days ago ("must not be earlier than 365 day(s) ago").
+HISTORY_DAYS = int(os.environ.get("AERODATABOX_HISTORY_DAYS", "365"))
 BASE = f"https://{HOST}"
 
 FIELDS = [

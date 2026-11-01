@@ -443,3 +443,12 @@ def test_cli_back_mode_progresses_past_collected_days(monkeypatch, tmp_root):
     assert today in got and today - timedelta(days=1) in got            # recent days always refreshed
     assert today - timedelta(days=10) not in got                          # already collected: skipped
     assert min(got) <= today - timedelta(days=40)                         # moves into older history
+
+
+def test_cli_skips_dates_beyond_history_without_calls(monkeypatch, tmp_root, capsys):
+    from ixm import __main__ as cli
+    seen = {}
+    monkeypatch.setattr(aerodatabox, "fetch_days", lambda days, on_day=None: seen.setdefault("days", list(days)) is not None and
+                        {"rows": [], "ok": 0, "failed": [], "stopped": ""})
+    cli.main(["flights", "--from", "2021-05-01", "--to", "2021-05-20"])
+    assert "keeps only 365 days" in capsys.readouterr().out and seen["days"] == []

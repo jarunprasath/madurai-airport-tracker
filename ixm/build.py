@@ -183,6 +183,8 @@ def build(today: date | None = None) -> dict:
                      "last_flight_day": max((r["date"] for r in flights), default=None),
                      "aai_months": sum(1 for r in monthly_rows if r["pax_total"])},
         "board": board,
+        "flights_status": json.loads((config.DATA_DIR / "flights_status.json").read_text(encoding="utf-8"))
+        if (config.DATA_DIR / "flights_status.json").exists() else None,
     }
     _write("summary.json", summary)
     _write("daily.json", an.daily_series(past, lf))

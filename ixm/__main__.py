@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -34,7 +35,7 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("live")
     f = sub.add_parser("flights")
     f.add_argument("--back", type=int, default=1, help="days before today (default 1 = yesterday)")
-    f.add_argument("--ahead", type=int, default=1, help="days after today (default 1 = tomorrow)")
+    f.add_argument("--ahead", type=int, default=0, help="days after today (default 0)")
     f.add_argument("--from", dest="date_from", help="first date YYYY-MM-DD for a historical backfill")
     f.add_argument("--to", dest="date_to", help="last date YYYY-MM-DD (default: same as --from)")
     f.add_argument("--max-days", type=int, default=31, help="safety cap on days per run (API quota), applies to every mode")
@@ -67,6 +68,12 @@ def main(argv: list[str] | None = None) -> int:
             days = [d0 + timedelta(days=i) for i in range((d1 - d0).days + 1)]
         else:
             days = [today + timedelta(days=i) for i in range(-args.back, args.ahead + 1)]
+        oldest = today - timedelta(days=aerodatabox.HISTORY_DAYS)
+        too_old = [d for d in days if d < oldest]
+        if too_old:
+            print(f"flights: skipping {len(too_old)} days before {oldest} - AeroDataBox keeps only "
+                  f"{aerodatabox.HISTORY_DAYS} days of history (no API calls spent on them)")
+            days = [d for d in days if d >= oldest]
         have = {r["date"] for r in store.load_all()}
         before = len(days)
         days = [d for d in days if d.isoformat() not in have or d >= today - timedelta(days=1)]
@@ -88,10 +95,16 @@ def main(argv: list[str] | None = None) -> int:
         res = aerodatabox.fetch_days(days, on_day=save)
         for d, why in res["failed"]:
             print(f"  {d}: skipped - {why}", flush=True)
+        attempted = res["ok"] + len(res["failed"]) + (1 if res["stopped"] else 0)
         print(f"flights: {res['ok']} of {len(days)} days fetched, {len(res['rows'])} movements, "
-              f"{saved['n']} new/updated, ~{2 * (res['ok'] + len(res['failed']))} API calls")
+              f"{saved['n']} new/updated, ~{2 * attempted} API requests")
         if res["stopped"]:
             print(f"STOPPED: {res['stopped']}")
+        if os.environ.get("AERODATABOX_KEY"):
+            status = {"checked_utc": datetime.utcnow().isoformat(timespec="seconds"),
+                      "state": "paused" if res["stopped"] else "ok",
+                      "message": ("Flight collection paused: " + res["stopped"].split(" (")[0]) if res["stopped"] else ""}
+            (config.DATA_DIR / "flights_status.json").write_text(json.dumps(status, indent=1), encoding="utf-8")
     elif args.cmd == "aai":
         from . import aai
         last = date(today.year, today.month, 1) - timedelta(days=1)

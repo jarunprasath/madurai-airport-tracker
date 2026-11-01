@@ -231,7 +231,8 @@
         { label: "Arrivals", data: d.map((x) => x.missing ? null : x.arrivals), backgroundColor: c.maroon, stack: "s" },
         { label: "Departures", data: d.map((x) => x.missing ? null : x.departures), backgroundColor: c.gold, stack: "s" }] },
         options: { scales: { x: { stacked: true, ticks: dayTicks(dates) }, y: { stacked: true } } } });
-      $("daily-note").textContent = `${niceDate(dates[0])} – ${niceDate(dates[dates.length - 1])} · ${have.length} of ${d.length} days have flight data` +
+      const fsx = summary && summary.flights_status;
+      $("daily-note").textContent = (fsx && fsx.state === "paused" ? `⚠ ${fsx.message}. ` : "") + `${niceDate(dates[0])} – ${niceDate(dates[dates.length - 1])} · ${have.length} of ${d.length} days have flight data` +
         (have.length < d.length ? " (days without data are left blank)" : "") +
         ". Source: AeroDataBox flight schedules and status (cancelled/diverted flights excluded).";
     }

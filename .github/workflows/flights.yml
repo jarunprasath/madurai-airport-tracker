@@ -1,10 +1,10 @@
 name: Collect flights
-# Arrivals/departures for yesterday, today and tomorrow from AeroDataBox.
-# 00:31 UTC = 06:01 IST (finalises yesterday) and 08:31 UTC = 14:01 IST (refreshes today).
+# Arrivals/departures for yesterday (final) and today (schedule) from AeroDataBox.
+# Once a day at 00:31 UTC = 06:01 IST: 2 days x 2 half-day requests = 4 requests/day (~120/month),
+# sized for the free BASIC plan's monthly unit quota.
 on:
   schedule:
     - cron: "31 0 * * *"
-    - cron: "31 8 * * *"
   workflow_dispatch:
     inputs:
       back:
@@ -12,9 +12,9 @@ on:
         default: "1"
       ahead:
         description: "Days after today to fetch"
-        default: "1"
+        default: "0"
       from_date:
-        description: "History backfill: first date YYYY-MM-DD (leave blank for the normal daily run)"
+        description: "History backfill: first date YYYY-MM-DD, at most 365 days ago (blank = normal daily run)"
         default: ""
       to_date:
         description: "History backfill: last date YYYY-MM-DD (max 31 days per run; blank = same day)"
@@ -41,7 +41,7 @@ jobs:
           if [ -n "${{ inputs.from_date }}" ]; then
             python -u -m ixm flights --from "${{ inputs.from_date }}" ${{ inputs.to_date && format('--to {0}', inputs.to_date) || '' }} | tee flights_run.log
           else
-            python -u -m ixm flights --back "${{ inputs.back || 1 }}" --ahead "${{ inputs.ahead || 1 }}" | tee flights_run.log
+            python -u -m ixm flights --back "${{ inputs.back || 1 }}" --ahead "${{ inputs.ahead || 0 }}" | tee flights_run.log
           fi
           { echo "### Flight collection"; echo '```'; tail -n 40 flights_run.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Commit data (also after a partial run)
