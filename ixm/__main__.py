@@ -46,6 +46,8 @@ def main(argv: list[str] | None = None) -> int:
     a.add_argument("--max-months", type=int, help="stop after this many new months (resume next run)")
     a.add_argument("--budget-min", type=float, default=40, help="stop after this many minutes (default 40)")
     sub.add_parser("build")
+    dz = sub.add_parser("decade", help="10-year strategic review (PPT + Excel)")
+    dz.add_argument("--out", type=Path)
     r = sub.add_parser("report")
     r.add_argument("--kind", choices=["weekly", "monthly", "yearly"], required=True)
     r.add_argument("--date", help="any date inside the wanted week/month (default: last complete one)")
@@ -117,6 +119,10 @@ def main(argv: list[str] | None = None) -> int:
         from .build import build
         s = build(today)
         print(f"build: {s['coverage']}")
+    elif args.cmd == "decade":
+        from .decade import generate as decade_generate
+        for kind, path in decade_generate(args.out).items():
+            print(f"decade {kind}: {path}")
     elif args.cmd == "report":
         from .report import generate
         if args.date:

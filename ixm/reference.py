@@ -89,21 +89,27 @@ KNOWN_AIRPORTS = {
     "delhi": ("DEL", "IN"), "hyderabad": ("HYD", "IN"), "kolkata": ("CCU", "IN"), "pune": ("PNQ", "IN"),
     "ahmedabad": ("AMD", "IN"), "goa": ("GOI", "IN"), "kochi": ("COK", "IN"), "cochin": ("COK", "IN"),
     "thiruvananthapuram": ("TRV", "IN"), "trivandrum": ("TRV", "IN"), "tirupati": ("TIR", "IN"),
+    # spellings seen in the feed
+    "bangalor": ("BLR", "IN"), "deli": ("DEL", "IN"), "vijayawada": ("VGA", "IN"), "vidzhayavada": ("VGA", "IN"),
+    "navi mumbai": ("NMI", "IN"),
 }
+CANONICAL_CITY = {"BLR": "Bengaluru", "DEL": "New Delhi", "VGA": "Vijayawada", "NMI": "Navi Mumbai", "BOM": "Mumbai",
+                  "MAA": "Chennai", "HYD": "Hyderabad", "CMB": "Colombo", "DXB": "Dubai", "AUH": "Abu Dhabi",
+                  "SIN": "Singapore", "KUL": "Kuala Lumpur"}
 
 
 def fill_airport(row: dict) -> dict:
     """Fill missing other_iata / other_country / is_international from the airport name or city."""
-    if row.get("other_country") and row.get("other_iata"):
-        return row
     text = f"{row.get('other_name', '')} {row.get('other_city', '')}".lower()
-    for key, (iata, cc) in KNOWN_AIRPORTS.items():
+    for key, (iata, cc) in ([] if row.get("other_country") and row.get("other_iata") else KNOWN_AIRPORTS.items()):
         if key in text:
             row["other_iata"] = row.get("other_iata") or iata
             if not row.get("other_country"):
                 row["other_country"] = cc
                 row["is_international"] = cc != "IN"
-            if not row.get("other_city"):
-                row["other_city"] = key.title()
             break
+    if row.get("other_iata") in CANONICAL_CITY:
+        row["other_city"] = CANONICAL_CITY[row["other_iata"]]
+    elif not row.get("other_city") and row.get("other_name"):
+        row["other_city"] = row["other_name"]
     return row

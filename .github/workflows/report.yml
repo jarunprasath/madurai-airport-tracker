@@ -11,7 +11,7 @@ on:
       kind:
         description: "Report type"
         type: choice
-        options: [weekly, monthly, yearly]
+        options: [weekly, monthly, yearly, 10-year-review]
         default: weekly
       date:
         description: "Any date inside the wanted week/month/financial year, YYYY-MM-DD (blank = last complete period)"
@@ -44,9 +44,13 @@ jobs:
               *) KIND=weekly ;;
             esac
           fi
-          ARGS="--kind $KIND"
-          [ -n "${{ inputs.date }}" ] && ARGS="$ARGS --date ${{ inputs.date }}"
-          python -m ixm report $ARGS | tee report.log
+          if [ "$KIND" = "10-year-review" ]; then
+            python -m ixm decade | tee report.log
+          else
+            ARGS="--kind $KIND"
+            [ -n "${{ inputs.date }}" ] && ARGS="$ARGS --date ${{ inputs.date }}"
+            python -m ixm report $ARGS | tee report.log
+          fi
       - uses: actions/upload-artifact@v4
         with:
           name: ixm-report
@@ -58,7 +62,7 @@ jobs:
           git config user.name "ixm-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add reports/*.pptx reports/*.xlsx
-          git diff --cached --quiet || git commit -m "report: $(grep -o 'IXM_[a-z]*_report_[^.]*' report.log | head -1)"
+          git diff --cached --quiet || git commit -m "report: $(grep -o 'IXM_[A-Za-z0-9_-]*' report.log | head -1)"
           # retry: if another run or a code push changed the same data meanwhile, keep this run's data
           for i in 1 2 3; do
             git pull --rebase --autostash -X theirs origin main && git push origin HEAD:main && exit 0

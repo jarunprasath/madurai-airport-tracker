@@ -466,3 +466,20 @@ def test_yearly_report_like_for_like(tmp_root):
     path = write_excel(d, tmp_root / "y.xlsx")
     from openpyxl import load_workbook
     assert "Months in FY" in load_workbook(path).sheetnames
+
+
+def test_decade_review_computes_and_publishes(tmp_root):
+    from ixm import decade
+    from ixm.build import publish_reports
+    store.upsert(synthetic_flights(date(2026, 6, 1), 30))
+    aai.write_monthly(tmp_root / "data" / "aai_monthly.csv", synthetic_monthly())
+    d = decade.compute()
+    recs = decade.RECOMMENDATIONS(d)
+    assert d["aai_months"] > 100 and d["forecast"]["available"] and len(recs) == 9
+    assert d["network"] and d["scenarios"][1]["name"] == "Match India"
+    p = decade.write_excel({**d, "recommendations": recs}, tmp_root / "reports" / "IXM_10_year_review.xlsx")
+    from openpyxl import load_workbook
+    assert {"FY_summary", "Peers", "Recommendations", "Scenarios_2031"} <= set(load_workbook(p).sheetnames)
+    (tmp_root / "reports" / "IXM_yearly_report_FY2025-26.xlsx").write_bytes(b"x")
+    kinds = {g["kind"] for g in publish_reports()}
+    assert {"review", "yearly"} <= kinds

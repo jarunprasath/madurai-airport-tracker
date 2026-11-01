@@ -111,18 +111,21 @@ def publish_reports() -> list[dict]:
     groups: dict[str, dict] = {}
     if src.exists():
         dst.mkdir(parents=True, exist_ok=True)
-        for p in sorted(src.glob("IXM_*_report_*.*")):
+        for p in sorted(list(src.glob("IXM_*_report_*.*")) + list(src.glob("IXM_10_year_review.*"))):
             if p.suffix not in (".pptx", ".xlsx"):
                 continue
-            m = re.match(r"IXM_(weekly|monthly)_report_(.+)$", p.stem)
-            if not m:
+            m = re.match(r"IXM_(weekly|monthly|yearly)_report_(.+)$", p.stem)
+            if p.stem == "IXM_10_year_review":
+                kind, title, period = "review", "10-year review & recommendations", "FY 2016-17 onwards"
+            elif m:
+                kind, title, period = m.group(1), f"{m.group(1).title()} report", m.group(2)
+            else:
                 continue
             shutil.copy2(p, dst / p.name)
-            g = groups.setdefault(p.stem, {"title": f"{m.group(1).title()} report", "kind": m.group(1),
-                                           "period": m.group(2), "files": []})
+            g = groups.setdefault(p.stem, {"title": title, "kind": kind, "period": period, "files": []})
             g["files"].append({"label": "PowerPoint" if p.suffix == ".pptx" else "Excel",
                                "href": f"reports/{p.name}"})
-    return sorted(groups.values(), key=lambda g: (g["period"], g["kind"]), reverse=True)
+    return sorted(groups.values(), key=lambda g: (g["kind"] == "review", g["period"], g["kind"]), reverse=True)
 
 
 def build(today: date | None = None) -> dict:
