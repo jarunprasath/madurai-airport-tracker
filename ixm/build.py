@@ -111,20 +111,25 @@ def publish_reports() -> list[dict]:
     groups: dict[str, dict] = {}
     if src.exists():
         dst.mkdir(parents=True, exist_ok=True)
-        for p in sorted(list(src.glob("IXM_*_report_*.*")) + list(src.glob("IXM_10_year_review.*"))):
-            if p.suffix not in (".pptx", ".xlsx"):
+        for p in sorted(list(src.glob("IXM_*_report_*.*")) + list(src.glob("IXM_10_year_review*.*"))):
+            if p.suffix not in (".pptx", ".xlsx", ".pdf"):
                 continue
-            m = re.match(r"IXM_(weekly|monthly|yearly)_report_(.+)$", p.stem)
-            if p.stem == "IXM_10_year_review":
+            editable = p.stem.endswith("_editable")
+            stem = p.stem[:-len("_editable")] if editable else p.stem
+            m = re.match(r"IXM_(weekly|monthly|yearly)_report_(.+)$", stem)
+            if stem == "IXM_10_year_review":
                 kind, title, period = "review", "10-year review & recommendations", "FY 2016-17 onwards"
             elif m:
                 kind, title, period = m.group(1), f"{m.group(1).title()} report", m.group(2)
             else:
                 continue
             shutil.copy2(p, dst / p.name)
-            g = groups.setdefault(p.stem, {"title": title, "kind": kind, "period": period, "files": []})
-            g["files"].append({"label": "PowerPoint" if p.suffix == ".pptx" else "Excel",
-                               "href": f"reports/{p.name}"})
+            g = groups.setdefault(stem, {"title": title, "kind": kind, "period": period, "files": []})
+            label = {".pptx": "PowerPoint (editable)" if editable else "PowerPoint", ".xlsx": "Excel", ".pdf": "PDF"}[p.suffix]
+            g["files"].append({"label": label, "href": f"reports/{p.name}"})
+    order = ["PowerPoint", "PDF", "Excel", "PowerPoint (editable)"]
+    for g in groups.values():
+        g["files"].sort(key=lambda f: order.index(f["label"]))
     return sorted(groups.values(), key=lambda g: (g["kind"] == "review", g["period"], g["kind"]), reverse=True)
 
 

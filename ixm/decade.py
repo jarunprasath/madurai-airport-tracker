@@ -415,7 +415,8 @@ def generate(out_dir: Path | None = None, recommendations: list | None = None) -
     paths = {"json": j, "xlsx": write_excel(d, out / f"{stem}.xlsx")}
     p = out / f"{stem}.pptx"
     subprocess.run(["node", str(config.ROOT / "decade_pptx.js"), str(j), str(p)], check=True)
-    paths["pptx"] = p
+    from .flatten import flatten
+    paths.update({k: Path(v) for k, v in flatten(p).items()})
     return paths
 
 

@@ -34,6 +34,10 @@ jobs:
         with:
           node-version: "20"
       - run: pip install -r requirements.txt && npm install --no-audit --no-fund
+      - name: Install slide renderer (LibreOffice, poppler, metric-compatible fonts)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends libreoffice-impress poppler-utils fonts-crosextra-carlito fonts-crosextra-caladea >/dev/null
       - name: Build report
         run: |
           KIND="${{ inputs.kind }}"
@@ -57,11 +61,12 @@ jobs:
           path: |
             reports/*.pptx
             reports/*.xlsx
+            reports/*.pdf
       - name: Commit report
         run: |
           git config user.name "ixm-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add reports/*.pptx reports/*.xlsx
+          git add reports/*.pptx reports/*.xlsx reports/*.pdf
           git diff --cached --quiet || git commit -m "report: $(grep -o 'IXM_[A-Za-z0-9_-]*' report.log | head -1)"
           # retry: if another run or a code push changed the same data meanwhile, keep this run's data
           for i in 1 2 3; do

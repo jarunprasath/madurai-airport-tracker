@@ -468,5 +468,6 @@ def generate(kind: str, ref: date, out_dir: Path | None = None, pptx: bool = Tru
         ppath = out / f"{stem}.pptx"
         script = config.ROOT / "report_pptx.js"
         subprocess.run(["node", str(script), str(jpath), str(ppath)], check=True)
-        paths["pptx"] = ppath
+        from .flatten import flatten
+        paths.update({k: Path(v) for k, v in flatten(ppath).items()})
     return paths
