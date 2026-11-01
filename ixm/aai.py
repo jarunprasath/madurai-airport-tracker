@@ -460,6 +460,15 @@ def collect(start: date, end: date, refetch: bool = False, fetcher: Fetcher | No
             write_monthly(config.AAI_MONTHLY_CSV, table)
             print(f"STOPPED: {e}", flush=True)
             break
+        except Exception as e:  # unexpected bug for this month: record it and move on
+            import traceback
+            traceback.print_exc()
+            summary["errors"] = summary.get("errors", 0) + 1
+            log_rows.append([key, "", "", f"error: {type(e).__name__}: {str(e)[:150]}"])
+            _append_log(log_rows)
+            write_monthly(config.AAI_MONTHLY_CSV, table)
+            print(f"{key}: ERROR {type(e).__name__}: {e} - continuing", flush=True)
+            continue
         summary["months_ok" if got_any else "months_missing"] += 1
         write_monthly(config.AAI_MONTHLY_CSV, table)   # save progress every month
         _append_log(log_rows)

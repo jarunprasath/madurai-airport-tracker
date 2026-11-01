@@ -323,3 +323,18 @@ def test_discover_full_month_and_underscore_names():
             '<a href="/sites/default/files/traffic-news/Sep2k26Annex_4.pdf">b</a>')
     links = aai.discover_links(html)
     assert (2026, 4, 3) in links and (2026, 9, 4) in links
+
+
+class CrashFetcher(FakeFetcher):
+    def fetch(self, year, month, annex):
+        if (year, month) == (2026, 8):
+            raise ValueError("boom")
+        return super().fetch(year, month, annex)
+
+
+def test_collect_continues_after_unexpected_error(tmp_root, tmp_path):
+    p = tmp_path / "x.pdf"
+    _make_pdf(p, [("ANNEXURE-III C TOTAL PASSENGERS", [["38", "MADURAI", "123559", "113397", "9.0", "912121", "866342", "5.3"]])])
+    s = aai.collect(date(2026, 6, 1), date(2026, 9, 1), fetcher=CrashFetcher(p.read_bytes()))
+    assert s["errors"] == 1 and s["months_ok"] == 3
+    assert "error: ValueError" in (tmp_root / "data" / "aai_fetch_log.csv").read_text()
