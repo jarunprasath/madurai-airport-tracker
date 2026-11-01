@@ -30,6 +30,7 @@
     const ym = labels[i]; const mo = +ym.slice(5, 7);
     const narrow = window.innerWidth < 640;
     const every = labels.length > 48 ? 12 : labels.length > 18 ? (narrow ? 6 : 3) : labels.length > 9 ? (narrow ? 3 : 1) : 1;
+    if (every === 12 && narrow && labels.length > 96) return mo === 1 && +ym.slice(0, 4) % 2 === 0 ? ym.slice(0, 4) : "";
     return (mo - 1) % every === 0 ? (every === 12 ? ym.slice(0, 4) : monthLabel(ym)) : ""; } });
   const dayTicks = (dates) => ({ autoSkip: false, maxRotation: 0, callback: (v, i) => {
     const day = +dates[i].slice(8, 10);
@@ -257,7 +258,7 @@
       return out;
     };
     if (am.length) {
-      const m = fillMonths(am).slice(-36);
+      const m = fillMonths(am);                      // full history since the first AAI month
       const split = m.every((r) => r.missing || (r.pax_dom !== null && r.pax_intl !== null));
       const months = m.map((r) => r.month);
       chart("c-aai", { type: split ? "bar" : "line", data: { labels: months.map(monthLabel), datasets: split ? [
@@ -268,7 +269,7 @@
       const gaps = m.filter((r) => r.missing).map((r) => r.month);
       $("aai-note").textContent = `Source: AAI monthly Traffic News. ${am.length} months collected; latest ${am[am.length - 1].month}.` +
         (gaps.length ? ` Not yet collected: ${gaps.join(", ")} (shown as gaps).` : "");
-      const fr = fillMonths(am).slice(-36);
+      const fr = fillMonths(am);
       const hasFr = fr.some((r) => r.frt_total !== null && r.frt_total !== undefined);
       const frMonths = fr.map((r) => r.month);
       if (hasFr) chart("c-freight", { type: "bar", data: { labels: frMonths.map(monthLabel),
@@ -284,7 +285,7 @@
       { h: "YoY %", f: (r) => (r.pax_yoy_pct === null ? "–" : r.pax_yoy_pct), num: true },
       { h: "Per day", f: (r) => fmt(r.pax_per_day), num: true }, { h: "Movements", f: (r) => fmt(r.mov_total), num: true },
       { h: "Cargo t", f: (r) => (r.frt_total === null ? "–" : r.frt_total), num: true }],
-      am.slice().reverse().slice(0, 36), "No AAI monthly data yet.");
+      am.slice().reverse(), "No AAI monthly data yet.");
 
     if (annual && annual.length) {
       chart("c-annual", { type: "bar", data: { labels: annual.map((r) => r.fiscal_year),

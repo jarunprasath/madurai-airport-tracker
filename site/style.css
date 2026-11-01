@@ -104,3 +104,6 @@ tr:last-child td { border-bottom: 0; }
 .card .row-head { margin-bottom: 4px; }
 .seg.small { margin-bottom: 4px; }
 .seg.small button { padding: 4px 10px; font-size: 12px; }
+
+.table-wrap.scroll { max-height: 520px; overflow-y: auto; }
+.table-wrap.scroll th { position: sticky; top: 0; z-index: 1; }
