@@ -94,7 +94,17 @@ def windows_for_day(d: date) -> list[tuple[str, str]]:
     ]
 
 
+class QuotaExceeded(RuntimeError):
+    """The API refused because the plan's request quota / rate limit is used up (HTTP 429)."""
+
+
+class AuthError(RuntimeError):
+    """The key is wrong or the subscription is not active (HTTP 401/403)."""
+
+
 def fetch_day(d: date, key: str | None = None, session: requests.Session | None = None) -> list[dict]:
+    """Fetch one local day. Raises QuotaExceeded / AuthError (stop the run) or ValueError
+    (this day is unavailable, e.g. too far in the past - skip it and continue)."""
     key = key or os.environ.get("AERODATABOX_KEY")
     if not key:
         print("AERODATABOX_KEY not set - skipping AeroDataBox collection.")
@@ -108,20 +118,42 @@ def fetch_day(d: date, key: str | None = None, session: requests.Session | None 
     rows: list[dict] = []
     for frm, to in windows_for_day(d):
         url = f"{BASE}/flights/airports/icao/{config.AIRPORT_ICAO}/{frm}/{to}"
-        r = s.get(url, headers=headers, params=params, timeout=40)
+        try:
+            r = s.get(url, headers=headers, params=params, timeout=40)
+        except requests.RequestException as e:
+            raise ValueError(f"network error: {type(e).__name__}") from e
         if r.status_code == 204:
             continue
+        if r.status_code == 429:
+            raise QuotaExceeded(r.text[:200])
+        if r.status_code in (401, 403):
+            raise AuthError(f"HTTP {r.status_code}: {r.text[:200]}")
         if r.status_code != 200:
-            print(f"AeroDataBox {r.status_code} for {frm}..{to}: {r.text[:200]}")
-            r.raise_for_status()
+            raise ValueError(f"HTTP {r.status_code}: {r.text[:160]}")
         rows.extend(parse_fids(r.json()))
     # keep only movements whose local date is the requested day
     return [r for r in rows if r["date"] == d.isoformat()]
 
 
-def fetch_days(days: Iterable[date], key: str | None = None) -> list[dict]:
-    out: list[dict] = []
+def fetch_days(days: Iterable[date], key: str | None = None, on_day=None) -> dict:
+    """Fetch day by day. `on_day(day, rows)` is called after each successful day (used to save
+    progress). Days that fail are skipped; quota or auth errors stop the run cleanly."""
+    result = {"rows": [], "ok": 0, "failed": [], "stopped": ""}
     with requests.Session() as s:
         for d in days:
-            out.extend(fetch_day(d, key, s))
-    return out
+            try:
+                day_rows = fetch_day(d, key, s)
+            except QuotaExceeded as e:
+                result["stopped"] = f"API quota/rate limit reached at {d} - run again later to continue ({e})"
+                break
+            except AuthError as e:
+                result["stopped"] = f"API key or subscription problem: {e}"
+                break
+            except ValueError as e:
+                result["failed"].append((d.isoformat(), str(e)))
+                continue
+            result["ok"] += 1
+            result["rows"].extend(day_rows)
+            if on_day:
+                on_day(d, day_rows)
+    return result

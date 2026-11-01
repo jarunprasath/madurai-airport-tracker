@@ -185,7 +185,7 @@ def build(today: date | None = None) -> dict:
         "board": board,
     }
     _write("summary.json", summary)
-    _write("daily.json", an.daily_series(past, lf)[-400:])
+    _write("daily.json", an.daily_series(past, lf))
     _write("weekly_flights.json", weeks)
     _write("monthly_flights.json", flight_months)
     _write("aai_monthly.json", monthly_rows)

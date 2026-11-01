@@ -37,7 +37,7 @@ def main(argv: list[str] | None = None) -> int:
     f.add_argument("--ahead", type=int, default=1, help="days after today (default 1 = tomorrow)")
     f.add_argument("--from", dest="date_from", help="first date YYYY-MM-DD for a historical backfill")
     f.add_argument("--to", dest="date_to", help="last date YYYY-MM-DD (default: same as --from)")
-    f.add_argument("--max-days", type=int, default=31, help="safety cap on days per run (API quota)")
+    f.add_argument("--max-days", type=int, default=31, help="safety cap on days per run (API quota), applies to every mode")
     a = sub.add_parser("aai")
     a.add_argument("--start", help="YYYY-MM (default: 4 months ago)")
     a.add_argument("--end", help="YYYY-MM (default: last month)")
@@ -65,20 +65,33 @@ def main(argv: list[str] | None = None) -> int:
             d0 = date.fromisoformat(args.date_from)
             d1 = date.fromisoformat(args.date_to) if args.date_to else d0
             days = [d0 + timedelta(days=i) for i in range((d1 - d0).days + 1)]
-            if len(days) > args.max_days:
-                print(f"flights: {len(days)} days requested; capped to the first {args.max_days} "
-                      f"(about {2 * args.max_days} API calls). Run again from {days[args.max_days]} to continue.")
-                days = days[:args.max_days]
         else:
             days = [today + timedelta(days=i) for i in range(-args.back, args.ahead + 1)]
-        rows = aerodatabox.fetch_days(days)
-        per_day = {}
-        for r in rows:
-            per_day[r["date"]] = per_day.get(r["date"], 0) + 1
-        for d in days:
-            print(f"  {d}: {per_day.get(d.isoformat(), 0)} movements")
-        print(f"flights: fetched {len(rows)} movements over {len(days)} days "
-              f"(~{2 * len(days)} API calls), {store.upsert(rows)} new/updated")
+        have = {r["date"] for r in store.load_all()}
+        before = len(days)
+        days = [d for d in days if d.isoformat() not in have or d >= today - timedelta(days=1)]
+        if before != len(days):
+            print(f"flights: skipping {before - len(days)} days already collected")
+        if len(days) > args.max_days:
+            # newest first for "back" runs so the most recent history arrives first
+            keep = days[-args.max_days:] if not args.date_from else days[:args.max_days]
+            nxt = (min(keep) - timedelta(days=1)) if not args.date_from else (max(keep) + timedelta(days=1))
+            print(f"flights: {len(days)} days requested; limited to {args.max_days} days "
+                  f"(~{2 * args.max_days} API calls) to protect your quota. Next run: continue from {nxt}.")
+            days = keep
+        saved = {"n": 0}
+
+        def save(day, rows):
+            saved["n"] += store.upsert(rows)
+            print(f"  {day}: {len(rows)} movements", flush=True)
+
+        res = aerodatabox.fetch_days(days, on_day=save)
+        for d, why in res["failed"]:
+            print(f"  {d}: skipped - {why}", flush=True)
+        print(f"flights: {res['ok']} of {len(days)} days fetched, {len(res['rows'])} movements, "
+              f"{saved['n']} new/updated, ~{2 * (res['ok'] + len(res['failed']))} API calls")
+        if res["stopped"]:
+            print(f"STOPPED: {res['stopped']}")
     elif args.cmd == "aai":
         from . import aai
         last = date(today.year, today.month, 1) - timedelta(days=1)

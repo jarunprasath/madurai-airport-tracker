@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       back:
-        description: "Days before today to fetch"
+        description: "Days before today to fetch (max 31 per run)"
         default: "1"
       ahead:
         description: "Days after today to fetch"
@@ -44,7 +44,8 @@ jobs:
             python -u -m ixm flights --back "${{ inputs.back || 1 }}" --ahead "${{ inputs.ahead || 1 }}" | tee flights_run.log
           fi
           { echo "### Flight collection"; echo '```'; tail -n 40 flights_run.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-      - name: Commit data
+      - name: Commit data (also after a partial run)
+        if: always()
         run: |
           git config user.name "ixm-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

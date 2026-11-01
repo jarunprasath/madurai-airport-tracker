@@ -1,5 +1,5 @@
 import json
-from datetime import date
+from datetime import date, timedelta
 
 import pytest
 
@@ -398,3 +398,48 @@ def test_column_slip_detected_against_same_report_prev_year_column():
             "2025-12": {"month": "2025-12", "frt_dom": "232", "frt_intl": "534", "frt_total": "766"}}
     c = clean_monthly(data)
     assert c["2025-12"]["frt_total"] == "" and c["2024-12"]["frt_total"] == "296"
+
+
+def test_fetch_days_skips_bad_days_saves_progress_and_stops_on_quota(monkeypatch):
+    calls, saved = [], []
+
+    def fake(d, key=None, session=None):
+        calls.append(d)
+        if d.day == 2:
+            raise ValueError("HTTP 400: date out of range")
+        if d.day == 4:
+            raise aerodatabox.QuotaExceeded("Too many requests")
+        return [{"date": d.isoformat()}]
+
+    monkeypatch.setattr(aerodatabox, "fetch_day", fake)
+    days = [date(2026, 1, i) for i in range(1, 7)]
+    res = aerodatabox.fetch_days(days, key="k", on_day=lambda d, rows: saved.append(d))
+    assert res["ok"] == 2 and [d for d, _ in res["failed"]] == ["2026-01-02"]
+    assert "quota" in res["stopped"] and len(calls) == 4          # stopped at day 4, days 5-6 untouched
+    assert saved == [date(2026, 1, 1), date(2026, 1, 3)]          # progress saved day by day
+
+
+def test_cli_caps_back_mode(monkeypatch, tmp_root, capsys):
+    from ixm import __main__ as cli
+    seen = {}
+    monkeypatch.setattr(aerodatabox, "fetch_days", lambda days, on_day=None: seen.setdefault("days", days) and
+                        {"rows": [], "ok": 0, "failed": [], "stopped": ""})
+    cli.main(["flights", "--back", "2000", "--ahead", "0"])
+    out = capsys.readouterr().out
+    assert len(seen["days"]) == 31 and "limited to 31 days" in out
+    assert max(seen["days"]) == cli._today()                         # newest days kept first
+
+
+def test_cli_back_mode_progresses_past_collected_days(monkeypatch, tmp_root):
+    from ixm import __main__ as cli
+    today = cli._today()
+    store.upsert([{"date": (today - timedelta(days=i)).isoformat(), "direction": "arrival", "flight_no": f"X{i}",
+                   "sched_local": "", "is_cargo": False, "is_international": False} for i in range(2, 40)])
+    seen = {}
+    monkeypatch.setattr(aerodatabox, "fetch_days", lambda days, on_day=None: seen.setdefault("days", days) and
+                        {"rows": [], "ok": 0, "failed": [], "stopped": ""})
+    cli.main(["flights", "--back", "100", "--ahead", "0"])
+    got = sorted(seen["days"])
+    assert today in got and today - timedelta(days=1) in got            # recent days always refreshed
+    assert today - timedelta(days=10) not in got                          # already collected: skipped
+    assert min(got) <= today - timedelta(days=40)                         # moves into older history
