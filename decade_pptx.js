@@ -64,6 +64,7 @@ function stat(s, x, y, w, value, label, sub, color = INK) {
 const FY = d.fy_table;
 const full = FY.filter((f) => f.months === 12);
 const fy = (k) => FY.find((f) => f.fy === k) || {};
+const peakTxt = (() => { const v = Object.values(d.network).map((n) => Math.max(...n.hourly) / n.days); return `${Math.min(...v).toFixed(1)}–${Math.max(...v).toFixed(1)}`; })();
 const peers = d.peers, ixm = peers.find((p) => p.airport.startsWith("Madurai")), trz = peers.find((p) => p.airport.startsWith("Tiruchi"));
 const nmonths = Object.keys(d.network).sort();
 const nlast = d.network[d.ref_month] || {};
@@ -94,7 +95,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
   bullets(s, [
     `Madurai is the only airport in its peer group still below its pre-COVID peak; Trichy grew ${trz.index_vs_1819 - 100 > 0 ? "+" : ""}${(trz.index_vs_1819 - 100).toFixed(1)}% and now carries ${(trz.fy2526 / ixm.fy2526).toFixed(1)}× Madurai's traffic.`,
     `Had Madurai grown like India since FY18-19 it would handle about ${lakh(ixm.fy1819 * d.india.fy2526 / d.india.fy1819)} passengers a year – roughly ${lakh(d.gap_vs_india)} more than today.`,
-    `The constraint is airline capacity and connectivity, not the terminal (about ${Math.round(100 * ixm.fy2526 / 2900000)}% of its 2.9 million rated capacity in use).`,
+    `The data point to airline capacity and connectivity, not the terminal, as the constraint: about ${Math.round(100 * ixm.fy2526 / 2900000)}% of the 2.9 million annual capacity is used and the busiest hour averages only ${peakTxt} movements a day.`,
     "Priorities: restore and widen Gulf links, use the new international status to bring in foreign airlines, upgauge Chennai/Bengaluru from turboprops, use night slots, attract a second airline.",
   ], 0.5, 2.85, 9.0, 2.05, 12);
 }
@@ -197,7 +198,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
   const srt = [...d.season].sort((a, b) => b.index - a.index);
   side(s, [
     "1.00 = an average month",
-    `Peaks: ${srt.slice(0, 3).map((x) => `${x.name} ${x.index.toFixed(2)}`).join(", ")} – Pongal, Dec holidays/Sabarimala, summer holidays`,
+    `Peaks: ${srt.slice(0, 3).map((x) => `${x.name} ${x.index.toFixed(2)}`).join(", ")} – in line with Pongal, summer and year-end holidays (our interpretation of the timing)`,
     `Lows: ${srt.slice(-2).map((x) => `${x.name} ${x.index.toFixed(2)}`).join(", ")}`,
     "Peak months run about 15–20% above the quietest – a case for seasonal extra flights",
   ]);
@@ -229,7 +230,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
     "Dubai & Abu Dhabi flights suspended from end-Feb 2026 (Gulf conflict); resumption from 14 Aug",
     `Mar–Jul 2026: about ${fmt(d.intl_lost_mar_jul_2026)} fewer international passengers than a year earlier`,
     `Domestic was also down ${Math.abs(Math.max(...dom.map((r) => r.dom_change_pct)))}–${Math.abs(Math.min(...dom.map((r) => r.dom_change_pct)))}% year on year in Jan–Jun 2026`,
-    `Recovery: domestic ${x[x.length - 1].dom_change_pct > 0 ? "+" : ""}${x[x.length - 1].dom_change_pct}% and international ${x[x.length - 1].change_pct}% in ${mlab(x[x.length - 1].month)}`,
+    `Latest month: domestic ${x[x.length - 1].dom_change_pct > 0 ? "+" : ""}${x[x.length - 1].dom_change_pct}% and international ${x[x.length - 1].change_pct}% in ${mlab(x[x.length - 1].month)}`,
   ], 6.85, 1.15, 2.65, 3.7, 11);
 }
 
@@ -244,7 +245,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
   side(s, [
     `Movements peaked at ${fmt(fy("2019-20").mov_total)} in FY19-20; ${fmt(fy("2024-25").mov_total)} in FY24-25`,
     `Passengers per movement: ${ppm.slice(-4).map((f) => `FY${f.fy.slice(2)}: ${f.pax_per_mov}`).join(", ")} (FY19-20: ${fy("2019-20").pax_per_mov})`,
-    "Airlines carry similar volumes with fewer, larger aircraft – frequency (choice of times) has fallen",
+    "More passengers per movement means fuller and/or larger aircraft – AAI does not publish seats, so the split is not known. Fewer movements does mean fewer choices of flight times",
   ]);
 }
 
@@ -256,10 +257,10 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
   img(s, "cargo", { x: 0.4, y: 1.05, w: 6.3, h: 3.85 }, "Cargo tonnes by financial year") || s.addChart(pres.charts.BAR, [{ name: "Cargo (tonnes)", labels, values: rows.map((c) => c.tonnes) }],
     { x: 0.4, y: 1.05, w: 6.3, h: 3.85, barDir: "col", chartColors: [TEAL], showLegend: false, ...axis() });
   side(s, [
-    `Cargo operations began in Dec 2017 and peaked at ${fmt(fy("2018-19").frt_total)} t in FY 2018-19 (confirmed by AAI's revised figures)`,
+    `Cargo is reported every month since 2016; it jumped in FY17-18 and peaked at ${fmt(fy("2018-19").frt_total)} t in FY 2018-19 (confirmed by AAI's revised figures)`,
     `FY 2024-25: ${fmt(fy("2024-25").frt_total)} t; FY 2025-26: ${fmt(fy("2025-26").frt_total)} t in 11 months`,
     `FY 2026-27 so far: ${fmt(fy("2026-27").frt_total)} t in ${fy("2026-27").frt_months} months`,
-    "Cargo is growing while passengers stagnate – most travels in passenger-aircraft holds, so more and larger flights also lift cargo",
+    "Cargo is growing while passengers stagnate. AAI does not split belly-hold and freighter cargo, so the driver of growth cannot be told from this data",
   ]);
 }
 
@@ -303,7 +304,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
   side(s, [
     "24-hour operations started in Oct 2024 (reported)",
     `Night movements (22:00–06:00): ${nmonths.map((m) => `${mlab(m)} ${d.network[m].night_movements}`).join(", ")}`,
-    "Gulf and South-East Asian carriers typically schedule late-evening and night departures – unused night capacity is an opportunity",
+    "Night slots let airlines use aircraft that fly elsewhere by day and suit onward Gulf connections – unused night capacity is an opportunity (rationale, not measured here)",
   ]);
 }
 
@@ -315,7 +316,7 @@ const ADB = "AeroDataBox flight records collected by the IXM Pulse tracker";
   stat(s, 5.1, 1.1, 2.15, "543 / 653", "acres handed over", "Aug 2025 – no completion date");
   stat(s, 7.4, 1.1, 2.1, "Mar 2026", "international airport status", "Union Cabinet approval");
   bullets(s, [
-    "The terminal is not the bottleneck this decade: even the fastest what-if path (slide 17) reaches about " + `${scen[scen.length - 1].terminal_use_pct}% of capacity by FY 2030-31.`,
+    `Busiest hour in the flight data: ${peakTxt} movements a day on average. ` + "The terminal is not the bottleneck this decade: even the fastest what-if path (slide 17) reaches about " + `${scen[scen.length - 1].terminal_use_pct}% of capacity by FY 2030-31.`,
     "The runway is: wide-body aircraft (A330/B777) need the 3,810 m extension – essential for long-haul and heavy cargo.",
     "Madurai has been outside bilateral air service agreements, which kept foreign airlines away – the new international status is the moment to change this.",
   ], 0.5, 2.85, 9, 2.0, 12);
@@ -352,7 +353,7 @@ const recs = d.recommendations;
   const s = slide("Opportunities to create");
   const ops = [
     ["Diaspora corridors", "Gulf, Singapore, Malaysia and Sri Lanka routes – international was 21–25% of traffic before COVID (AAI). Target: restore and exceed FY19-20's " + fmt(fy("2019-20").pax_intl) + " international passengers."],
-    ["Heritage & pilgrim gateway", "Meenakshi Amman Temple, Rameswaram and Kodaikanal are within reach; Dec–Jan peaks (Pongal, Sabarimala season) support seasonal and charter flights. (Qualitative – no visitor data in this review.)"],
+    ["Heritage & pilgrim gateway", "Meenakshi Amman Temple, Rameswaram and Kodaikanal are within reach; the Dec–Jan peaks could support seasonal and charter flights. (Qualitative – no visitor data in this review.)"],
     ["Air cargo from the south", "Cargo grew while passengers stalled. International status plus customs and cold-chain facilities can serve agricultural and regional exporters."],
     ["Night slots & based aircraft", "Zero scheduled night movements despite 24-hour operations. An airline basing aircraft overnight in Madurai enables early departures and late returns."],
   ];
@@ -371,7 +372,8 @@ const recs = d.recommendations;
   bullets(s, [
     "Share this evidence with AAI Madurai, the Ministry of Civil Aviation, the State Government and airlines; track progress monthly on the IXM Pulse dashboard.",
     "Ask DGCA/AAI for route-level origin–destination data – it would turn route proposals from hypotheses into business cases.",
-    `Limits: AAI months ${d.aai_missing.join(" and ")} not available; flight-level detail covers ${d.flight_days} days (AeroDataBox keeps 365 days of history); peer figures are AAI totals via Wikipedia.`,
+    `Limits: AAI months ${d.aai_missing.join(" and ")} not available; flight-level detail covers ${d.flight_days} days (AeroDataBox keeps 365 days of history); peer figures are AAI totals via Wikipedia, without a domestic/international split.`,
+    "Not analysed (no data here): fares, catchment and leakage to Trichy or other airports, road and rail competition, and airline-by-airline history before Nov 2025 – so the causes of the fall since FY18-19 are not proven by this review.",
     "Scenarios are illustrative what-ifs using observed growth rates; the 12-month forecast is a statistical model, not an official projection.",
     "Dashboard: jarunprasath.github.io/madurai-airport-tracker · Contact: linkedin.com/in/arunprasathj",
   ], 0.5, 1.15, 9, 3.8, 13, "E5E7EB");

@@ -446,7 +446,7 @@ def RECOMMENDATIONS(d: dict) -> list[tuple]:
         (1, "Restore Gulf services in full and add Sharjah, Muscat, Kuwait and Doha",
          f"International passengers fell by about {d['intl_lost_mar_jul_2026']:,} in Mar–Jul 2026 vs the same months of 2025 "
          f"during the Gulf suspension; international share was {pre.get('intl_share')}% in FY18-19",
-         "Airlines (IndiGo, Air India Express, SpiceJet), MoCA", "High"),
+         "SpiceJet (Dubai) and IndiGo (Abu Dhabi), which flew these before the suspension; other Indian and Gulf carriers; MoCA", "High"),
         (2, "Use the new international status: seek point-of-call rights for foreign carriers (Gulf, Sri Lanka, Malaysia, Singapore)",
          "International status approved Mar 2026; Madurai was outside bilateral agreements, which kept foreign airlines away",
          "MoCA, Ministry of External Affairs, State Government", "High"),
@@ -464,7 +464,7 @@ def RECOMMENDATIONS(d: dict) -> list[tuple]:
          "IndiGo share of movements – " + "; ".join(
              f"{m}: {next((a['share_pct'] for a in n['airlines'] if a['airline'] == 'IndiGo'), 0)}%" for m, n in sorted(d["network"].items())),
          "Air India group, Akasa Air, State Government (incentives)", "Medium"),
-        (6, "New direct domestic routes to Kolkata, Pune, Ahmedabad, Goa and Kochi (demand to be confirmed with airline O&D data)",
+        (6, "Test candidate new direct routes to unserved metros, e.g. Kolkata, Pune, Ahmedabad (hypotheses – demand not shown by this data)",
          f"{len(normal.get('routes', []))} regular destinations in {nm}; Madurai fell from rank "
          f"{ind['rank_1819']} to {ind['rank_2526']} among Indian airports between FY18-19 and FY25-26",
          "Airlines, State Government (viability-gap / UDAN-type support)", "Medium"),
