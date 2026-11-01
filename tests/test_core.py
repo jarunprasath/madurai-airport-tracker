@@ -452,3 +452,17 @@ def test_cli_skips_dates_beyond_history_without_calls(monkeypatch, tmp_root, cap
                         {"rows": [], "ok": 0, "failed": [], "stopped": ""})
     cli.main(["flights", "--from", "2021-05-01", "--to", "2021-05-20"])
     assert "keeps only 365 days" in capsys.readouterr().out and seen["days"] == []
+
+
+def test_yearly_report_like_for_like(tmp_root):
+    m = synthetic_monthly()
+    del m["2025-11"]
+    aai.write_monthly(tmp_root / "data" / "aai_monthly.csv", m)
+    d = build_report_data("yearly", date(2025, 6, 1))
+    a, p = d["aai_this_month"], d["aai_prev_year"]
+    assert a["month"] == "FY 2025-26" and a["months"] == 11 and a["missing"] == ["2025-11"]
+    assert a["lfl_months"] == 11 and p["months"] == 11                      # Nov excluded from both years
+    assert len(d["fy_months"]) == 11 and d["start"] == "2025-04-01" and d["end"] == "2026-03-31"
+    path = write_excel(d, tmp_root / "y.xlsx")
+    from openpyxl import load_workbook
+    assert "Months in FY" in load_workbook(path).sheetnames

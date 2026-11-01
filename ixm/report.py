@@ -35,9 +35,33 @@ def _period(kind: str, ref: date) -> tuple[date, date, date, date, str]:
         s, e = an.month_bounds(ref.year, ref.month)
         ps, pe = an.month_bounds(ref.year - (ref.month == 1), (ref.month - 2) % 12 + 1)
         label = f"{s:%B %Y}"
+    elif kind == "yearly":
+        fy = ref.year if ref.month >= 4 else ref.year - 1        # Indian financial year, April-March
+        s, e = date(fy, 4, 1), date(fy + 1, 3, 31)
+        ps, pe = date(fy - 1, 4, 1), date(fy, 3, 31)
+        label = f"FY {fy}-{(fy + 1) % 100:02d} (Apr {fy} - Mar {fy + 1})"
     else:
-        raise ValueError("kind must be 'weekly' or 'monthly'")
+        raise ValueError("kind must be 'weekly', 'monthly' or 'yearly'")
     return s, e, ps, pe, label
+
+
+def fy_aggregate(monthly_rows: list[dict], s: date, e: date, name: str,
+                 only_months: set[str] | None = None) -> dict | None:
+    """Sum AAI monthly rows inside [s, e]. A metric is summed only when every month has it.
+    `only_months` (calendar month numbers "MM") restricts the sum for like-for-like comparisons."""
+    a, b = f"{s.year}-{s.month:02d}", f"{e.year}-{e.month:02d}"
+    rows = [r for r in monthly_rows if a <= r["month"] <= b and r.get("pax_total")
+            and (only_months is None or r["month"][5:] in only_months)]
+    if not rows:
+        return None
+    n_expected = (e.year - s.year) * 12 + e.month - s.month + 1
+    out = {"month": name, "months": len(rows), "months_expected": n_expected,
+           "missing": sorted({f"{y}-{m:02d}" for y in range(s.year, e.year + 1) for m in range(1, 13)
+                              if a <= f"{y}-{m:02d}" <= b} - {r["month"] for r in rows})}
+    for k in ("pax_dom", "pax_intl", "pax_total", "mov_dom", "mov_intl", "mov_total", "frt_dom", "frt_intl", "frt_total"):
+        vals = [r.get(k) for r in rows]
+        out[k] = round(sum(vals), 1) if all(v is not None for v in vals) else None
+    return out
 
 
 def build_report_data(kind: str, ref: date) -> dict:
@@ -70,6 +94,12 @@ def build_report_data(kind: str, ref: date) -> dict:
     end_month = f"{e.year}-{e.month:02d}"
     aai_hist = [r for r in monthly_rows if r["month"] <= end_month and r["pax_total"]][-24:]
     aai_this = next((r for r in monthly_rows if r["month"] == end_month and r["pax_total"]), None)
+    fy_months = []
+    if kind == "yearly":
+        fy_name = label.split(" (")[0]
+        aai_this = fy_aggregate(monthly_rows, s, e, fy_name)
+        fy_months = [r for r in monthly_rows if f"{s.year}-{s.month:02d}" <= r["month"] <= end_month]
+        aai_hist = [r for r in monthly_rows if r["month"] <= end_month and r["pax_total"]][-36:]
     fc = forecast.monthly_forecast({k: v for k, v in monthly.items() if k <= end_month})
 
     airlines = an.airline_table(cur_rows, lf)
@@ -104,11 +134,31 @@ def build_report_data(kind: str, ref: date) -> dict:
         insights.append(no_flight_reason)
     aai_prev_year = None
     if aai_this:
-        py = f"{int(end_month[:4]) - 1}-{end_month[5:]}"
-        aai_prev_year = next((r for r in monthly_rows if r["month"] == py and r["pax_total"]), None)
+        if kind == "yearly":
+            # like-for-like: compare only the calendar months present in BOTH years
+            cur_mm = {r["month"][5:] for r in monthly_rows if f"{s.year}-04" <= r["month"] <= f"{e.year}-03" and r.get("pax_total")}
+            prev_mm = {r["month"][5:] for r in monthly_rows if f"{ps.year}-04" <= r["month"] <= f"{pe.year}-03" and r.get("pax_total")}
+            common = cur_mm & prev_mm
+            aai_prev_year = fy_aggregate(monthly_rows, ps, pe, f"FY {ps.year}-{(ps.year + 1) % 100:02d}", common)
+            cur_lfl = fy_aggregate(monthly_rows, s, e, "lfl", common)
+            if aai_prev_year and cur_lfl:
+                aai_this["lfl_months"] = len(common)
+                for k in ("pax_total", "pax_dom", "pax_intl", "mov_total", "frt_total"):
+                    aai_this[f"{k}_lfl"] = cur_lfl.get(k)
+                aai_this["pax_yoy_pct"] = _pct(cur_lfl["pax_total"], aai_prev_year["pax_total"])
+            if aai_this["missing"]:
+                insights.append(f"AAI data covers {aai_this['months']} of {aai_this['months_expected']} months "
+                                f"(missing: {', '.join(aai_this['missing'])}); totals below are for available months.")
+        else:
+            py = f"{int(end_month[:4]) - 1}-{end_month[5:]}"
+            aai_prev_year = next((r for r in monthly_rows if r["month"] == py and r["pax_total"]), None)
         y = aai_this.get("pax_yoy_pct")
-        insights.append(f"AAI official passengers for {end_month}: {int(aai_this['pax_total']):,}"
+        insights.append(f"AAI official passengers for {aai_this['month']}: {int(aai_this['pax_total']):,}"
                         + (f" ({y:+.1f}% year on year)." if y is not None else "."))
+        if kind == "yearly" and fy_months:
+            best = max((r for r in fy_months if r.get("pax_total")), key=lambda r: r["pax_total"])
+            worst = min((r for r in fy_months if r.get("pax_total")), key=lambda r: r["pax_total"])
+            insights.append(f"Busiest month {best['month']} ({int(best['pax_total']):,}); quietest {worst['month']} ({int(worst['pax_total']):,}).")
         if aai_this.get("pax_dom") is not None and aai_this.get("pax_intl") is not None:
             share = 100 * aai_this["pax_intl"] / aai_this["pax_total"]
             line = f"Domestic {int(aai_this['pax_dom']):,} and international {int(aai_this['pax_intl']):,} ({share:.1f}% of total)"
@@ -166,7 +216,7 @@ def build_report_data(kind: str, ref: date) -> dict:
         "days_with_data": days_cur, "days_in_period": days_expected,
         "daily": daily, "airlines": airlines, "routes": routes, "aircraft": aircraft, "hourly": hourly,
         "aai_history": aai_hist, "aai_this_month": aai_this, "aai_prev_year": aai_prev_year,
-        "aai_gaps": gaps, "aai_annual": annual_rows, "no_flight_reason": no_flight_reason,
+        "aai_gaps": gaps, "aai_annual": annual_rows, "no_flight_reason": no_flight_reason, "fy_months": fy_months,
         "flight_coverage": {"first": first_day, "last": last_day},
         "forecast": fc, "insights": insights, "caveats": caveats,
         "flights": sorted(cur_rows, key=lambda r: (r["date"], r["sched_local"])),
@@ -236,7 +286,7 @@ def write_excel(d: dict, path: Path) -> Path:
     if d["aai_this_month"]:
         a = d["aai_this_month"]
         ws.append([])
-        ws.append(["AAI official (month)", "Passengers", "Aircraft movements", "Freight (t)"])
+        ws.append(["AAI official", "Passengers", "Aircraft movements", "Freight (t)"])
         ws.append([a["month"], a["pax_total"], a["mov_total"], a["frt_total"]])
     ws.append([])
     ws.append(["Key insights"])
@@ -253,6 +303,11 @@ def write_excel(d: dict, path: Path) -> Path:
     for col in "BCD":
         ws.column_dimensions[col].width = 18
 
+    if d.get("fy_months"):
+        fm = d["fy_months"]
+        wsy = _sheet(wb, "Months in FY", ["Month", "Passengers", "Domestic", "International", "YoY %", "Movements", "Cargo (t)"],
+                     [[x["month"], x["pax_total"], x["pax_dom"], x["pax_intl"], x["pax_yoy_pct"], x["mov_total"], x["frt_total"]] for x in fm])
+        _bar(wsy, "Monthly passengers in the financial year", 1, [3, 4], len(fm), "I2", "Passengers", stacked=True)
     daily = d["daily"]
     wsd = _sheet(wb, "Daily", ["Date", "Movements", "Arrivals", "Departures", "International", "Cargo",
                                "Cancelled", "Est. passengers", "On-time %"],
@@ -339,8 +394,12 @@ def generate(kind: str, ref: date, out_dir: Path | None = None, pptx: bool = Tru
     d = build_report_data(kind, ref)
     out = out_dir or REPORTS_DIR
     out.mkdir(parents=True, exist_ok=True)
-    tag = (f"{d['start'][:4]}-W{date.fromisoformat(d['start']).isocalendar()[1]:02d}"
-           if kind == "weekly" else d["start"][:7])
+    if kind == "weekly":
+        tag = f"{d['start'][:4]}-W{date.fromisoformat(d['start']).isocalendar()[1]:02d}"
+    elif kind == "yearly":
+        tag = f"FY{d['start'][:4]}-{int(d['start'][2:4]) + 1:02d}"
+    else:
+        tag = d["start"][:7]
     stem = f"IXM_{kind}_report_{tag}"
     paths = {"xlsx": write_excel(d, out / f"{stem}.xlsx")}
     jpath = out / f"{stem}.json"

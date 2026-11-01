@@ -76,7 +76,7 @@ const k = d.kpi, kc = d.kpi_change;
     line: { color: GOLD, transparency: 80 }, objectName: "motif-circle" });
   s.addText("MADURAI AIRPORT · IXM / VOMD", { x: 0.6, y: 1.0, w: 8, h: 0.4, fontSize: 14, color: GOLD,
     bold: true, charSpacing: 3, fontFace: FONT_B, isTextBox: true });
-  s.addText(`${d.kind === "weekly" ? "Weekly" : "Monthly"} traffic report`, { x: 0.6, y: 1.5, w: 8.5, h: 1.0,
+  s.addText(`${d.kind === "weekly" ? "Weekly" : d.kind === "yearly" ? "Yearly" : "Monthly"} traffic report`, { x: 0.6, y: 1.5, w: 8.5, h: 1.0,
     fontSize: 40, bold: true, color: WHITE, fontFace: FONT_H, isTextBox: true });
   s.addText(d.label, { x: 0.6, y: 2.5, w: 8.5, h: 0.5, fontSize: 20, color: WHITE, fontFace: FONT_B, isTextBox: true });
   s.addText("Flights · passengers · airlines · routes · cargo · forecast", { x: 0.6, y: 3.6, w: 8.5, h: 0.4,
@@ -92,11 +92,16 @@ const k = d.kpi, kc = d.kpi_change;
   const yoy = (c, p) => (c === null || c === undefined || !p ? "no comparison" :
     `${c > p ? "▲" : c < p ? "▼" : "■"} ${Math.abs(Math.round(1000 * (c - p) / p) / 10)}% vs a year ago`);
   // No flight-schedule data for the period: show the official AAI month instead of zeros
-  const cards = (!hasFlights && A) ? [
-    ["Passengers (AAI)", fmt(A.pax_total), yoy(A.pax_total, P.pax_total)],
-    ["International passengers", fmt(A.pax_intl), yoy(A.pax_intl, P.pax_intl)],
-    ["Aircraft movements", fmt(A.mov_total), yoy(A.mov_total, P.mov_total)],
-    ["Cargo (tonnes)", fmt(A.frt_total), yoy(A.frt_total, P.frt_total)],
+  // Yearly reports always lead with AAI's official figures (flight data rarely covers a whole year)
+  const useAAI = A && (!hasFlights || d.kind === "yearly");
+  // yearly: change is like-for-like over the months present in both years
+  const L = (k) => (A && A[`${k}_lfl`] !== undefined ? A[`${k}_lfl`] : A && A[k]);
+  const lflNote = A && A.lfl_months && A.lfl_months < 12 ? ` (${A.lfl_months} mo.)` : "";
+  const cards = useAAI ? [
+    ["Passengers (AAI)", fmt(A.pax_total), yoy(L("pax_total"), P.pax_total) + lflNote],
+    ["International passengers", fmt(A.pax_intl), yoy(L("pax_intl"), P.pax_intl) + lflNote],
+    ["Aircraft movements", fmt(A.mov_total), yoy(L("mov_total"), P.mov_total) + lflNote],
+    ["Cargo (tonnes)", fmt(A.frt_total), yoy(L("frt_total"), P.frt_total) + lflNote],
   ] : [
     ["Flight movements", fmt(k.movements), chg(kc.movements)],
     ["Est. passengers", fmt(k.est_pax), chg(kc.est_pax)],
@@ -109,7 +114,7 @@ const k = d.kpi, kc = d.kpi_change;
     const x = 0.5 + i * 2.3;
     s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: 1.3, w: 2.1, h: 2.0, fill: { color: LIGHT },
       line: { color: LIGHT }, rectRadius: 0.1, objectName: `kpi-card-${i}` });
-    s.addText(value, { x, y: 1.45, w: 2.1, h: 0.9, fontSize: 36, bold: true, color: i === 0 ? MAROON : INK,
+    s.addText(value, { x, y: 1.45, w: 2.1, h: 0.9, fontSize: value.length > 8 ? 28 : 36, bold: true, color: i === 0 ? MAROON : INK,
       align: "center", fontFace: FONT_H, isTextBox: true });
     s.addText(label, { x: x + 0.1, y: 2.35, w: 1.9, h: 0.4, fontSize: 12, color: INK, align: "center",
       fontFace: FONT_B, isTextBox: true });
@@ -117,7 +122,10 @@ const k = d.kpi, kc = d.kpi_change;
       fontFace: FONT_B, isTextBox: true });
   });
   const a = d.aai_this_month;
-  const line2 = (!hasFlights && a)
+  const line2 = (d.kind === "yearly" && a)
+    ? `Official AAI figures for ${a.month}: domestic ${fmt(a.pax_dom)} passengers` + (a.missing && a.missing.length ? ` (${a.months} of ${a.months_expected} months; ${a.missing.join(", ")} not published).` : ".") +
+      (hasFlights ? ` Flight-level detail covers ${d.days_with_data} of ${d.days_in_period} days.` : "")
+    : (!hasFlights && a)
     ? `Official AAI figures for ${a.month} (domestic ${fmt(a.pax_dom)} passengers). Flight-by-flight data was not collected for this period.`
     : a
     ? `AAI official for ${a.month}: ${fmt(a.pax_total)} passengers · ${fmt(a.mov_total)} aircraft movements · ${a.frt_total ?? "–"} t freight`
@@ -146,8 +154,27 @@ const k = d.kpi, kc = d.kpi_change;
   }
 }
 
-// 4. Daily movements
-{
+// 4. Daily movements (yearly reports: month-by-month official passengers instead)
+if (d.kind === "yearly" && (d.fy_months || []).length) {
+  const s = contentSlide(`Month by month – ${d.label.split(" (")[0]}`);
+  const fm = d.fy_months;
+  const labels = fm.map((x) => { const [y, m] = x.month.split("-"); return ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][+m - 1] + " " + y.slice(2); });
+  s.addChart(pres.charts.BAR, [
+    { name: "Domestic", labels, values: fm.map((x) => x.pax_dom || 0) },
+    { name: "International", labels, values: fm.map((x) => x.pax_intl || 0) },
+  ], { x: 0.5, y: 1.2, w: 6.2, h: 3.8, barDir: "col", barGrouping: "stacked", chartColors: [MAROON, GOLD],
+    showLegend: true, legendPos: "b", legendFontSize: 10, legendColor: INK, showValue: false, ...axis() });
+  const tot = fm.reduce((t, x) => t + (x.pax_total || 0), 0);
+  const best = fm.reduce((a, b) => ((b.pax_total || 0) > (a.pax_total || 0) ? b : a));
+  const A = d.aai_this_month || {};
+  commentary(s, [
+    `${fmt(tot)} passengers in ${fm.length} month${fm.length > 1 ? "s" : ""}`,
+    `Average ${fmt(tot / fm.length)} per month`,
+    `Busiest: ${best.month} (${fmt(best.pax_total)})`,
+    A.pax_intl ? `International share ${(100 * A.pax_intl / A.pax_total).toFixed(1)}%` : "Source: AAI monthly Traffic News",
+    ...(A.missing && A.missing.length ? [`Not published by AAI: ${A.missing.join(", ")}`] : []),
+  ]);
+} else {
   const s = contentSlide(d.kind === "weekly" ? "Daily flight movements this week" : `Daily flight movements – ${d.label}`);
   if (hasFlights) {
     const labels = d.daily.map((x) => x.date.slice(8));

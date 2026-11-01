@@ -1,19 +1,20 @@
 name: Generate report
-# PowerPoint + Excel reports. Automatic: weekly every Monday, monthly on the 8th.
+# PowerPoint + Excel reports. Automatic: weekly every Monday, monthly on the 8th, yearly (financial year) on 20 June.
 # On demand: Actions -> Generate report -> Run workflow (choose weekly/monthly and any date in the period).
 on:
   schedule:
     - cron: "41 2 * * 1"   # Monday 08:11 IST - last week
     - cron: "41 2 8 * *"   # 8th of month - last month
+    - cron: "41 3 20 6 *"  # 20 June - last financial year (AAI's March data is out by then)
   workflow_dispatch:
     inputs:
       kind:
         description: "Report type"
         type: choice
-        options: [weekly, monthly]
+        options: [weekly, monthly, yearly]
         default: weekly
       date:
-        description: "Any date inside the wanted week/month, YYYY-MM-DD (blank = last complete period)"
+        description: "Any date inside the wanted week/month/financial year, YYYY-MM-DD (blank = last complete period)"
         default: ""
 permissions:
   contents: write
@@ -37,7 +38,11 @@ jobs:
         run: |
           KIND="${{ inputs.kind }}"
           if [ -z "$KIND" ]; then
-            if [ "${{ github.event.schedule }}" = "41 2 8 * *" ]; then KIND=monthly; else KIND=weekly; fi
+            case "${{ github.event.schedule }}" in
+              "41 2 8 * *") KIND=monthly ;;
+              "41 3 20 6 *") KIND=yearly ;;
+              *) KIND=weekly ;;
+            esac
           fi
           ARGS="--kind $KIND"
           [ -n "${{ inputs.date }}" ] && ARGS="$ARGS --date ${{ inputs.date }}"

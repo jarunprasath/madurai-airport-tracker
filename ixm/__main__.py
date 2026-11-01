@@ -47,7 +47,7 @@ def main(argv: list[str] | None = None) -> int:
     a.add_argument("--budget-min", type=float, default=40, help="stop after this many minutes (default 40)")
     sub.add_parser("build")
     r = sub.add_parser("report")
-    r.add_argument("--kind", choices=["weekly", "monthly"], required=True)
+    r.add_argument("--kind", choices=["weekly", "monthly", "yearly"], required=True)
     r.add_argument("--date", help="any date inside the wanted week/month (default: last complete one)")
     r.add_argument("--no-pptx", action="store_true")
     r.add_argument("--out", type=Path)
@@ -123,6 +123,8 @@ def main(argv: list[str] | None = None) -> int:
             ref = date.fromisoformat(args.date)
         elif args.kind == "weekly":
             ref = today - timedelta(days=today.weekday() + 7)        # last complete Mon-Sun week
+        elif args.kind == "yearly":
+            ref = date(today.year - 1 if today.month >= 4 else today.year - 2, 4, 1)   # last complete FY
         else:
             ref = date(today.year, today.month, 1) - timedelta(days=1)  # last complete month
         for kind, path in generate(args.kind, ref, args.out, pptx=not args.no_pptx).items():
