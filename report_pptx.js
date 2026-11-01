@@ -88,7 +88,16 @@ const k = d.kpi, kc = d.kpi_change;
 // 2. Key numbers
 {
   const s = contentSlide("Key numbers at a glance");
-  const cards = [
+  const A = d.aai_this_month, P = d.aai_prev_year || {};
+  const yoy = (c, p) => (c === null || c === undefined || !p ? "no comparison" :
+    `${c > p ? "▲" : c < p ? "▼" : "■"} ${Math.abs(Math.round(1000 * (c - p) / p) / 10)}% vs a year ago`);
+  // No flight-schedule data for the period: show the official AAI month instead of zeros
+  const cards = (!hasFlights && A) ? [
+    ["Passengers (AAI)", fmt(A.pax_total), yoy(A.pax_total, P.pax_total)],
+    ["International passengers", fmt(A.pax_intl), yoy(A.pax_intl, P.pax_intl)],
+    ["Aircraft movements", fmt(A.mov_total), yoy(A.mov_total, P.mov_total)],
+    ["Cargo (tonnes)", fmt(A.frt_total), yoy(A.frt_total, P.frt_total)],
+  ] : [
     ["Flight movements", fmt(k.movements), chg(kc.movements)],
     ["Est. passengers", fmt(k.est_pax), chg(kc.est_pax)],
     ["International movements", fmt(k.international), chg(kc.international)],
@@ -106,7 +115,9 @@ const k = d.kpi, kc = d.kpi_change;
       fontFace: FONT_B, isTextBox: true });
   });
   const a = d.aai_this_month;
-  const line2 = a
+  const line2 = (!hasFlights && a)
+    ? `Official AAI figures for ${a.month} (domestic ${fmt(a.pax_dom)} passengers). Flight-by-flight data was not collected for this period.`
+    : a
     ? `AAI official for ${a.month}: ${fmt(a.pax_total)} passengers · ${fmt(a.mov_total)} aircraft movements · ${a.frt_total ?? "–"} t freight`
     : "AAI official monthly figures for this period are not published yet (they usually lag 4–8 weeks).";
   s.addText(line2, { x: 0.5, y: 3.6, w: 9, h: 0.5, fontSize: 13, color: INK, fontFace: FONT_B, isTextBox: true });

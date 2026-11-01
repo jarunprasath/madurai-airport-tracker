@@ -87,10 +87,41 @@ def build_report_data(kind: str, ref: date) -> dict:
             insights.append(f"{cur['cargo']} dedicated cargo flight movements recorded.")
     else:
         insights.append("No flight-schedule data was collected for this period yet.")
+    aai_prev_year = None
     if aai_this:
+        py = f"{int(end_month[:4]) - 1}-{end_month[5:]}"
+        aai_prev_year = next((r for r in monthly_rows if r["month"] == py and r["pax_total"]), None)
         y = aai_this.get("pax_yoy_pct")
         insights.append(f"AAI official passengers for {end_month}: {int(aai_this['pax_total']):,}"
                         + (f" ({y:+.1f}% year on year)." if y is not None else "."))
+        if aai_this.get("pax_dom") is not None and aai_this.get("pax_intl") is not None:
+            share = 100 * aai_this["pax_intl"] / aai_this["pax_total"]
+            line = f"Domestic {int(aai_this['pax_dom']):,} and international {int(aai_this['pax_intl']):,} ({share:.1f}% of total)"
+            if aai_prev_year and aai_prev_year.get("pax_intl"):
+                line += (f"; international {_pct(aai_this['pax_intl'], aai_prev_year['pax_intl']):+.1f}% and domestic "
+                         f"{_pct(aai_this['pax_dom'], aai_prev_year['pax_dom']):+.1f}% vs a year ago")
+            insights.append(line + ".")
+        if aai_this.get("mov_total"):
+            line = f"Aircraft movements: {int(aai_this['mov_total']):,} (about {aai_this['pax_total'] / aai_this['mov_total']:.0f} passengers per movement)"
+            if aai_prev_year and aai_prev_year.get("mov_total"):
+                line += f", {_pct(aai_this['mov_total'], aai_prev_year['mov_total']):+.1f}% vs a year ago"
+            insights.append(line + ".")
+        if aai_this.get("frt_total") is not None:
+            line = f"Cargo handled: {aai_this['frt_total']:,.0f} tonnes"
+            if aai_prev_year and aai_prev_year.get("frt_total"):
+                line += f" ({_pct(aai_this['frt_total'], aai_prev_year['frt_total']):+.1f}% year on year)"
+            insights.append(line + ".")
+    # months missing inside the plotted AAI history
+    gaps = []
+    if aai_hist:
+        y0, m0 = map(int, aai_hist[0]["month"].split("-"))
+        have = {r["month"] for r in aai_hist}
+        while f"{y0}-{m0:02d}" <= aai_hist[-1]["month"]:
+            if f"{y0}-{m0:02d}" not in have:
+                gaps.append(f"{y0}-{m0:02d}")
+            m0 += 1
+            if m0 == 13:
+                y0, m0 = y0 + 1, 1
     if lf >= 0.85 and "calibrated" in lf_note:
         insights.append(f"Implied seat load factor is about {round(lf * 100)}% - flights run close to full, "
                         "which supports a case for added capacity or new frequencies.")
@@ -107,6 +138,8 @@ def build_report_data(kind: str, ref: date) -> dict:
     ]
     if days_cur < days_expected:
         caveats.insert(0, f"Flight data covers {days_cur} of {days_expected} days in this period.")
+    if gaps:
+        caveats.append(f"AAI months not yet collected (skipped in the trend chart): {', '.join(gaps)}.")
 
     return {
         "kind": kind, "label": label, "start": s.isoformat(), "end": e.isoformat(),
@@ -117,7 +150,8 @@ def build_report_data(kind: str, ref: date) -> dict:
         "kpi_change": {k: _pct(cur[k], prev[k]) for k in ("movements", "est_pax", "international", "cargo")},
         "days_with_data": days_cur, "days_in_period": days_expected,
         "daily": daily, "airlines": airlines, "routes": routes, "aircraft": aircraft, "hourly": hourly,
-        "aai_history": aai_hist, "aai_this_month": aai_this, "aai_annual": annual_rows,
+        "aai_history": aai_hist, "aai_this_month": aai_this, "aai_prev_year": aai_prev_year,
+        "aai_gaps": gaps, "aai_annual": annual_rows,
         "forecast": fc, "insights": insights, "caveats": caveats,
         "flights": sorted(cur_rows, key=lambda r: (r["date"], r["sched_local"])),
         "sources": ["AAI Traffic News - aai.aero", "AeroDataBox (via RapidAPI)", "OpenSky Network"],

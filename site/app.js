@@ -149,9 +149,9 @@
       board = summary.board || [];
       const k = summary.kpi, a = summary.latest_aai_month;
       const cards = [
-        ["Flights, last 7 days", fmt(k.last7.movements), `${fmt(k.last7.movements / 7)} per day · ${k.last7.international} international`],
+        ["Flights, last 7 days", fmt(k.last7.movements), k.last7.days ? `${fmt(k.last7.movements / k.last7.days)} per day over ${k.last7.days} day${k.last7.days > 1 ? "s" : ""} of data · ${k.last7.international} international` : "no flight data yet"],
         ["Est. passengers, last 7 days", fmt(k.last7.est_pax), "estimate (seats × load factor)"],
-        ["Flights, last 30 days", fmt(k.last30.movements), `${k.last30.cargo} cargo · ${k.last30.cancelled} cancelled`],
+        ["Flights, last 30 days", fmt(k.last30.movements), `${k.last30.days || 0} day${k.last30.days === 1 ? "" : "s"} of data · ${k.last30.cargo} cargo · ${k.last30.cancelled} cancelled`],
         a ? [`AAI passengers, ${a.month}`, fmt(a.pax_total), a.pax_yoy_pct !== null ? `${a.pax_yoy_pct > 0 ? "+" : ""}${a.pax_yoy_pct}% year on year` : "official"]
           : ["AAI passengers", "–", "official monthly data not collected yet"],
       ];
@@ -176,17 +176,32 @@
 
     // AAI monthly
     const am = (aaiM || []).filter((r) => r.pax_total);
+    // continuous month axis: missing months become gaps instead of silently joining neighbours
+    const fillMonths = (rows) => {
+      if (!rows.length) return rows;
+      const by = Object.fromEntries(rows.map((r) => [r.month, r])); const out = [];
+      let [y, mo] = rows[0].month.split("-").map(Number); const [ey, em] = rows[rows.length - 1].month.split("-").map(Number);
+      while (y < ey || (y === ey && mo <= em)) {
+        const key = `${y}-${String(mo).padStart(2, "0")}`;
+        out.push(by[key] || { month: key, missing: true });
+        mo += 1; if (mo === 13) { y += 1; mo = 1; }
+      }
+      return out;
+    };
     if (am.length) {
-      const m = am.slice(-36);
-      const split = m.every((r) => r.pax_dom !== null && r.pax_intl !== null);
+      const m = fillMonths(am).slice(-36);
+      const split = m.every((r) => r.missing || (r.pax_dom !== null && r.pax_intl !== null));
       chart("c-aai", { type: split ? "bar" : "line", data: { labels: m.map((r) => r.month), datasets: split ? [
         { label: "Domestic", data: m.map((r) => r.pax_dom), backgroundColor: c.maroon, stack: "p" },
         { label: "International", data: m.map((r) => r.pax_intl), backgroundColor: c.gold, stack: "p" }]
         : [{ label: "Passengers", data: m.map((r) => r.pax_total), borderColor: c.maroon, backgroundColor: c.maroon }] },
         options: { scales: { x: { grid: { display: false } }, y: { beginAtZero: true } } } });
-      $("aai-note").textContent = `Source: AAI monthly Traffic News. ${am.length} months collected; latest ${am[am.length - 1].month}.`;
-      const fr = am.filter((r) => r.frt_total !== null).slice(-36);
-      if (fr.length) chart("c-freight", { type: "bar", data: { labels: fr.map((r) => r.month),
+      const gaps = m.filter((r) => r.missing).map((r) => r.month);
+      $("aai-note").textContent = `Source: AAI monthly Traffic News. ${am.length} months collected; latest ${am[am.length - 1].month}.` +
+        (gaps.length ? ` Not yet collected: ${gaps.join(", ")} (shown as gaps).` : "");
+      const fr = fillMonths(am).slice(-36);
+      const hasFr = fr.some((r) => r.frt_total !== null && r.frt_total !== undefined);
+      if (hasFr) chart("c-freight", { type: "bar", data: { labels: fr.map((r) => r.month),
         datasets: [{ label: "Freight (t)", data: fr.map((r) => r.frt_total), backgroundColor: c.teal }] },
         options: { plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true } } } });
       else noData("c-freight", "No cargo data yet");
