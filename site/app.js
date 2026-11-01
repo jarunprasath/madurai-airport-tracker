@@ -124,7 +124,7 @@
       { h: "Airline", f: (r) => r.airline }, { h: "From / To", f: (r) => `${r.other_city || r.other_name} ${r.other_iata ? "(" + r.other_iata + ")" : ""}` },
       { h: "Aircraft", f: (r) => r.aircraft_model || "–" },
       { h: "Status", html: true, f: (r) => `<span class="st ${statusClass(r.status)}">${esc(r.status || "Scheduled")}</span>${r.is_cargo ? ' <span class="tag">cargo</span>' : ""}` },
-    ], rows, "No schedule data for today yet. It appears after the daily collection runs (needs the AERODATABOX_KEY secret).");
+    ], rows, "No schedule data for today yet. It appears after the next flight collection run (06:00 and 14:00 IST).");
   }
   document.querySelectorAll("#board-seg button").forEach((b) => b.addEventListener("click", () => {
     document.querySelectorAll("#board-seg button").forEach((x) => x.classList.toggle("on", x === b));

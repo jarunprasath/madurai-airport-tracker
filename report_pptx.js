@@ -103,7 +103,9 @@ const k = d.kpi, kc = d.kpi_change;
     ["International movements", fmt(k.international), chg(kc.international)],
     ["Cargo flight movements", fmt(k.cargo), chg(kc.cargo)],
   ];
-  cards.forEach(([label, value, sub], i) => {
+  if (!hasFlights && !A) {
+    emptyNote(s, `${d.no_flight_reason}\nOfficial AAI figures for ${d.end.slice(0, 7)} are not published yet (AAI usually publishes 4–8 weeks after month end).`, 0.5, 1.3, 9, 2.0);
+  } else cards.forEach(([label, value, sub], i) => {
     const x = 0.5 + i * 2.3;
     s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: 1.3, w: 2.1, h: 2.0, fill: { color: LIGHT },
       line: { color: LIGHT }, rectRadius: 0.1, objectName: `kpi-card-${i}` });
@@ -163,7 +165,7 @@ const k = d.kpi, kc = d.kpi_change;
       `${k.cancelled} cancelled or diverted`,
       k.on_time_pct !== null ? `On-time (≤15 min): ${k.on_time_pct}%` : "On-time data not available",
     ]);
-  } else emptyNote(s, "No flight-schedule data collected for this period yet.\nAdd the AERODATABOX_KEY secret to start collecting.");
+  } else emptyNote(s, d.no_flight_reason);
 }
 
 // 5. Airlines
@@ -179,7 +181,7 @@ const k = d.kpi, kc = d.kpi_change;
     top.slice(0, 7).forEach((a) => rows.push([a.airline, fmt(a.flights), `${a.share_pct}%`, fmt(a.est_pax)]));
     s.addTable(rows, { x: 5.3, y: 1.25, w: 4.2, colW: [1.8, 0.7, 0.75, 0.95], fontSize: 11, fontFace: FONT_B,
       color: INK, border: { type: "solid", pt: 0.5, color: GRID }, rowH: 0.34 });
-  } else emptyNote(s, "No airline data for this period yet.");
+  } else emptyNote(s, d.no_flight_reason);
 }
 
 // 6. Routes
@@ -198,7 +200,7 @@ const k = d.kpi, kc = d.kpi_change;
       `Top route: ${top[0].city || top[0].iata} (~${top[0].per_day}/day)`,
       "✈ marks international routes",
     ]);
-  } else emptyNote(s, "No route data for this period yet.");
+  } else emptyNote(s, d.no_flight_reason);
 }
 
 // 7. Aircraft types & peak hours
@@ -212,7 +214,7 @@ const k = d.kpi, kc = d.kpi_change;
     s.addChart(pres.charts.BAR, [{ name: "Movements", labels: d.hourly.map((_, h) => String(h).padStart(2, "0")), values: d.hourly }],
       { x: 5.1, y: 1.2, w: 4.4, h: 3.8, barDir: "col", chartColors: [MAROON], showLegend: false, showValue: false,
         showTitle: true, title: "Scheduled movements by hour (local)", ...axis(), catAxisLabelFontSize: 8 });
-  } else emptyNote(s, "No fleet or timing data for this period yet.");
+  } else emptyNote(s, d.no_flight_reason);
 }
 
 // 8. AAI official trend

@@ -47,6 +47,20 @@ def build_report_data(kind: str, ref: date) -> dict:
     lf, lf_note = an.current_load_factor(an.calibrate_load_factor(flights, monthly))
 
     cur_rows, prev_rows = an.period_rows(flights, s, e), an.period_rows(flights, ps, pe)
+    first_day = min((r["date"] for r in flights), default=None)
+    last_day = max((r["date"] for r in flights), default=None)
+    if cur_rows:
+        no_flight_reason = ""
+    elif not first_day:
+        no_flight_reason = ("No flight-schedule data has been collected yet. "
+                            "Check that the AERODATABOX_KEY secret is set and the 'Collect flights' workflow has run.")
+    elif e.isoformat() < first_day:
+        no_flight_reason = (f"Flight-by-flight collection started on {date.fromisoformat(first_day):%d %b %Y}, "
+                            f"after this period, so daily flights, airlines and routes are not available. "
+                            + ("For past periods use the monthly report, which is based on AAI's official figures."
+                               if kind == "weekly" else "Official AAI monthly figures are shown instead."))
+    else:
+        no_flight_reason = "No flights were recorded in this period (the data source may have had an outage)."
     cur, prev = an.summarize(cur_rows, lf), an.summarize(prev_rows, lf)
     days_cur = len({r["date"] for r in cur_rows})
     days_expected = (e - s).days + 1
@@ -86,7 +100,7 @@ def build_report_data(kind: str, ref: date) -> dict:
         if cur["cargo"]:
             insights.append(f"{cur['cargo']} dedicated cargo flight movements recorded.")
     else:
-        insights.append("No flight-schedule data was collected for this period yet.")
+        insights.append(no_flight_reason)
     aai_prev_year = None
     if aai_this:
         py = f"{int(end_month[:4]) - 1}-{end_month[5:]}"
@@ -151,7 +165,8 @@ def build_report_data(kind: str, ref: date) -> dict:
         "days_with_data": days_cur, "days_in_period": days_expected,
         "daily": daily, "airlines": airlines, "routes": routes, "aircraft": aircraft, "hourly": hourly,
         "aai_history": aai_hist, "aai_this_month": aai_this, "aai_prev_year": aai_prev_year,
-        "aai_gaps": gaps, "aai_annual": annual_rows,
+        "aai_gaps": gaps, "aai_annual": annual_rows, "no_flight_reason": no_flight_reason,
+        "flight_coverage": {"first": first_day, "last": last_day},
         "forecast": fc, "insights": insights, "caveats": caveats,
         "flights": sorted(cur_rows, key=lambda r: (r["date"], r["sched_local"])),
         "sources": ["AAI Traffic News - aai.aero", "AeroDataBox (via RapidAPI)", "OpenSky Network"],
