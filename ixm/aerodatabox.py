@@ -104,7 +104,7 @@ class AuthError(RuntimeError):
     """The key is wrong or the subscription is not active (HTTP 401/403)."""
 
 
-def fetch_day(d: date, key: str | None = None, session: requests.Session | None = None) -> list[dict]:
+def fetch_day(d: date, key: str | None = None, session: requests.Session | None = None, meter=None) -> list[dict]:
     """Fetch one local day. Raises QuotaExceeded / AuthError (stop the run) or ValueError
     (this day is unavailable, e.g. too far in the past - skip it and continue)."""
     key = key or os.environ.get("AERODATABOX_KEY")
@@ -124,12 +124,19 @@ def fetch_day(d: date, key: str | None = None, session: requests.Session | None 
             r = s.get(url, headers=headers, params=params, timeout=40)
         except requests.RequestException as e:
             raise ValueError(f"network error: {type(e).__name__}") from e
-        if r.status_code == 204:
-            continue
         if r.status_code == 429:
+            if meter:
+                meter.hook(exhausted=True)
             raise QuotaExceeded(r.text[:200])
         if r.status_code in (401, 403):
             raise AuthError(f"HTTP {r.status_code}: {r.text[:200]}")
+        if meter:
+            if r.status_code in (200, 204):
+                meter.hook(r)
+            else:
+                meter.count_call()      # assume refused requests may still be billed (conservative)
+        if r.status_code == 204:
+            continue
         if r.status_code != 200:
             raise ValueError(f"HTTP {r.status_code}: {r.text[:160]}")
         rows.extend(parse_fids(r.json()))
@@ -137,14 +144,14 @@ def fetch_day(d: date, key: str | None = None, session: requests.Session | None 
     return [r for r in rows if r["date"] == d.isoformat()]
 
 
-def fetch_days(days: Iterable[date], key: str | None = None, on_day=None) -> dict:
+def fetch_days(days: Iterable[date], key: str | None = None, on_day=None, meter=None) -> dict:
     """Fetch day by day. `on_day(day, rows)` is called after each successful day (used to save
     progress). Days that fail are skipped; quota or auth errors stop the run cleanly."""
     result = {"rows": [], "ok": 0, "failed": [], "stopped": ""}
     with requests.Session() as s:
         for d in days:
             try:
-                day_rows = fetch_day(d, key, s)
+                day_rows = fetch_day(d, key, s, meter)
             except QuotaExceeded as e:
                 result["stopped"] = f"API quota/rate limit reached at {d} - run again later to continue ({e})"
                 break

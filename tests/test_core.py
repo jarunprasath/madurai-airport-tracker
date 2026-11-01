@@ -410,7 +410,7 @@ def test_column_slip_detected_against_same_report_prev_year_column():
 def test_fetch_days_skips_bad_days_saves_progress_and_stops_on_quota(monkeypatch):
     calls, saved = [], []
 
-    def fake(d, key=None, session=None):
+    def fake(d, key=None, session=None, meter=None):
         calls.append(d)
         if d.day == 2:
             raise ValueError("HTTP 400: date out of range")
@@ -429,7 +429,7 @@ def test_fetch_days_skips_bad_days_saves_progress_and_stops_on_quota(monkeypatch
 def test_cli_caps_back_mode(monkeypatch, tmp_root, capsys):
     from ixm import __main__ as cli
     seen = {}
-    monkeypatch.setattr(aerodatabox, "fetch_days", lambda days, on_day=None: seen.setdefault("days", days) and
+    monkeypatch.setattr(aerodatabox, "fetch_days", lambda days, on_day=None, meter=None: seen.setdefault("days", days) and
                         {"rows": [], "ok": 0, "failed": [], "stopped": ""})
     cli.main(["flights", "--back", "2000", "--ahead", "0"])
     out = capsys.readouterr().out
@@ -443,7 +443,7 @@ def test_cli_back_mode_progresses_past_collected_days(monkeypatch, tmp_root):
     store.upsert([{"date": (today - timedelta(days=i)).isoformat(), "direction": "arrival", "flight_no": f"X{i}",
                    "sched_local": "", "is_cargo": False, "is_international": False} for i in range(2, 40)])
     seen = {}
-    monkeypatch.setattr(aerodatabox, "fetch_days", lambda days, on_day=None: seen.setdefault("days", days) and
+    monkeypatch.setattr(aerodatabox, "fetch_days", lambda days, on_day=None, meter=None: seen.setdefault("days", days) and
                         {"rows": [], "ok": 0, "failed": [], "stopped": ""})
     cli.main(["flights", "--back", "100", "--ahead", "0"])
     got = sorted(seen["days"])
@@ -455,10 +455,10 @@ def test_cli_back_mode_progresses_past_collected_days(monkeypatch, tmp_root):
 def test_cli_skips_dates_beyond_history_without_calls(monkeypatch, tmp_root, capsys):
     from ixm import __main__ as cli
     seen = {}
-    monkeypatch.setattr(aerodatabox, "fetch_days", lambda days, on_day=None: seen.setdefault("days", list(days)) is not None and
+    monkeypatch.setattr(aerodatabox, "fetch_days", lambda days, on_day=None, meter=None: seen.setdefault("days", list(days)) is not None and
                         {"rows": [], "ok": 0, "failed": [], "stopped": ""})
     cli.main(["flights", "--from", "2021-05-01", "--to", "2021-05-20"])
-    assert "keeps only 365 days" in capsys.readouterr().out and seen["days"] == []
+    assert "keeps only 365 days" in capsys.readouterr().out and seen.get("days", []) == []
 
 
 def test_yearly_report_like_for_like(tmp_root):

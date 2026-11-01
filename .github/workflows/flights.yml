@@ -1,7 +1,12 @@
 name: Collect flights
 # Arrivals/departures for yesterday (final) and today (schedule) from AeroDataBox.
-# Once a day at 00:31 UTC = 06:01 IST: 2 days x 2 half-day requests = 4 requests/day (~120/month),
-# sized for the free BASIC plan's monthly unit quota.
+# Once a day at 00:31 UTC = 06:01 IST: yesterday (final) + today (schedule) = 4 requests/day.
+# Monthly budget (ixm/quota.py, state in data/api_usage.json): units for the rest of the month's daily runs
+# are always kept back; only the spare is spent filling missing past days, oldest first.
+# Optional repository variables (Settings -> Secrets and variables -> Actions -> Variables):
+#   AERODATABOX_MONTHLY_UNITS (default 400), AERODATABOX_UNITS_PER_CALL (default 2),
+#   AERODATABOX_RESET_DAY (day your RapidAPI quota resets; learned automatically if not set),
+#   AERODATABOX_HISTORY_DAYS (default 365; 180 on Pro, 210 on Ultra).
 on:
   schedule:
     - cron: "31 0 * * *"
@@ -37,11 +42,15 @@ jobs:
       - name: Fetch flights
         env:
           AERODATABOX_KEY: ${{ secrets.AERODATABOX_KEY }}
+          AERODATABOX_MONTHLY_UNITS: ${{ vars.AERODATABOX_MONTHLY_UNITS }}
+          AERODATABOX_UNITS_PER_CALL: ${{ vars.AERODATABOX_UNITS_PER_CALL }}
+          AERODATABOX_RESET_DAY: ${{ vars.AERODATABOX_RESET_DAY }}
+          AERODATABOX_HISTORY_DAYS: ${{ vars.AERODATABOX_HISTORY_DAYS || '365' }}
         run: |
           if [ -n "${{ inputs.from_date }}" ]; then
             python -u -m ixm flights --from "${{ inputs.from_date }}" ${{ inputs.to_date && format('--to {0}', inputs.to_date) || '' }} | tee flights_run.log
           else
-            python -u -m ixm flights --back "${{ inputs.back || 1 }}" --ahead "${{ inputs.ahead || 0 }}" | tee flights_run.log
+            python -u -m ixm flights --back "${{ inputs.back || 1 }}" --ahead "${{ inputs.ahead || 0 }}" --backfill | tee flights_run.log
           fi
           { echo "### Flight collection"; echo '```'; tail -n 40 flights_run.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Commit data (also after a partial run)

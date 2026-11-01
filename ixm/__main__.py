@@ -28,6 +28,87 @@ def _ym(s: str) -> date:
     return date(y, m, 1)
 
 
+def _flights(args, today: date) -> None:
+    from . import aerodatabox, quota, store
+    has_key = bool(os.environ.get("AERODATABOX_KEY"))
+    meter = quota.Meter(today) if has_key else None
+    oldest = today - timedelta(days=aerodatabox.HISTORY_DAYS - 1)
+    have = {r["date"] for r in store.load_all()}
+    empty = set(meter.u.get("empty_days", [])) if meter else set()
+    saved = {"n": 0}
+    stopped = ""
+
+    def save(day, rows):
+        saved["n"] += store.upsert(rows)
+        if not rows and meter:
+            meter.u.setdefault("empty_days", []).append(day.isoformat())
+        print(f"  {day}: {len(rows)} movements", flush=True)
+
+    def run(days, label):
+        nonlocal stopped
+        if not days:
+            return
+        res = aerodatabox.fetch_days(days, on_day=save, meter=meter)
+        for d, why in res["failed"]:
+            print(f"  {d}: skipped - {why}", flush=True)
+        print(f"{label}: {res['ok']} of {len(days)} days fetched, {len(res['rows'])} movements", flush=True)
+        if res["stopped"]:
+            stopped = res["stopped"]
+            print(f"STOPPED: {stopped}")
+
+    daily_calls = 2 * (args.back + args.ahead + 1)
+    if args.date_from:
+        d0 = date.fromisoformat(args.date_from)
+        d1 = date.fromisoformat(args.date_to) if args.date_to else d0
+        days = [d0 + timedelta(days=i) for i in range((d1 - d0).days + 1)]
+        too_old = [d for d in days if d < oldest]
+        if too_old:
+            print(f"flights: skipping {len(too_old)} days before {oldest} - AeroDataBox keeps only "
+                  f"{aerodatabox.HISTORY_DAYS} days of history (no API calls spent on them)")
+        days = [d for d in days if d >= oldest and (d.isoformat() not in have or d >= today - timedelta(days=1))]
+        cap = args.max_days
+        if meter and not args.ignore_budget:
+            pl = quota.plan(today, 4, meter.u)
+            print(f"budget: {pl['remaining_units']} units left this cycle (to {pl['cycle_end']}), "
+                  f"{pl['reserve_units']} kept for daily runs -> room for {pl['backfill_days']} back-fill days")
+            cap = min(cap, pl["backfill_days"])
+        if len(days) > cap:
+            print(f"flights: {len(days)} days requested; fetching {cap} now (quota protection), the rest later")
+            days = days[:cap]
+        run(days, "range")
+    else:
+        days = [today + timedelta(days=i) for i in range(-args.back, args.ahead + 1)]
+        if args.back > 1:       # manual catch-up run: skip collected/too-old days, newest first, within budget
+            days = [d for d in days if d >= oldest and (d.isoformat() not in have or d >= today - timedelta(days=1))]
+            cap = args.max_days
+            if meter and not args.ignore_budget:
+                cap = min(cap, quota.plan(today, 4, meter.u)["backfill_days"] + args.ahead + 2)
+            if len(days) > cap:
+                print(f"flights: {len(days)} days requested; limited to {cap} days (~{2 * cap} API calls) "
+                      f"to protect your quota. Next run continues from {days[-cap] - timedelta(days=1)}.")
+                days = days[-cap:]
+        run(days, "daily")
+        if args.backfill and meter and not stopped:
+            pl = quota.plan(today, daily_calls, meter.u, include_today=False)
+            print(f"budget: {pl['remaining_units']} units left this cycle (to {pl['cycle_end']}), "
+                  f"{pl['reserve_units']} kept for the remaining daily runs -> room for {pl['backfill_days']} back-fill days")
+            missing = [oldest + timedelta(days=i) for i in range((today - timedelta(days=args.back) - oldest).days)]
+            missing = [d for d in missing if d.isoformat() not in have and d.isoformat() not in empty]
+            print(f"backfill: {len(missing)} missing days within the {aerodatabox.HISTORY_DAYS}-day window"
+                  + (f", oldest {missing[0]}" if missing else ""))
+            run(missing[:min(pl["backfill_days"], args.max_days)], "backfill")
+    if meter:
+        meter.save()
+        pl = quota.plan(today, daily_calls, meter.u, include_today=False)
+        print(f"usage: {meter.u.get('calls', 0)} calls this cycle (since {meter.u['cycle_start']}), "
+              f"about {pl['remaining_units']} units left")
+    if has_key:
+        status = {"checked_utc": datetime.utcnow().isoformat(timespec="seconds"),
+                  "state": "paused" if stopped else "ok",
+                  "message": ("Flight collection paused: " + stopped.split(" (")[0]) if stopped else ""}
+        (config.DATA_DIR / "flights_status.json").write_text(json.dumps(status, indent=1), encoding="utf-8")
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="python -m ixm", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -39,6 +120,10 @@ def main(argv: list[str] | None = None) -> int:
     f.add_argument("--from", dest="date_from", help="first date YYYY-MM-DD for a historical backfill")
     f.add_argument("--to", dest="date_to", help="last date YYYY-MM-DD (default: same as --from)")
     f.add_argument("--max-days", type=int, default=31, help="safety cap on days per run (API quota), applies to every mode")
+    f.add_argument("--backfill", action="store_true",
+                   help="after the normal fetch, fill missing past days (oldest first) using only the spare monthly budget")
+    f.add_argument("--ignore-budget", action="store_true", help="do not limit a --from/--to run to the spare budget")
+    sub.add_parser("quota", help="show this month's AeroDataBox budget")
     a = sub.add_parser("aai")
     a.add_argument("--start", help="YYYY-MM (default: 4 months ago)")
     a.add_argument("--end", help="YYYY-MM (default: last month)")
@@ -62,51 +147,11 @@ def main(argv: list[str] | None = None) -> int:
         config.SITE_DATA_DIR.mkdir(parents=True, exist_ok=True)
         (config.SITE_DATA_DIR / "live.json").write_text(json.dumps(snap, indent=1), encoding="utf-8")
         print(f"live: {snap['status']}, {len(snap['aircraft'])} aircraft")
+    elif args.cmd == "quota":
+        from . import quota
+        print(json.dumps(quota.plan(today, 4), indent=1))
     elif args.cmd == "flights":
-        from . import aerodatabox, store
-        if args.date_from:
-            d0 = date.fromisoformat(args.date_from)
-            d1 = date.fromisoformat(args.date_to) if args.date_to else d0
-            days = [d0 + timedelta(days=i) for i in range((d1 - d0).days + 1)]
-        else:
-            days = [today + timedelta(days=i) for i in range(-args.back, args.ahead + 1)]
-        oldest = today - timedelta(days=aerodatabox.HISTORY_DAYS)
-        too_old = [d for d in days if d < oldest]
-        if too_old:
-            print(f"flights: skipping {len(too_old)} days before {oldest} - AeroDataBox keeps only "
-                  f"{aerodatabox.HISTORY_DAYS} days of history (no API calls spent on them)")
-            days = [d for d in days if d >= oldest]
-        have = {r["date"] for r in store.load_all()}
-        before = len(days)
-        days = [d for d in days if d.isoformat() not in have or d >= today - timedelta(days=1)]
-        if before != len(days):
-            print(f"flights: skipping {before - len(days)} days already collected")
-        if len(days) > args.max_days:
-            # newest first for "back" runs so the most recent history arrives first
-            keep = days[-args.max_days:] if not args.date_from else days[:args.max_days]
-            nxt = (min(keep) - timedelta(days=1)) if not args.date_from else (max(keep) + timedelta(days=1))
-            print(f"flights: {len(days)} days requested; limited to {args.max_days} days "
-                  f"(~{2 * args.max_days} API calls) to protect your quota. Next run: continue from {nxt}.")
-            days = keep
-        saved = {"n": 0}
-
-        def save(day, rows):
-            saved["n"] += store.upsert(rows)
-            print(f"  {day}: {len(rows)} movements", flush=True)
-
-        res = aerodatabox.fetch_days(days, on_day=save)
-        for d, why in res["failed"]:
-            print(f"  {d}: skipped - {why}", flush=True)
-        attempted = res["ok"] + len(res["failed"]) + (1 if res["stopped"] else 0)
-        print(f"flights: {res['ok']} of {len(days)} days fetched, {len(res['rows'])} movements, "
-              f"{saved['n']} new/updated, ~{2 * attempted} API requests")
-        if res["stopped"]:
-            print(f"STOPPED: {res['stopped']}")
-        if os.environ.get("AERODATABOX_KEY"):
-            status = {"checked_utc": datetime.utcnow().isoformat(timespec="seconds"),
-                      "state": "paused" if res["stopped"] else "ok",
-                      "message": ("Flight collection paused: " + res["stopped"].split(" (")[0]) if res["stopped"] else ""}
-            (config.DATA_DIR / "flights_status.json").write_text(json.dumps(status, indent=1), encoding="utf-8")
+        _flights(args, today)
     elif args.cmd == "aai":
         from . import aai
         last = date(today.year, today.month, 1) - timedelta(days=1)
