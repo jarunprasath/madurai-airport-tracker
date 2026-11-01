@@ -350,3 +350,6 @@ month,annex,url,status
 2018-04,3,https://www.aai.aero/sites/default/files/traffic-news/Apr2k18annex3.pdf,check: domestic: month 151967.0 > YTD 109060.0; total: month 166360.0 > YTD 137274.0 || rows: international: 31 CHANDIGARH 14393 12210 17.9 32 MADURAI 28214 23269 21.3 | domestic: 31 CHANDIGARH 151967 200912 -24.4 32 MADURAI 109060 97285 12.1 | total: 31 CHANDIGARH 166360 213122 -21.9 32 MADURAI 137274 120554 13.9
 2018-04,2,https://www.aai.aero/sites/default/files/traffic-news/Apr2k18annex2.pdf,check: domestic: month 1216.0 > YTD 1049.0; total: month 1324.0 > YTD 1289.0 || rows: international: 31 CHANDIGARH 108 82 31.7 32 MADURAI 240 180 33.3 | domestic: 31 CHANDIGARH 1216 1792 -32.1 32 MADURAI 1049 894 17.3 | total: 31 CHANDIGARH 1324 1874 -29.3 32 MADURAI 1289 1074 20.0
 2018-04,4,https://www.aai.aero/sites/default/files/traffic-news/Apr2k18annex4.pdf,check: domestic: month 370.0 > YTD 32.0; total: month 370.0 > YTD 32.0; international 31.0 + domestic 370.0 != total 370.0 || rows: international: 31 CHANDIGARH 0 0 - 32 MADURAI 95 1 - | domestic: 31 CHANDIGARH 370 621 -40.4 32 MADURAI 170 95 78.9 | total: 31 CHANDIGARH 370 621 -40.4 32 MADURAI 265 96 176.0
+2025-11,3,,not found
+2025-11,2,,not found
+2025-11,4,,not found
